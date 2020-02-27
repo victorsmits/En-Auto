@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="@sv50712-002.dbaas.ovh.net" uuid="b037a2da-6b76-401e-8c58-56e32a0073ce">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://sv50712-002.dbaas.ovh.net:35805</jdbc-url>
+    </data-source>
+  </component>
+</project>
