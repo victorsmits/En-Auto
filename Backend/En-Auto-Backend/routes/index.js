@@ -1,5 +1,4 @@
 var express = require('express');
-const User = require('../sequelize/models/User');
 var router = express.Router();
 
 const errHandler = err =>{

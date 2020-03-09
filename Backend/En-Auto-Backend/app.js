@@ -13,8 +13,13 @@ var app = express();
 
 // MONGO CONNECTION
 mongoose.connect(process.env.MONGO,
+<<<<<<< Updated upstream
     {useNewUrlParser: true,useUnifiedTopology:true}, () =>
         console.log("mongo seem connected")
+=======
+    {useNewUrlParser: true, useUnifiedTopology:true}, () =>
+        console.log("mongo connected")
+>>>>>>> Stashed changes
 );
 //connection to DB 
 var db = mongoose.connection;
