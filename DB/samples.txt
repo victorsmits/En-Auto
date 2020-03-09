@@ -10,3 +10,15 @@ db.EnAuto.insertMany( [ { adresse: "", superficie: 1 },{ adresse: "", superficie
 db.EnAuto.remove( {_id: } )
 db.EnAuto.drop(); //supprime toute la collection donc a ne pas faire
 
+--
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://EnAuto:Enauto1234@en-auto-gdyqg.gcp.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("EnAuto").collection("EnAuto");
+  // perform actions on the collection object
+
+  
+  client.close();
+});
