@@ -1,0 +1,12 @@
+sudo mongo "mongodb+srv://EnAuto:Enauto1234@en-auto-gdyqg.gcp.mongodb.net/test?retryWrites=true&w=majority"
+
+db = db.getSiblingDB("EnAuto");
+use EnAuto
+
+db.EnAuto.insertOne( {adresse: "",superficie: 1,});
+db.EnAuto.insertMany( [ { adresse: "", superficie: 1 },{ adresse: "", superficie: 1 } ] );
+
+//remove id X
+db.EnAuto.remove( {_id: } )
+db.EnAuto.drop(); //supprime toute la collection donc a ne pas faire
+
