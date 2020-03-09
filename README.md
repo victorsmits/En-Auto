@@ -1,7 +1,7 @@
-## En-Auto
+# En-Auto
 
 
-# Rapport du 9 mars :
+## Rapport du 9 mars :
 
 * Création d'un gitignore
 * Modification des dépendances de package.json
