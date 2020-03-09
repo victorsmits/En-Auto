@@ -11,18 +11,11 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-var mysql = require(__dirname +'/sequelize/models/index');
-
 // MONGO CONNECTION
 mongoose.connect(process.env.MONGO,
     {useNewUrlParser: true,useUnifiedTopology:true}, () =>
         console.log("mongo connected")
 );
-
-//MYSQL CONNECTION
-if(mysql){
-  console.log("MYSQL connected")
-}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

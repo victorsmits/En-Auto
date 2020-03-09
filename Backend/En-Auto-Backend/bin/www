@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('en-auto-backend:server');
 var http = require('http');
+const db = require('../sequelize/models/connection');
+
+
 
 /**
  * Get port from environment and store in Express.

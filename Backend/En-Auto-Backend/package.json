@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
   "keywords": [
     "Backend"
@@ -23,7 +24,6 @@
     "mongoose": "^5.9.2",
     "mongoose-model-cli": "^1.4.0",
     "morgan": "~1.9.1",
-    "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "sequelize": "^5.21.5",
     "sequelize-auto": "^0.4.29",
