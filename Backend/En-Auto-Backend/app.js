@@ -1,6 +1,7 @@
 require('dotenv/config');
 require('./models/UserModel');
 require('./config/passport');
+const cors = require('cors');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -50,6 +51,8 @@ app.use(passport.initialize());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors({origin: 'http://localhost:4200'}));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -63,6 +66,7 @@ app.use('/users', usersRouter);
 app.use(function (req, res, next) {
     next(createError(404));
 });
+
 
 // error handler
 app.use(function (err, req, res, next) {

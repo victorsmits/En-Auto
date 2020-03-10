@@ -12,7 +12,7 @@ export class ApiService {
   constructor(public http: HttpClient) { }
 
   register(body){
-    return this.http.post(this.ip + '/user',body).pipe(
+    return this.http.post(this.ip + '/users/register',body).pipe(
       catchError(this.handelError));
   }
 

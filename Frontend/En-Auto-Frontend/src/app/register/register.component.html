@@ -1,19 +1,21 @@
-<form [formGroup]="form" (ngSubmit)="form">
-  <mat-form-field >
-    <input matInput formGroupName="lastName">
-    <span *ngIf="isValid('lastName')"> Please enter your last name </span>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput formGroupName="firstName">
-    <span *ngIf="isValid('firstName')"> Please enter your first name </span>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput formGroupName="email">
-    <span *ngIf="isValid('email')">Please enter a valid email </span>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput formGroupName="password">
-    <span *ngIf="isValid('password')">Please enter a password </span>
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="register()"> register</button>
-</form>
+<mat-card>
+  <form [formGroup]="loginForm">
+    <mat-form-field >
+      <input matInput formControlName="lastName" placeholder="Last name">
+      <mat-error *ngIf="isValid('lastName')"> Please enter your last name </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="firstName" placeholder="First name">
+      <mat-error *ngIf="isValid('firstName')"> Please enter your first name </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="Email">
+      <mat-error *ngIf="isValid('email')">Please enter a valid email </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="password" placeholder="Password" type="password">
+      <mat-error *ngIf="isValid('password')">Please enter a password </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="register(loginForm)"> register</button>
+  </form>
+</mat-card>

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 /* GET users listing. */
 
+
 router.post('/register', function(req, res, next) {
   let user = new User({
     lastName : req.body.lastName,
