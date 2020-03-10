@@ -9,7 +9,8 @@ db.EnAuto.insertMany( [ { adresse: "", superficie: 1 },{ adresse: "", superficie
 //remove id X
 db.EnAuto.remove( {_id: } )
 db.EnAuto.drop(); //supprime toute la collection donc a ne pas faire
-
+//add a collection
+db.EnAuto.insertOne( {x:1})
 --
 //connection to DB 
 const mongoose = require('mongoose');
@@ -33,4 +34,13 @@ db.once('open', function (callback) {
             console.log('Database populated')
         }
     })
+})
+
+
+//AUTO INCREMENT
+
+db.products.insert({
+   "_id":getNextSequenceValue("productid"),
+   "product_name":"Apple iPhone",
+   "category":"mobiles"
 })

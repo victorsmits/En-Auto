@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "populate": "tsc --build tsconfig.json && ./node_modules/.bin/ts-node En-Auto_backEnd/bin/populate.ts"
   },
   "keywords": [
     "Backend"
