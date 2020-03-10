@@ -4,10 +4,10 @@
 if (mongoose.connection.readyState === 0) {
     mongoose.connect(require('./connection-string'));
 }
+//schema devis
+const devis = ({
 
-const devis = new Schema({
-
-    'id_devis': {type: Schema.Types.ObjectId, ref: ''},
+    'id_devis': {type: Int8Array},
     //coût
     'cout_structure': {type: Float32Array}, //installation de goutiere? tuiles manquante?   
     'cout_acheminement': {type: Float32Array},  //achemeniment eau pluie (goutiere)
@@ -19,8 +19,11 @@ const devis = new Schema({
     'superficie': {type: Int8Array}, //toit m2
     'economie': {type: Float32Array}, //estimation finale en €
     'rentabilite': {type: Boolean, default: false}, //ou bien une jauge
-
+    'createdAt': {type: Date, default: Date.now},
 });
-
+//array of devis
+const A_devis = new Schema({
+    a_devis : {type: [devis]}
+});
 
 module.exports = mongoose.model('Devis', devis);
