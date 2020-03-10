@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-//import { cpus } from 'os';
 
 //Variables declaration 
 const authenticatedUser = chai.request('../app');
