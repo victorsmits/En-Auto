@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="form">
+  <mat-form-field >
+    <input matInput formGroupName="lastName">
+    <span *ngIf="isValid('lastName')"> Please enter your last name </span>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formGroupName="firstName">
+    <span *ngIf="isValid('firstName')"> Please enter your first name </span>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formGroupName="email">
+    <span *ngIf="isValid('email')">Please enter a valid email </span>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formGroupName="password">
+    <span *ngIf="isValid('password')">Please enter a password </span>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="register()"> register</button>
+</form>
