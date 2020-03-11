@@ -12,7 +12,7 @@ mongoose_1.default.connect(process.env.MONGO, { useNewUrlParser: true, useUnifie
 mongoose_1.default.connection.collections['users'].drop();
 mongoose_1.default.connection.collections['devis'].drop();
 
-var User1 = new User({
+var user1 = new User({
     _id: 1,
     firstName: "Tomtom",
     lastName: "Tona",
@@ -20,14 +20,14 @@ var User1 = new User({
     email: "tomtom@gmail.com",
     password: "@tom"
 });
-var Devis1 = new Devis({
+var devis1 = new Devis({
     id_devis: 1,
     cout_structure: 500,
     cout_acheminement: 400,
     prix_cuve: 150,
     conso: 100,
 });
-var User2 = new User({
+var user2 = new User({
     _id: 2,
     firstName: "Nana",
     lastName: "Tona",
@@ -36,13 +36,13 @@ var User2 = new User({
     password: "@na"
 });
 
-User.create([User1, User2])
+User.create([user1, user2])
     .then(function (data) {
     console.log(data, "Populated (User)!");
 }).catch(function (err) {
     console.log("Not Populated (User)...");
 });
-Metric.create([Devis1])
+Devis.create([devis1])
     .then(function (data) {
     console.log(data, "Populated (Devis)!");
     mongoose_1.default.connection.close();
