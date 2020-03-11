@@ -30,4 +30,3 @@
 * Ajout des dépendances Nodemon
 * Mise en place du thème jekyll-theme-cayman
 * Création d'une table de routage 
-*
