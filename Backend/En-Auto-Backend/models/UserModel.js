@@ -3,9 +3,6 @@ const Schema = mongoose.Schema;
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
-// if (mongoose.connection.readyState === 0) {
-//     mongoose.connect(process.env.MONGO);
-// }
 const User = new Schema({
     'lastName': {
         type: String,

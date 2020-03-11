@@ -1,6 +1,8 @@
 require('dotenv/config');
 require('./models/UserModel');
+require('./models/DevisModel');
 require('./config/passport');
+
 const cors = require('cors');
 const createError = require('http-errors');
 const express = require('express');
@@ -9,8 +11,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require("mongoose");
 const passport = require('passport');
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const devRouter = require('./routes/devis');
 
 const app = express();
 
@@ -61,7 +65,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/devis', devisRouter);
+app.use('/devis', devRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

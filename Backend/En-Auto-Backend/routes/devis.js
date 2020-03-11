@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const mongoose = require('mongoose');
 const Devis = mongoose.model('Devis');
 
@@ -26,4 +26,6 @@ router.post('/create-devis', function(req, res, next) {
 
 router.put('/update-devis', function(req, res, next) {
     
-})
+});
+
+module.exports = router;
