@@ -18,6 +18,9 @@ export class ToolsService {
     this.api.getProfile().subscribe(data => {
       let profile = JSON.parse(JSON.stringify(data))["Profile"];
       UserProfile._id = profile._id;
+      UserProfile.lastName = profile.lastName;
+      UserProfile.firstName = profile.firstName;
+      UserProfile.email = profile.email;
     })
   }
 }
