@@ -26,9 +26,6 @@ const User = new Schema({
         type: String
         , unique: true,
         required: true
-    },
-    'id_devis': {
-        type: [Number]
     }
 });
 
@@ -51,9 +48,8 @@ User.methods.generateJwt = function () {
         email: this.email,
         lastName: this.lastName,
         firstName: this.firstName,
-        id_devis: this.id_devis,
         exp: parseInt(expiry.getTime() / 1000),
-    }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
+    }, process.env.SECRET); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
 const UserModel = mongoose.model('User', User);
