@@ -4,12 +4,12 @@ export interface Devis {
   routing_cost: Number,
   tank_cost: Number,
   consum : Number,
-  water_cost: Number,
-  water_volume: Number,
-  roof_area: Number,
-  final_save : Number,
-  rentability: Number,
-  created_at: Date,
+  water_cost?: Number,
+  water_volume?: Number,
+  roof_area?: Number,
+  final_save? : Number,
+  rentability?: Number,
+  created_at?: Date,
 }
 
 export interface User {
@@ -17,4 +17,10 @@ export interface User {
   lastName: String,
   firstName: String,
   email: String,
+}
+
+export interface WaterCost {
+  _id: Number,
+  postCode: Number,
+  cost: Number,
 }

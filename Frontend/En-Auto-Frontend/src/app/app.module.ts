@@ -13,12 +13,15 @@ import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
+import { EstimationComponent } from './estimation/estimation.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EstimationComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import {MatCardModule} from "@angular/material/card";
     HttpClientModule,
     RouterModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

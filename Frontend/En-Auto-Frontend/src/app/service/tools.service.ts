@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApiService} from "./api.service";
 import {User} from "../Interface/Interface.module";
 
@@ -14,13 +14,30 @@ export class ToolsService {
   }
 
   setProfile(){
-    let UserProfile : User;
     this.api.getProfile().subscribe(data => {
-      let profile = JSON.parse(JSON.stringify(data))["Profile"];
-      UserProfile._id = profile._id;
-      UserProfile.lastName = profile.lastName;
-      UserProfile.firstName = profile.firstName;
-      UserProfile.email = profile.email;
+      let profile = JSON.parse(JSON.stringify(data))["profile"];
+
+      let UserProfile : User = {
+        _id: profile["_id"],
+        lastName: profile["lastName"],
+        firstName: profile["firstName"],
+        email: profile["email"],
+      };
+
+      localStorage.setItem("user",JSON.stringify(UserProfile));
     })
+  }
+
+  getUser(): User{
+    let user = localStorage.getItem("user");
+
+    let profile = JSON.parse(user);
+    return {
+      _id: profile._id,
+      lastName: profile.lastName,
+      firstName: profile.firstName,
+      email: profile.email,
+    }
+
   }
 }

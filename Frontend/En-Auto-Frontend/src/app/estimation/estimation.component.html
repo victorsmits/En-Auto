@@ -1,0 +1,31 @@
+<mat-card>
+    <ng-container *ngTemplateOutlet="step1">
+  </ng-container>
+    <button mat-flat-button color="primary" (click)="next()"></button>
+</mat-card>
+
+<ng-template #step1>
+  <form action="" [formGroup]="estiForm">
+    <mat-form-field>
+      <input matInput type="text" formControlName="address" placeholder="what's your address?">
+    </mat-form-field>
+    <mat-form-field>
+      <input type="number" matInput formControlName="postalCode" placeholder="What's your postal code?">
+    </mat-form-field>
+  </form>
+</ng-template>
+
+<ng-template #step2>
+  <mat-form-field>
+    <input matInput type="number" formControlName="houseArea" placeholder="what's your address?">
+  </mat-form-field>
+
+  <mat-radio-group aria-label="Avez vous des tuiles a remplacer?" (change)="setTiles($event.value)">
+    <mat-radio-button value="yes"> oui</mat-radio-button>
+    <mat-radio-button value="no"> non</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field *ngIf="hasTiles === 'yes' ">
+    <input matInput type="number" formControlName="tiles_nb" placeholder="what's your address?">
+  </mat-form-field>
+</ng-template>

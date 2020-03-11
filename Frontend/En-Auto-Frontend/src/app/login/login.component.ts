@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   public errorMessage: string;
   public profile: JSON;
+  ok: boolean;
 
   constructor(private api: ApiService,
               private fb: FormBuilder,
@@ -32,10 +33,9 @@ export class LoginComponent implements OnInit {
         console.log(data["token"]);
         localStorage.setItem("token", data["token"].toString());
 
-        this.api.getProfile().subscribe((data) => {
-          console.log(data);
-          this.profile = JSON.parse(JSON.stringify(data));
-        })
+        this.tool.setProfile();
+        console.log(this.tool.getUser()._id);
+        this.ok = true;
 
       }, error => {
         this.errorMessage = error
