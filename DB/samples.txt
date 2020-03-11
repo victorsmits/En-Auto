@@ -44,3 +44,4 @@ db.products.insert({
    "product_name":"Apple iPhone",
    "category":"mobiles"
 })
+

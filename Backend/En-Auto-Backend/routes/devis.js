@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Devis = mongoose.model('Devis');
 
 router.post('/create-devis', function(req, res, next) {
-    let devis = new devisSchema ({
+    let devis = new Devis ({
         cout_structure: '', // calcul :  besoin de req.body.installation et de req.body.tuile et faire ensuite un calcul
         cout_acheminement: "", //Calcul ?
         prix_cuve : "", //En fonction du choix de l'utilisateur ?
