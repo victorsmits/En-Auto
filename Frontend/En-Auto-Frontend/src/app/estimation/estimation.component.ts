@@ -11,6 +11,9 @@ export class EstimationComponent implements OnInit {
 
   public estiForm : FormGroup;
   hasTiles: string;
+  hasGutter: string;
+  knowConsommation: string;
+  choice: string;
   formStep = ["step1"];
   ctx: any;
   constructor(public api: ApiService,
@@ -22,14 +25,23 @@ export class EstimationComponent implements OnInit {
       address: ["", [Validators.required]],
       postalCode: ["", [Validators.required]],
       houseArea: ["", [Validators.required]],
-      tiles_nb: [""]
+      tiles_nb: [""],
+      m_gutter: [""],
+      consommation: [""],
+      people:[""],
+      nb_machin: [""],
+      garden_area: [""],
     });
   }
 
 
   setTiles(value: any) {
     return this.hasTiles = value;
+  } //je sais pas a quoi ca sert xD c'est grisé
+  setGutter(value: any) {
+    return this.hasGutter = value;
   }
+
 
   next() {
 
