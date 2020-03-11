@@ -1,11 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const jwt = require('jsonwebtoken');
 let decodedToken = "";
-/* GET users listing. */
-
 
 router.post('/register', function (req, res, next) {
     let user = new User({
