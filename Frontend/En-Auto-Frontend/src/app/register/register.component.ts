@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ApiService} from "../api.service";
+import {ApiService} from "../service/api.service";
+import {ToolsService} from "../service/tools.service";
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,9 @@ import {ApiService} from "../api.service";
 export class RegisterComponent implements OnInit {
   public loginForm: FormGroup;
 
-  constructor(public API: ApiService,public fb: FormBuilder) {
+  constructor(public API: ApiService,
+              public fb: FormBuilder,
+              public tool : ToolsService) {
   }
 
   ngOnInit(): void {

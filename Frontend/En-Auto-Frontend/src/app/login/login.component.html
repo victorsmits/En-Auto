@@ -1,12 +1,14 @@
-<form action="" [formGroup]="form">
-  <mat-form-field>
-    <input matInput placeholder="email" formGroupName="email">
-    <span *ngIf="isValid('email')">Please enter a valid email </span>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="password" formGroupName="password">
-    <span *ngIf="isValid('password')">Please enter a password </span>
-  </mat-form-field>
-  <button mat-flat-button color="accent"> register</button>
-</form>
-
+<mat-card>
+  <form action="" [formGroup]="loginForm">
+    <mat-error *ngIf="errorMessage" >{{errorMessage}}</mat-error>
+    <mat-form-field>
+      <input matInput placeholder="email" formControlName="email">
+      <mat-error *ngIf="tool.isValid('email',loginForm)">Please enter a valid email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="password" formControlName="password" type="password">
+      <mat-error *ngIf="tool.isValid('password',loginForm)">Please enter a password</mat-error>
+    </mat-form-field>
+    <button mat-flat-button color="accent" (click)="onLogin()"> register </button>
+  </form>
+</mat-card>

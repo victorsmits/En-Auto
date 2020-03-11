@@ -2,19 +2,19 @@
   <form [formGroup]="loginForm">
     <mat-form-field >
       <input matInput formControlName="lastName" placeholder="Last name">
-      <mat-error *ngIf="isValid('lastName')"> Please enter your last name </mat-error>
+      <mat-error *ngIf="tool.isValid('lastName',loginForm)"> Please enter your last name </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input matInput formControlName="firstName" placeholder="First name">
-      <mat-error *ngIf="isValid('firstName')"> Please enter your first name </mat-error>
+      <mat-error *ngIf="tool.isValid('firstName',loginForm)"> Please enter your first name </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input matInput formControlName="email" placeholder="Email">
-      <mat-error *ngIf="isValid('email')">Please enter a valid email </mat-error>
+      <mat-error *ngIf="tool.isValid('email',loginForm)">Please enter a valid email </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input matInput formControlName="password" placeholder="Password" type="password">
-      <mat-error *ngIf="isValid('password')">Please enter a password </mat-error>
+      <mat-error *ngIf="tool.isValid('password',loginForm)">Please enter a password </mat-error>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="register(loginForm)"> register</button>
   </form>
