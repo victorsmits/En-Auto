@@ -35,29 +35,10 @@ router.get('', function(req, res, next) {
     })
 });
 
-//M.A.J du devis utilisateur (dépendant de l'id_user)
-router.put('', function(req, res, next) {
-    Devis.findByIdAndUpdate({id_user: req.body.id_user.toString()}, {
-        cout_structure: req.body.cout_structure,
-        cout_acheminement: req.body.cout_acheminement,
-        prix_cuve : req.body.prix_cuve,
-        conso : req.body.conso,
-        superficie : req.body.superficie
-    }, (err, devis) => {
-        console.log("devis= ",devis);
-        if(!devis) {
-            return res.status(401).send({
-                message : "Devis not found with id "+ req.body.id_user
-            });
-        }
-        res.send({message: "Devis updated successfully!"});
-    })
-})
-
 //Suppression du devis utilisateur (dépendant de l'id_user)
 router.delete('', function(req, res, next) {
-    console.log(Devis.find({id_user: req.query._id}))
-    Devis.deleteOne({id_user: req.query._id.toString()}, (err,devis) =>{
+    console.log(Devis.find({_id: req.query._id}))
+    Devis.findByIdAndRemove({_id: req.query._id.toString()}, (err,devis) =>{
         console.log("devis = ",devis)
         if(!devis) {
             return res.status(401).send({
@@ -67,5 +48,20 @@ router.delete('', function(req, res, next) {
         res.send({message: "Devis deleted successfully!"});
     });
 })
+
+//M.A.J du devis utilisateur (dépendant de l'id_user)
+router.put('', function(req, res, next) {
+    Devis.findByIdAndUpdate(req.query._id, req.body, (err, devis) => {
+        console.log("devis= ",devis);
+        if(!devis) {
+            return res.status(401).send({
+                message : "Devis not found with id "+ req.query._id
+            });
+        }
+        return res.status(201).json(devis);
+    })
+})
+
+
 
 module.exports = router;
