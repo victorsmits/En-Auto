@@ -8,3 +8,6 @@ mat-card{
   width: 20em;
   margin: auto;
 }
+mat-radio-button{
+  margin: 2%
+}

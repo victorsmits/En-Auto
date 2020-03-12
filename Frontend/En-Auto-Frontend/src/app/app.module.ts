@@ -16,6 +16,9 @@ import {MatCardModule} from "@angular/material/card";
 import { EstimationComponent } from './estimation/estimation.component';
 import {MatRadioModule} from "@angular/material/radio";
 import {MatIconModule} from "@angular/material/icon";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import {MatIconModule} from "@angular/material/icon";
     MatButtonModule,
     MatCardModule,
     MatRadioModule,
-    MatIconModule
+    MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

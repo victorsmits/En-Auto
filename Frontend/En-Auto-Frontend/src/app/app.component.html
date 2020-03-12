@@ -2,9 +2,65 @@
 <html>
 <head>
   <meta charset="UTF-8">
+
 </head>
+<mat-toolbar class="Navbar" color="primary" >
+  <a mat-list-item routerLink=".">
+    <mat-icon> home </mat-icon>
+    <span> Accueil </span>
+  </a>
+
+  <a mat-list-item routerLink="/login">
+    <mat-icon> person </mat-icon>
+    <span> Login </span>
+  </a>
+
+  <a mat-list-item routerLink="/register">
+    <mat-icon> person_add </mat-icon>
+    <span> Register </span>
+  </a>
+</mat-toolbar>
 <body>
 <router-outlet></router-outlet>
 </body>
 </html>
 
+<ng-template #desktopNav >
+  <mat-nav-list>
+    <a mat-list-item routerLink=".">
+      <mat-icon> home </mat-icon>
+      <span> Accueil </span>
+    </a>
+
+    <a mat-list-item routerLink="login">
+      <mat-icon> person </mat-icon>
+      <span> Login </span>
+    </a>
+
+    <a mat-list-item routerLink="register">
+      <mat-icon> person_add </mat-icon>
+      <span> Register </span>
+    </a>
+
+  </mat-nav-list>
+</ng-template>
+
+<ng-template #menutemplate>
+  <mat-nav-list>
+    <a mat-list-item routerLink=".">
+      <mat-icon> home </mat-icon>
+      <span> Accueil </span>
+    </a>
+
+    <a mat-list-item routerLink="login">
+      <mat-icon> person </mat-icon>
+      <span> Login </span>
+    </a>
+
+    <a mat-list-item routerLink="register">
+      <mat-icon> person_add </mat-icon>
+      <span> Register </span>
+    </a>
+
+  </mat-nav-list>
+</ng-template>

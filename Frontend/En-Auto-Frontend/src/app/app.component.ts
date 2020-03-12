@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ToolsService} from "./service/tools.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'En-Auto';
+  public isHandset$ = this.tool.isHandset$;
+
+  constructor(private tool: ToolsService) {}
 }

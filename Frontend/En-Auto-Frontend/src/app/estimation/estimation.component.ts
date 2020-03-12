@@ -14,7 +14,7 @@ export class EstimationComponent implements OnInit {
   hasGutter: string;
   knowConsommation: string;
   choice: string;
-  formStep = ["step1"];
+  formStep = 1;
   ctx: any;
   constructor(public api: ApiService,
               public fb : FormBuilder) { }
@@ -44,6 +44,11 @@ export class EstimationComponent implements OnInit {
 
 
   next() {
+    this.formStep += 1;
+    console.log(this.formStep);
+  }
+
+  submitForm() {
 
   }
 }
