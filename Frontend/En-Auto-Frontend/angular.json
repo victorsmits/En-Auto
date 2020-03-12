@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "En-Auto": {
+    "En-Auto-Frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/En-Auto",
+            "outputPath": "dist/En-Auto-Frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "En-Auto:build"
+            "browserTarget": "En-Auto-Frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "En-Auto:build:production"
+              "browserTarget": "En-Auto-Frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "En-Auto:build"
+            "browserTarget": "En-Auto-Frontend:build"
           }
         },
         "test": {
@@ -112,19 +112,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "En-Auto:serve"
+            "devServerTarget": "En-Auto-Frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "En-Auto:serve:production"
+              "devServerTarget": "En-Auto-Frontend:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "En-Auto",
+  "defaultProject": "En-Auto-Frontend",
   "cli": {
-    "analytics": "01569a74-78c4-4c7f-8368-28ac88a768e9"
+    "analytics": "83d2148d-0d6a-4cad-9ca9-30b3b36b3d91"
   }
 }

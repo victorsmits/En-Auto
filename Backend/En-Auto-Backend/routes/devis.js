@@ -26,7 +26,7 @@ router.post('', function(req, res, next) {
 router.get('', function(req, res, next) {
     Devis.find({id_user : req.query.id_user.toString()},(err,devis)=>{
         if(!devis) {
-            return res.status(404).send({
+            return res.status(401).send({
                 message : "Devis not found with id "+ req.query.id_user
             });
         }else{
@@ -46,7 +46,7 @@ router.put('', function(req, res, next) {
     }, (err, devis) => {
         console.log("devis= ",devis);
         if(!devis) {
-            return res.status(404).send({
+            return res.status(401).send({
                 message : "Devis not found with id "+ req.body.id_user
             });
         }
@@ -56,11 +56,12 @@ router.put('', function(req, res, next) {
 
 //Suppression du devis utilisateur (dépendant de l'id_user)
 router.delete('', function(req, res, next) {
-    Devis.findByIdAndRemove({id_user: req.query.id_user.toString()}, (err,devis) =>{
-        console.log("devis= ",devis)
+    console.log(Devis.find({id_user: req.query._id}))
+    Devis.deleteOne({id_user: req.query._id.toString()}, (err,devis) =>{
+        console.log("devis = ",devis)
         if(!devis) {
             return res.status(401).send({
-                message : "Devis not found with id "+ req.query.id_user
+                message : "Devis not found with id "+ req.query._id
             });
         }
         res.send({message: "Devis deleted successfully!"});
