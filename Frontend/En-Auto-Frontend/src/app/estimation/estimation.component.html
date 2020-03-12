@@ -1,7 +1,5 @@
-
 <mat-card>
-
-  <mat-horizontal-stepper [linear]="true">
+  <mat-horizontal-stepper [linear]="true" (selectionChange)="selectionChange($event)">
     <mat-step label="Adresse">
       <div *ngTemplateOutlet="step1"></div>
       <button mat-flat-button color="primary" matStepperNext>Next</button>
@@ -11,17 +9,19 @@
       <button mat-flat-button color="primary" matStepperPrevious>Back</button>
       <button mat-flat-button color="primary" matStepperNext>Next</button>
     </mat-step>
+    <mat-step label="Toiture">
+      <div *ngTemplateOutlet="step3"></div>
+      <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+      <button mat-flat-button color="primary" matStepperNext>Next</button>
+    </mat-step>
     <mat-step label="Premier résultat">
+      <div *ngTemplateOutlet="firstDevisTemplate"></div>
+
       <button mat-flat-button color="primary" matStepperPrevious>Back</button>
       <button mat-flat-button color="primary" (click)="goFurther = true" *ngIf="!goFurther">Aller plus loin</button>
       <button mat-flat-button color="primary" matStepperNext *ngIf="goFurther">Continuer</button>
     </mat-step>
     <div *ngIf="goFurther">
-      <mat-step label="Toiture">
-        <div *ngTemplateOutlet="step3"></div>
-        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" matStepperNext>Next</button>
-      </mat-step>
       <mat-step label="Toiture">
         <div *ngTemplateOutlet="step4"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
@@ -30,13 +30,10 @@
       <mat-step label="Toiture">
         <div *ngTemplateOutlet="step5"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" matStepperNext>Next</button>
+        <button mat-flat-button color="primary" (click)="submitForm()">Calculer</button>
       </mat-step>
     </div>
-
   </mat-horizontal-stepper>
-
-
 </mat-card>
 
 <ng-template #step1>
@@ -131,4 +128,13 @@
     </mat-form-field>
 
   </form>
+</ng-template>
+
+<ng-template #firstDevisTemplate>
+  <div>
+    <p> Coût total de réparation du toit      {{roof_cost}}</p>
+    <p> Coût des tuiles   {{tiles_cost}}</p>
+    <p>  Coût des gouttière {{gutter_cost}} </p>
+    <p>Volume totale d'eau récupérable    {{water_volume}}</p>
+  </div>
 </ng-template>

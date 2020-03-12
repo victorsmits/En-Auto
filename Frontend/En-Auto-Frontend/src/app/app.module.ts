@@ -21,6 +21,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from "@angular/material/stepper";
+import {MatTreeModule} from "@angular/material/tree";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {MatStepperModule} from "@angular/material/stepper";
     MatToolbarModule,
     MatListModule,
     MatProgressBarModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTreeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

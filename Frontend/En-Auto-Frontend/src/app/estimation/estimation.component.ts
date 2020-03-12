@@ -1,6 +1,10 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormArray} from "@angular/forms";
 import {ApiService} from "../service/api.service";
+import {Devis} from "../Interface/Interface.module";
+import {ToolsService} from "../service/tools.service";
+import {MathService} from "../service/math.service";
+import {StepperSelectionEvent} from "@angular/cdk/stepper";
 
 @Component({
   selector: 'app-estimation',
@@ -9,15 +13,26 @@ import {ApiService} from "../service/api.service";
 })
 export class EstimationComponent implements OnInit {
 
-  public estiForm : FormGroup;
+  public estiForm: FormGroup;
   hasTiles: string;
   hasGutter: string;
   knowConsommation: string;
   choice: string;
   formStep = 0;
   goFurther: boolean = false;
+  public finalDevis: Devis;
+
+  water_volume: number;
+  roof_cost: number;
+  tiles_cost: number;
+  gutter_cost: number;
+
+
   constructor(public api: ApiService,
-              public fb : FormBuilder) { }
+              public fb: FormBuilder,
+              public tool: ToolsService,
+              public math: MathService) {
+  }
 
   ngOnInit(): void {
     this.estiForm = this.fb.group({
@@ -27,7 +42,7 @@ export class EstimationComponent implements OnInit {
       tiles_nb: [null],
       m_gutter: [null],
       consommation: [null],
-      people:[null],
+      people: [null],
       nb_machin: [null],
       garden_area: [null],
     });
@@ -35,10 +50,10 @@ export class EstimationComponent implements OnInit {
 
   // Loading bar
 
-  get Status() : number{
-    if(this.formStep <= 2){
+  get Status(): number {
+    if (this.formStep <= 2) {
       return this.formStep * 50
-    }else{
+    } else {
       return this.formStep * 20
     }
   }
@@ -61,23 +76,28 @@ export class EstimationComponent implements OnInit {
     return this.choice = value;
   }
 
-  // Form Navigation
+  computeFirstDevis() {
+    console.log(this.estiForm.value);
+    let gutter = this.estiForm.value["m_gutter"];
+    let tiles = this.estiForm.value["tiles_nb"];
 
-  next() {
-    this.formStep += 1;
+    this.tiles_cost = tiles != null? this.math.tilesReparationCost(tiles): 0;
+    this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;
+
+    this.water_volume = this.math.roofWaterVolume(this.estiForm.value["houseArea"], 10);
+    this.roof_cost = this.tiles_cost + this.gutter_cost;
   }
 
+  // Form Navigation
   submitForm() {
-    if(this.estiForm.valid){
+    if (this.estiForm.valid) {
 
     }
   }
 
-  prev() {
-    this.formStep -= 1;
+  selectionChange($event: StepperSelectionEvent) {
+    if($event.selectedIndex == 3){
+      this.computeFirstDevis();
+    }
   }
-
-
-
-
 }
