@@ -9,7 +9,7 @@
   * Suppression du dossier Sequelize
   * Création du dossier Mongo
 * Mise à jour des dépendances et des variables d'environnement 
-* Connexion du MongoDB dans le BackEnd avec tests 
+* Connexion du MongoDB dans le BackEnd avec test
  
  
 
@@ -30,3 +30,9 @@
 
 
 ## Rapport du 11 mars :
+
+* Création du formulaire de récupération des informations de l'utilisateur 
+* Mise à jour du service permettant l'authentification de l'utilisateur 
+* Mise à jour de l'interface utilisateur et de l'affichage du devis
+* Merge des branches 'JWT' et 'Frontend'
+* Mise à jour du service permettant de calculer le devis 
