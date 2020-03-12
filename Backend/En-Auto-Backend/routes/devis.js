@@ -61,7 +61,4 @@ router.put('', function(req, res, next) {
         return res.status(201).json(devis);
     })
 })
-
-
-
 module.exports = router;
