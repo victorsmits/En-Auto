@@ -14,41 +14,70 @@ export class EstimationComponent implements OnInit {
   hasGutter: string;
   knowConsommation: string;
   choice: string;
-  formStep = 1;
-  ctx: any;
+  formStep = 0;
+  goFurther: boolean = false;
   constructor(public api: ApiService,
               public fb : FormBuilder) { }
 
   ngOnInit(): void {
     this.estiForm = this.fb.group({
-      step: this.fb.array([]),
       address: ["", [Validators.required]],
       postalCode: ["", [Validators.required]],
       houseArea: ["", [Validators.required]],
-      tiles_nb: [""],
-      m_gutter: [""],
-      consommation: [""],
-      people:[""],
-      nb_machin: [""],
-      garden_area: [""],
+      tiles_nb: [null],
+      m_gutter: [null],
+      consommation: [null],
+      people:[null],
+      nb_machin: [null],
+      garden_area: [null],
     });
   }
 
+  // Loading bar
+
+  get Status() : number{
+    if(this.formStep <= 2){
+      return this.formStep * 50
+    }else{
+      return this.formStep * 20
+    }
+  }
+
+  // Form Question control
 
   setTiles(value: any) {
     return this.hasTiles = value;
-  } //je sais pas a quoi ca sert xD c'est grisé
+  }
+
   setGutter(value: any) {
     return this.hasGutter = value;
   }
 
+  setConsommation(value: any) {
+    return this.knowConsommation = value;
+  }
+
+  setUse(value: any) {
+    return this.choice = value;
+  }
+
+  // Form Navigation
 
   next() {
     this.formStep += 1;
-    console.log(this.formStep);
   }
 
   submitForm() {
+    if(this.estiForm.valid){
 
+    }
   }
+
+  prev() {
+    this.formStep -= 1;
+  }
+
+
+
+
 }

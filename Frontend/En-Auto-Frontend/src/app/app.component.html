@@ -4,25 +4,29 @@
   <meta charset="UTF-8">
 
 </head>
-<mat-toolbar class="Navbar" color="primary" >
-  <a mat-list-item routerLink=".">
-    <mat-icon> home </mat-icon>
-    <span> Accueil </span>
-  </a>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav">
+    <div *ngTemplateOutlet="menutemplate"></div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
 
-  <a mat-list-item routerLink="/login">
-    <mat-icon> person </mat-icon>
-    <span> Login </span>
-  </a>
+    <ng-container>
+      <body>
+      <router-outlet></router-outlet>
+      </body>
+    </ng-container>
 
-  <a mat-list-item routerLink="/register">
-    <mat-icon> person_add </mat-icon>
-    <span> Register </span>
-  </a>
-</mat-toolbar>
-<body>
-<router-outlet></router-outlet>
-</body>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 </html>
 
 <ng-template #desktopNav >

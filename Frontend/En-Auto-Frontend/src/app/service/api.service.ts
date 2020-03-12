@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {throwError} from "rxjs";
+import {Devis} from "../Interface/Interface.module";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,24 @@ export class ApiService {
     return this.http.get(this.ip + '/users/profile', {
       observe: 'body',
       params: new HttpParams().append('token', localStorage.getItem('token'))
+    }).pipe(
+      catchError(this.handelError));
+  }
+
+  createDevis(devis : Devis){
+    return this.http.post(this.ip + '/devis', devis).pipe(
+      catchError(this.handelError));
+  }
+
+  updateDevis(devis : Devis){
+    return this.http.put(this.ip + '/devis', devis).pipe(
+      catchError(this.handelError));
+  }
+
+  deleteDevis(devis : Devis){
+    return this.http.delete(this.ip + '/devis', {
+      observe: 'body',
+      params : new HttpParams().append('_id',devis._id.toString())
     }).pipe(
       catchError(this.handelError));
   }

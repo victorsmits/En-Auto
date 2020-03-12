@@ -1,23 +1,42 @@
+
 <mat-card>
-  <div [ngSwitch]="formStep">
-    <ng-container *ngSwitchCase="1">
+
+  <mat-horizontal-stepper [linear]="true">
+    <mat-step label="Adresse">
       <div *ngTemplateOutlet="step1"></div>
-    </ng-container>
-    <ng-container *ngSwitchCase="2">
+      <button mat-flat-button color="primary" matStepperNext>Next</button>
+    </mat-step>
+    <mat-step label="Toiture">
       <div *ngTemplateOutlet="step2"></div>
-    </ng-container>
-    <ng-container *ngSwitchCase="3">
-      <div *ngTemplateOutlet="step3"></div>
-    </ng-container>
-    <ng-container *ngSwitchCase="4">
-      <div *ngTemplateOutlet="step4"></div>
-    </ng-container>
-    <ng-container *ngSwitchCase="5">
-      <div *ngTemplateOutlet="step5"></div>
-    </ng-container>
-  </div>
-  <button mat-flat-button color="primary" (click)="next()" *ngIf="formStep < 5"> Next</button>
-  <button mat-flat-button color="primary" (click)="submitForm()" *ngIf="formStep >= 5"> End</button>
+      <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+      <button mat-flat-button color="primary" matStepperNext>Next</button>
+    </mat-step>
+    <mat-step label="Premier résultat">
+      <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+      <button mat-flat-button color="primary" (click)="goFurther = true" *ngIf="!goFurther">Aller plus loin</button>
+      <button mat-flat-button color="primary" matStepperNext *ngIf="goFurther">Continuer</button>
+    </mat-step>
+    <div *ngIf="goFurther">
+      <mat-step label="Toiture">
+        <div *ngTemplateOutlet="step3"></div>
+        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      </mat-step>
+      <mat-step label="Toiture">
+        <div *ngTemplateOutlet="step4"></div>
+        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      </mat-step>
+      <mat-step label="Toiture">
+        <div *ngTemplateOutlet="step5"></div>
+        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      </mat-step>
+    </div>
+
+  </mat-horizontal-stepper>
+
+
 </mat-card>
 
 <ng-template #step1>
@@ -44,7 +63,7 @@
     </mat-radio-group>
 
     <mat-form-field *ngIf="hasTiles === 'yes' ">
-      <input matInput type="number" formControlName="tiles_nb" placeholder="what's your address?">
+      <input matInput type="number" formControlName="tiles_nb" placeholder="combien de tuile(s) a remplacer?">
     </mat-form-field>
   </form>
 </ng-template>
@@ -52,7 +71,7 @@
 <ng-template #step3>
   <form action="" [formGroup]="estiForm">
     <p>Avez vous besoin de faire installer une goutière?</p>
-    <mat-radio-group aria-label="Avez vous besoin de faire installer une goutière?" (change)="setTiles($event.value)">
+    <mat-radio-group aria-label="Avez vous besoin de faire installer une goutière?" (change)="setGutter($event.value)">
       <mat-radio-button value="yes"> oui</mat-radio-button>
       <mat-radio-button value="no"> non</mat-radio-button>
     </mat-radio-group>
@@ -66,7 +85,9 @@
 
 <ng-template #step4>
   <form action="" [formGroup]="estiForm">
-    <mat-radio-group aria-label="Connaissez vous votre consommation d'eau annuelle ?" (change)="setTiles($event.value)">
+    <p>Connaissez vous votre consommation d'eau annuelle ?</p>
+    <mat-radio-group aria-label="Connaissez vous votre consommation d'eau annuelle ?"
+                     (change)="setConsommation($event.value)">
       <mat-radio-button value="yes"> oui</mat-radio-button>
       <mat-radio-button value="no"> non</mat-radio-button>
     </mat-radio-group>
@@ -84,7 +105,8 @@
 
 <ng-template #step5>
   <form action="" [formGroup]="estiForm">
-    <mat-radio-group aria-label="Quelle est l'usage que vous voudriez faire ?" (change)="setTiles($event.value)">
+    <p>Quelle est l'usage que vous voudriez faire ?</p>
+    <mat-radio-group aria-label="Quelle est l'usage que vous voudriez faire ?" (change)="setUse($event.value)">
       <mat-radio-button value="garden"> Jardin seulement</mat-radio-button>
       <mat-radio-button value="house"> Usage domestique</mat-radio-button>
       <mat-radio-button value="both"> Les deux</mat-radio-button>
@@ -94,13 +116,19 @@
       <input matInput type="number" formControlName="garden_area"
              placeholder="Quelle est la superfecie de votre jardin ?">
     </mat-form-field>
+
     <mat-form-field *ngIf="choice === 'house' ">
       <input matInput type="number" formControlName="nb_machin" placeholder="Combien de machines possedez vous ?">
     </mat-form-field>
+
     <mat-form-field *ngIf="choice === 'both' ">
       <input matInput type="number" formControlName="garden_area"
              placeholder="Quelle est la superfecie de votre jardin ?">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="choice === 'both' ">
       <input matInput type="number" formControlName="nb_machin" placeholder="Combien de machines possedez vous ?">
     </mat-form-field>
+
   </form>
 </ng-template>

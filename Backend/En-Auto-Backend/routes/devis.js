@@ -3,8 +3,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Devis = mongoose.model('Devis');
 
-router.post('/create-devis', function(req, res, next) {
+router.post('', function(req, res, next) {
     let devis = new Devis ({
+        id_user: req.params.id_user,
         cout_structure: '', // calcul :  besoin de req.body.installation et de req.body.tuile et faire ensuite un calcul
         cout_acheminement: "", //Calcul ?
         prix_cuve : "", //En fonction du choix de l'utilisateur ?
@@ -20,11 +21,11 @@ router.post('/create-devis', function(req, res, next) {
         .then(r =>{
             return res.status(201).json(r);
         }).catch(error => {
-            return res.status(501).json({message : error})
+            return res.status(401).json({message : error})
         })
 });
 
-router.put('/update-devis', function(req, res, next) {
+router.put('', function(req, res, next) {
     
 });
 
