@@ -31,7 +31,7 @@
       <mat-step label="Toiture" *ngIf="choice === 'both'|| choice === 'house'" >
         <div *ngTemplateOutlet="step4"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" (click)="submitForm()">Calculer</button>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
       </mat-step>
 
       <mat-step label="Utilisation">

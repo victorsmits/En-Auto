@@ -99,20 +99,25 @@ export class EstimationComponent implements OnInit {
   }
 
   computeFinalDevis() {
-    this.finalDevis = {
-      _id: this.estiForm.value["_id"] ? this.estiForm.value["_id"] : undefined,
-      id_user: this.estiForm.value["id_user"] ? this.estiForm.value["id_user"] : undefined,
-      structural_cost: this.roof_cost,
-      routing_cost: undefined,
-      tank_cost: undefined,
-      consum: this.estiForm.value["consommation"] ? this.estiForm.value["consommation"] : undefined,
-      water_cost: this.api.getWaterCost(this.estiForm.value["postalCode"]),
-      water_volume: this.water_volume,
-      roof_area: this.estiForm.value["houseArea"] ? this.estiForm.value["houseArea"] : undefined,
-      final_save : this.estiForm.value["final_save"]? this.estiForm.value["final_save"] : undefined,
-      rentability: undefined,
-      created_at: this.estiForm.value["created_at"] ? this.estiForm.value["created_at"] : new Date(),
-    }
+    this.api.getWaterCost(this.estiForm.value["postalCode"]).subscribe(data =>{
+      if(data){
+        this.finalDevis = {
+          _id: this.estiForm.value["_id"] ? this.estiForm.value["_id"] : undefined,
+          id_user: this.estiForm.value["id_user"] ? this.estiForm.value["id_user"] : undefined,
+          structural_cost: this.roof_cost,
+          routing_cost: undefined,
+          tank_cost: undefined,
+          consum: this.estiForm.value["consommation"] ? this.estiForm.value["consommation"] : undefined,
+          // water_cost: this.api.getWaterCost(this.estiForm.value["postalCode"]),
+          water_volume: this.water_volume,
+          roof_area: this.estiForm.value["houseArea"] ? this.estiForm.value["houseArea"] : undefined,
+          final_save : this.estiForm.value["final_save"]? this.estiForm.value["final_save"] : undefined,
+          rentability: undefined,
+          created_at: this.estiForm.value["created_at"] ? this.estiForm.value["created_at"] : new Date(),
+        }
+      }
+    });
+
   }
 
   // Form Navigation
@@ -130,7 +135,7 @@ export class EstimationComponent implements OnInit {
   saveDevis(){
     this.api.createDevis(this.finalDevis).subscribe(data => {
       if(data["created"]){
-        
+
       }
     })
   }

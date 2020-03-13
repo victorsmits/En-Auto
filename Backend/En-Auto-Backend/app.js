@@ -1,6 +1,7 @@
 require('dotenv/config');
 require('./models/UserModel');
 require('./models/DevisModel');
+require('./models/WaterCostModel');
 require('./config/passport');
 
 const cors = require('cors');
@@ -14,6 +15,7 @@ const passport = require('passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const waterCostRouter  = require('./routes/watercost');
 const devRouter = require('./routes/devis');
 
 const app = express();
@@ -66,6 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/devis', devRouter);
+app.use('/watercost', waterCostRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

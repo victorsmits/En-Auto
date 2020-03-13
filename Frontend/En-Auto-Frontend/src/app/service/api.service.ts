@@ -51,7 +51,7 @@ export class ApiService {
 
   getWaterCost(codepostal: any) {
     //TODO get route for waterCost
-    return this.http.get(this.ip + '/', {
+    return this.http.get(this.ip + '/watercost', {
       observe: 'body',
       params: new HttpParams().append('codepostal', codepostal)
     }).pipe(
