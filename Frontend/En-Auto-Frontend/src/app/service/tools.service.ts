@@ -57,8 +57,10 @@ export class ToolsService {
   setDevis(data : JSON) : Devis {
     return {
       _id: data["_id"] ? data["_id"] : undefined,
+      address: data["address"] ? data["address"] : undefined,
+      code_postal: data["code_postal"] ? data["code_postal"] : undefined,
       id_user: data["id_user"] ? data["id_user"] : undefined,
-      structural_cost: data["structural"] ? data["structural"] : undefined,
+      structural_cost: data["structural_cost"] ? data["structural_cost"] : undefined,
       routing_cost: data["routing_cost"] ? data["routing_cost"] : undefined,
       tank_cost: data["tank_cost"] ? data["tank_cost"] : undefined,
       consum: data["consum"] ? data["consum"] : undefined,

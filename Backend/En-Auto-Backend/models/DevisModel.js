@@ -16,8 +16,7 @@ const devisSchema = new Schema({
     },
     //coût
     'cout_structure': {
-        type: Number,
-        required: true
+        type: Number
     }, //installation de goutiere? tuiles manquante?
     'cout_acheminement': {
         type: Number,

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiService} from "../service/api.service";
 import {ToolsService} from "../service/tools.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(public API: ApiService,
               public fb: FormBuilder,
-              public tool : ToolsService) {
+              public tool : ToolsService,
+              public router : Router) {
   }
 
   ngOnInit(): void {
@@ -32,7 +34,9 @@ export class RegisterComponent implements OnInit {
   register(loginForm: FormGroup) {
     console.log(loginForm.value);
     this.API.register(loginForm.value).subscribe(data => {
-      console.log(data)
+      if(data){
+        this.router.navigate(['login'])
+      }
     })
   }
 }
