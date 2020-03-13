@@ -5,6 +5,10 @@ import {Devis} from "../Interface/Interface.module";
 import {ToolsService} from "../service/tools.service";
 import {MathService} from "../service/math.service";
 import {StepperSelectionEvent} from "@angular/cdk/stepper";
+import {MatDialog} from "@angular/material/dialog";
+import {LoginComponent} from "../login/login.component";
+import {RegisterComponent} from "../register/register.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-estimation',
@@ -27,11 +31,12 @@ export class EstimationComponent implements OnInit {
   tiles_cost: number;
   gutter_cost: number;
 
-
   constructor(public api: ApiService,
               public fb: FormBuilder,
               public tool: ToolsService,
-              public math: MathService) {
+              public math: MathService,
+              public dialog: MatDialog,
+              public router: Router) {
   }
 
   ngOnInit(): void {
@@ -88,6 +93,23 @@ export class EstimationComponent implements OnInit {
     this.roof_cost = this.tiles_cost + this.gutter_cost;
   }
 
+  computeFinalDevis() {
+    this.finalDevis = {
+      _id: this.estiForm.value["_id"] ? this.estiForm.value["_id"] : undefined,
+      id_user: this.estiForm.value["id_user"] ? this.estiForm.value["id_user"] : undefined,
+      structural_cost: this.roof_cost,
+      routing_cost: undefined,
+      tank_cost: undefined,
+      consum: this.estiForm.value["consommation"] ? this.estiForm.value["consommation"] : undefined,
+      water_cost: this.api.getWaterCost(this.estiForm.value["postalCode"]),
+      water_volume: this.water_volume,
+      roof_area: this.estiForm.value["houseArea"] ? this.estiForm.value["houseArea"] : undefined,
+      final_save : this.estiForm.value["final_save"]? this.estiForm.value["final_save"] : undefined,
+      rentability: undefined,
+      created_at: this.estiForm.value["created_at"] ? this.estiForm.value["created_at"] : new Date(),
+    }
+  }
+
   // Form Navigation
   submitForm() {
     if (this.estiForm.valid) {
@@ -99,5 +121,26 @@ export class EstimationComponent implements OnInit {
     if($event.selectedIndex == 3){
       this.computeFirstDevis();
     }
+  }
+
+  saveDevis(){
+    this.api.createDevis(this.finalDevis).subscribe(data => {
+      if(data["created"]){
+        
+      }
+    })
+  }
+
+  save() {
+    if(!this.tool.isLoggedIn()){
+      sessionStorage.setItem('devis',this.estiForm.value);
+      this.router.navigate(['login'])
+    }else{
+      this.saveDevis();
+    }
+  }
+
+  send() {
+
   }
 }

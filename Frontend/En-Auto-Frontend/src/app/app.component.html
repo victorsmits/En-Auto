@@ -6,7 +6,7 @@
 </head>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav">
-    <div *ngTemplateOutlet="menutemplate"></div>
+    <div *ngTemplateOutlet="desktopNav"></div>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -29,42 +29,37 @@
 </mat-sidenav-container>
 </html>
 
-<ng-template #desktopNav >
+<ng-template #desktopNav>
   <mat-nav-list>
     <a mat-list-item routerLink=".">
-      <mat-icon> home </mat-icon>
+      <mat-icon> home</mat-icon>
       <span> Accueil </span>
     </a>
 
-    <a mat-list-item routerLink="login">
-      <mat-icon> person </mat-icon>
-      <span> Login </span>
-    </a>
+    <div *ngIf="!tool.isLoggedIn()">
+      <a mat-list-item routerLink="login">
+        <mat-icon> person</mat-icon>
+        <span> Login </span>
+      </a>
 
-    <a mat-list-item routerLink="register">
-      <mat-icon> person_add </mat-icon>
-      <span> Register </span>
-    </a>
+      <a mat-list-item routerLink="register">
+        <mat-icon> person_add</mat-icon>
+        <span> Register </span>
+      </a>
+    </div>
+
+    <div *ngIf="tool.isLoggedIn()">
+      <a mat-list-item [matMenuTriggerFor]="menu">
+        <mat-icon> person </mat-icon>
+        <span> {{user.lastName}} {{user.firstName}} </span>
+      </a>
+
+      <mat-menu #menu="matMenu" yPosition="below">
+        <a mat-menu-item routerLink="">Profil</a>
+        <a mat-menu-item (click)="tool.onLogout()">Déconnexion</a>
+      </mat-menu>
+    </div>
 
   </mat-nav-list>
 </ng-template>
 
-<ng-template #menutemplate>
-  <mat-nav-list>
-    <a mat-list-item routerLink=".">
-      <mat-icon> home </mat-icon>
-      <span> Accueil </span>
-    </a>
-
-    <a mat-list-item routerLink="login">
-      <mat-icon> person </mat-icon>
-      <span> Login </span>
-    </a>
-
-    <a mat-list-item routerLink="register">
-      <mat-icon> person_add </mat-icon>
-      <span> Register </span>
-    </a>
-
-  </mat-nav-list>
-</ng-template>

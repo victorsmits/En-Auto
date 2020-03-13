@@ -49,6 +49,15 @@ export class ApiService {
       catchError(this.handelError));
   }
 
+  getWaterCost(codepostal: any) {
+    //TODO get route for waterCost
+    return this.http.get(this.ip + '/', {
+      observe: 'body',
+      params: new HttpParams().append('codepostal', codepostal)
+    }).pipe(
+      catchError(this.handelError));
+  }
+
   handelError(err) {
     if (err instanceof HttpErrorResponse) {
       let error = new HttpErrorResponse(err);
@@ -62,4 +71,6 @@ export class ApiService {
     }
 
   }
+
+
 }
