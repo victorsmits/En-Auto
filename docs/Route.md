@@ -9,6 +9,6 @@
 | /devis |PUT| `{_id : String, cout_structure : Number, cout_acheminement : Number,  prix_cuve: Number, conso : Number, superficie : Number }` | `{message: String}`| `{ message : String}`|
 | /devis |DELETE|`{_id : String}`|`{message: String}` |`{message: String}`|
 | /watercost |POST| `{postCode: Number, cost: Number }` | `{WaterCost Model}`| `{ message : String}`|
-| /watercost |GET|`{postCode: Number}`|`{Devis Model}` |`{message: String}`|
+| /watercost |GET|`{postCode: Number}`|`{WaterCost Model}` |`{message: String}`|
 | /watercost |PUT| `{_id : String, postCode: Number, cost: Number }` | `{message: String}`| `{ message : String}`|
 | /watercost |DELETE|`{_id : String}`|`{message: String}` |`{message: String}`|

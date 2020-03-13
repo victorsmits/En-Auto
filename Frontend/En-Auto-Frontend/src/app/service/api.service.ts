@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {throwError} from "rxjs";
-import {Devis} from "../Interface/Interface.module";
+import {Devis, WaterCost} from "../Interface/Interface.module";
 
 @Injectable({
   providedIn: 'root'
@@ -50,11 +50,28 @@ export class ApiService {
   }
 
   getWaterCost(codepostal: any) {
-    //TODO get route for waterCost
     return this.http.get(this.ip + '/watercost', {
       observe: 'body',
-      params: new HttpParams().append('codepostal', codepostal)
+      params: new HttpParams().append('postCode', codepostal)
     }).pipe(
+      catchError(this.handelError));
+  }
+
+  createWaterCost(waterCost : WaterCost) {
+    return this.http.post(this.ip + '/watercost', waterCost).pipe(
+      catchError(this.handelError));
+  }
+
+  deleteWaterCost(_id : string) {
+    return this.http.delete(this.ip + '/watercost', {
+      observe: 'body',
+      params: new HttpParams().append('_id', _id)
+    }).pipe(
+      catchError(this.handelError));
+  }
+
+  updateWaterCost(WaterCost : WaterCost) {
+    return this.http.put(this.ip + '/watercost', WaterCost ).pipe(
       catchError(this.handelError));
   }
 

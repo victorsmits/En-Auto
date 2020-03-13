@@ -2,6 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const devisSchema = new Schema({
+    'addresse' : {
+      type: String,
+      required: true
+    },
+    'code_postal' : {
+      type: Number,
+      required: true
+    },
     'id_user': {
         type: mongoose.Types.ObjectId,
         required : true
@@ -21,7 +29,6 @@ const devisSchema = new Schema({
     }, //plusieurs a proposer ?
     'conso': {
         type: Number,
-        required: true
     }, //estimation ou pas conso
     'prix_eau': {
         type: Number
@@ -37,8 +44,8 @@ const devisSchema = new Schema({
         type: Number
     }, //estimation finale en €
     'rentabilite': {
-        type: Boolean,
-        default: false
+        type: Number,
+        // default: false
     }, //ou bien une jauge
     'createdAt': {
         type: Date,

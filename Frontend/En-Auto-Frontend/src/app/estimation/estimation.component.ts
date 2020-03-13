@@ -9,6 +9,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {LoginComponent} from "../login/login.component";
 import {RegisterComponent} from "../register/register.component";
 import {Router} from "@angular/router";
+import {$e} from "codelyzer/angular/styles/chars";
 
 @Component({
   selector: 'app-estimation',
@@ -41,6 +42,11 @@ export class EstimationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if("devis" in sessionStorage && this.tool.isLoggedIn()){
+      this.saveDevis()
+    }
+
+
     this.estiForm = this.fb.group({
       address: ["", [Validators.required]],
       postalCode: ["", [Validators.required]],
@@ -51,17 +57,9 @@ export class EstimationComponent implements OnInit {
       people: [null],
       nb_machin: [null],
       garden_area: [null],
+      tank_type: [null],
+      tank_dist:[null]
     });
-  }
-
-  // Loading bar
-
-  get Status(): number {
-    if (this.formStep <= 2) {
-      return this.formStep * 50
-    } else {
-      return this.formStep * 20
-    }
   }
 
   // Form Question control
@@ -73,6 +71,7 @@ export class EstimationComponent implements OnInit {
   setGutter(value: any) {
     return this.hasGutter = value;
   }
+
   setType(value: any){
     return this.roof = value;
   }
@@ -100,42 +99,49 @@ export class EstimationComponent implements OnInit {
 
   computeFinalDevis() {
     this.api.getWaterCost(this.estiForm.value["postalCode"]).subscribe(data =>{
-      if(data){
+      if(data[0]){
         this.finalDevis = {
           _id: this.estiForm.value["_id"] ? this.estiForm.value["_id"] : undefined,
-          id_user: this.estiForm.value["id_user"] ? this.estiForm.value["id_user"] : undefined,
+          address: this.estiForm.value["address"] ? this.estiForm.value["address"] : undefined,
+          code_postal : this.estiForm.value["postalCode"] ? this.estiForm.value["postalCode"] : undefined,
+          id_user: this.tool.isLoggedIn()? this.tool.getUser()._id : undefined,
           structural_cost: this.roof_cost,
-          routing_cost: undefined,
-          tank_cost: undefined,
+          routing_cost: 10,
+          tank_cost: 10,
           consum: this.estiForm.value["consommation"] ? this.estiForm.value["consommation"] : undefined,
-          // water_cost: this.api.getWaterCost(this.estiForm.value["postalCode"]),
+          water_cost: this.tool.setWaterCost(data[0]).cost,
           water_volume: this.water_volume,
           roof_area: this.estiForm.value["houseArea"] ? this.estiForm.value["houseArea"] : undefined,
           final_save : this.estiForm.value["final_save"]? this.estiForm.value["final_save"] : undefined,
           rentability: undefined,
           created_at: this.estiForm.value["created_at"] ? this.estiForm.value["created_at"] : new Date(),
-        }
+        };
+        console.log("final devis :", this.finalDevis);
       }
+
+
     });
 
   }
 
-  // Form Navigation
-  submitForm() {
-    if (this.estiForm.valid) {
-    }
-  }
-
   selectionChange($event: StepperSelectionEvent) {
+    console.log(this.estiForm.value);
     if($event.selectedIndex == 3){
       this.computeFirstDevis();
     }
+    if(this.estiForm.value["tank_type"] != null){
+      this.computeFinalDevis()
+    }
+    console.log($event.selectedIndex);
   }
 
   saveDevis(){
+    if("devis" in sessionStorage){
+      this.finalDevis = this.tool.setDevis(JSON.parse(sessionStorage.getItem("devis")));
+    }
     this.api.createDevis(this.finalDevis).subscribe(data => {
-      if(data["created"]){
-
+      if(data["message"]){
+        console.log(data["message"])
       }
     })
   }

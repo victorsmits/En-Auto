@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from "./api.service";
-import {Devis, User} from "../Interface/Interface.module";
+import {Devis, User, WaterCost} from "../Interface/Interface.module";
 import {Observable, Subject} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map, shareReplay} from "rxjs/operators";
@@ -69,6 +69,16 @@ export class ToolsService {
       rentability: data["rentability"] ? data["rentability"] : undefined,
       created_at: data["created_at"] ? data["created_at"] : new Date(),
     }
+  }
+
+  setWaterCost(data: JSON) : WaterCost {
+      let waterCost : WaterCost = {
+        _id: data["_id"],
+        postCode: data["postCode"],
+        cost: data["cost"]
+      };
+      console.log(waterCost);
+      return waterCost;
   }
 
   getUser(): User{

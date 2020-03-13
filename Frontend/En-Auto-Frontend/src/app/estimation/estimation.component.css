@@ -7,7 +7,7 @@ button{
   margin-left: 2%;
 }
 mat-card{
-  width: 70em;
+  width: fit-content;
   margin: 5em auto;
 }
 mat-radio-button{

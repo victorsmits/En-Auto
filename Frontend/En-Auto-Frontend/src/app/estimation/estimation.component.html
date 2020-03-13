@@ -28,13 +28,21 @@
         <button mat-flat-button color="primary" matStepperNext>Next</button>
       </mat-step>
 
-      <mat-step label="Toiture" *ngIf="choice === 'both'|| choice === 'house'" >
+      <mat-step label="Consomation" *ngIf="choice === 'both'|| choice === 'house'" >
+<!--        comsonmation totale-->
         <div *ngTemplateOutlet="step4"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
         <button mat-flat-button color="primary" matStepperNext>Next</button>
       </mat-step>
 
-      <mat-step label="Utilisation">
+      <mat-step label="Cuve">
+        <!--        distance cuve maison-->
+        <div *ngTemplateOutlet="step6"></div>
+        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      </mat-step>
+
+      <mat-step label="Devis Finale">
         <div *ngTemplateOutlet="Save"></div>
 
       </mat-step>
@@ -110,6 +118,22 @@
     <mat-form-field *ngIf="knowConsommation === 'no' ">
       <input matInput type="number" formControlName="people"
              placeholder="Combien de personnes habitent à l'année votre domicile ?">
+    </mat-form-field>
+  </form>
+</ng-template>
+
+<ng-template #step6>
+  <form action="" [formGroup]="estiForm">
+    <p>Connaissez vous votre consommation d'eau annuelle ?</p>
+
+    <mat-radio-group aria-label="Connaissez vous votre consommation d'eau annuelle ?" formControlName="tank_type">
+      <mat-radio-button value="dig"> Entérer</mat-radio-button>
+      <mat-radio-button value="not-dig"> Non Entérer</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field>
+      <input matInput type="number" formControlName="tank_dist"
+             placeholder="Distance cuve maison?">
     </mat-form-field>
   </form>
 </ng-template>
