@@ -2,9 +2,13 @@ mat-form-field {
   width: 100%;
 }
 button{
-  font-size: large;
+  font-size: 16px;
+  margin: 1em 2em 0 2em;
 }
 mat-card{
   width: 20em;
   margin: auto;
+}
+.action{
+ display: grid;
 }

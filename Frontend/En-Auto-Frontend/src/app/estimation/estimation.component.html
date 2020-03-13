@@ -22,16 +22,23 @@
       <button mat-flat-button color="primary" matStepperNext *ngIf="goFurther">Continuer</button>
     </mat-step>
     <div *ngIf="goFurther">
-      <mat-step label="Toiture">
-        <div *ngTemplateOutlet="step4"></div>
+      <mat-step label="Utilisation">
+        <div *ngTemplateOutlet="step5"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
         <button mat-flat-button color="primary" matStepperNext>Next</button>
       </mat-step>
-      <mat-step label="Toiture">
-        <div *ngTemplateOutlet="step5"></div>
+
+      <mat-step label="Toiture" *ngIf="choice === 'both'|| choice === 'house'" >
+        <div *ngTemplateOutlet="step4"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
         <button mat-flat-button color="primary" (click)="submitForm()">Calculer</button>
       </mat-step>
+
+      <mat-step label="Utilisation">
+        <div *ngTemplateOutlet="Save"></div>
+
+      </mat-step>
+
     </div>
   </mat-horizontal-stepper>
 </mat-card>
@@ -135,6 +142,14 @@
     </mat-form-field>
 
   </form>
+</ng-template>
+
+<ng-template #Save>
+  <p> Voulez vous sauvegarder ou envoyer le devis ?</p>
+  <div>
+    <button mat-flat-button (click)="save()"> Sauvegarder</button>
+    <button mat-flat-button (click)="send()"> Envoyez</button>
+  </div>
 </ng-template>
 
 <ng-template #firstDevisTemplate>

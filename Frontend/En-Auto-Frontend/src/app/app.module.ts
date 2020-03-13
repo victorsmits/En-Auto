@@ -22,6 +22,8 @@ import {MatListModule} from "@angular/material/list";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatTreeModule} from "@angular/material/tree";
+import {MatMenuModule} from "@angular/material/menu";
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -30,27 +32,30 @@ import {MatTreeModule} from "@angular/material/tree";
     RegisterComponent,
     EstimationComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    RouterModule,
-    MatButtonModule,
-    MatCardModule,
-    MatRadioModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatProgressBarModule,
-    MatStepperModule,
-    MatTreeModule
-  ],
-  providers: [],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        RouterModule,
+        MatButtonModule,
+        MatCardModule,
+        MatRadioModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatProgressBarModule,
+        MatStepperModule,
+        MatTreeModule,
+        MatMenuModule,
+      MatDialogModule
+    ],
+  providers: [MatDialogModule,
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiService} from "../service/api.service";
 import {ToolsService} from "../service/tools.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private api: ApiService,
               private fb: FormBuilder,
-              public tool: ToolsService) {
+              public tool: ToolsService,
+              public router : Router) {
   }
 
   ngOnInit(): void {
@@ -27,15 +29,12 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    console.log(this.loginForm);
     if (this.loginForm.valid) {
       this.api.login(this.loginForm.value).subscribe(data => {
-        console.log(data["token"]);
         localStorage.setItem("token", data["token"].toString());
 
         this.tool.setProfile();
-        console.log(this.tool.getUser()._id);
-        this.ok = true;
+        this.router.navigate([''])
 
       }, error => {
         this.errorMessage = error

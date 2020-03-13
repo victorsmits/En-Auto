@@ -1,6 +1,8 @@
 export interface Devis {
   _id?: String,
   id_user?: String,
+  address?: String,
+  code_postal?: Number,
   structural_cost?: Number,
   routing_cost?: Number,
   tank_cost?: Number,

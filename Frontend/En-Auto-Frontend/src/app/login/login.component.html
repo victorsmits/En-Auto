@@ -9,6 +9,10 @@
       <input matInput placeholder="password" formControlName="password" type="password">
       <mat-error *ngIf="tool.isValid('password',loginForm)">Please enter a password</mat-error>
     </mat-form-field>
-    <button mat-flat-button color="accent" (click)="onLogin()"> register </button>
+    <div class="action">
+      <button mat-flat-button color="primary" (click)="onLogin()"> Log in </button>
+      <button mat-flat-button color="primary" routerLink="/register"> Register </button>
+    </div>
+
   </form>
 </mat-card>
