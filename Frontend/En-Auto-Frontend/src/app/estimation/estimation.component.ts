@@ -111,7 +111,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       if (data[0]) {
         water = this.tool.setWaterCost(data[0]).cost
       } else {
-        water = 0
+        water = 4;
       }
       this.finalDevis = {
         _id: this.estiForm.value["_id"] ? this.estiForm.value["_id"] : undefined,
@@ -122,7 +122,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
         routing_cost: 10,
         tank_cost: 10,
         consum: this.estiForm.value["consommation"] ? this.estiForm.value["consommation"] : undefined,
-        water_cost:water,
+        water_cost: water,
         water_volume: this.water_volume,
         roof_area: this.estiForm.value["houseArea"] ? this.estiForm.value["houseArea"] : undefined,
         final_save: this.estiForm.value["final_save"] ? this.estiForm.value["final_save"] : undefined,
