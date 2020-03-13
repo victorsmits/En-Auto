@@ -44,6 +44,7 @@
 
 ## Rapport du 12 mars : 
 
+* Création d'une base de données avec le prix de l'eau en fonction de la commune 
 * Ajout des différents à champ à remplir par l'utilisateur 
 * Amélioration du formulaire : passage d'une suite de question à un onglet par 'catégorie'
 * Travail sur le front stepper 
