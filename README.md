@@ -36,3 +36,21 @@
 * Mise à jour de l'interface utilisateur et de l'affichage du devis
 * Merge des branches 'JWT' et 'Frontend'
 * Mise à jour du service permettant de calculer le devis 
+* Début de travail sur les formes
+  * Ajout de la fonction setUser() : permet de stocker localement les données de l'utilisateur 
+  * Ajout de la fonction getUser() : permet de récupérer les données dde l'utilisateur depuis un stockage local 
+* Créatiuon d'un sous-programme pour les calculs 
+
+
+## Rapport du 12 mars : 
+
+* Ajout des différents à champ à remplir par l'utilisateur 
+* Amélioration du formulaire : passage d'une suite de question à un onglet par 'catégorie'
+* Travail sur le front stepper 
+  * Développement du formulaire 
+  * Travail sur les calculs 
+* Amélioration des requêtes pour le devis et du chemin utilisateur 
+* Fixation de problèmes sur l'angular
+* Test vde la version Alpha1 :
+  * Test du formulaire par étape 
+  * Affichage du premier devis 
