@@ -26,6 +26,7 @@ export class EstimationComponent implements OnInit {
   roof_cost: number;
   tiles_cost: number;
   gutter_cost: number;
+  roof: number;
 
 
   constructor(public api: ApiService,
@@ -67,6 +68,9 @@ export class EstimationComponent implements OnInit {
   setGutter(value: any) {
     return this.hasGutter = value;
   }
+  setType(value: any){
+    return this.roof = value;
+  }
 
   setConsommation(value: any) {
     return this.knowConsommation = value;
@@ -84,14 +88,14 @@ export class EstimationComponent implements OnInit {
     this.tiles_cost = tiles != null? this.math.tilesReparationCost(tiles): 0;
     this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;
 
-    this.water_volume = this.math.roofWaterVolume(this.estiForm.value["houseArea"], 10);
+    this.water_volume = this.math.roofWaterVolume(this.estiForm.value["houseArea"], 10, this.roof);
+    console.log(this.water_volume);
     this.roof_cost = this.tiles_cost + this.gutter_cost;
   }
 
   // Form Navigation
   submitForm() {
     if (this.estiForm.valid) {
-
     }
   }
 
