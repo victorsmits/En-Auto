@@ -7,7 +7,7 @@
 | /devis |POST| `{cout_structure : Number, cout_acheminement : Number,  prix_cuve: Number, conso : Number, superficie : Number }` | `{Devis Model}`| `{ message : String}`|
 | /devis |GET|`{id_user : String}`|`{Devis Model}` |`{message: String}`|
 | /devis |PUT| `{_id : String, cout_structure : Number, cout_acheminement : Number,  prix_cuve: Number, conso : Number, superficie : Number }` | `{message: String}`| `{ message : String}`|
-| /devis |DELETE|`{_id : String}`|`{message: String}` |`{message: String}`|
+| /devis |DELETE|`{_id : String}`|`{message: Boolean}` |`{message: String}`|
 | /watercost |POST| `{postCode: Number, cost: Number }` | `{WaterCost Model}`| `{ message : String}`|
 | /watercost |GET|`{postCode: Number}`|`{WaterCost Model}` |`{message: String}`|
 | /watercost |PUT| `{_id : String, postCode: Number, cost: Number }` | `{message: String}`| `{ message : String}`|

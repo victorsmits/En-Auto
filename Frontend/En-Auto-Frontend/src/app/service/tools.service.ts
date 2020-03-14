@@ -5,6 +5,7 @@ import {Observable, Subject} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map, shareReplay} from "rxjs/operators";
 import {MathService} from "./math.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,15 @@ export class ToolsService {
   public authStatusListener : Subject<boolean> = new Subject<boolean>();
 
   constructor(public api : ApiService,
-              public math : MathService) { }
-
-  isValid(controlName,form): boolean {
-    return form.get(controlName).invalid && form.get(controlName).touched;
-  }
+              public math : MathService,
+              private _snackBar: MatSnackBar) { }
 
   get AuthStatusListener() : Observable<any> {
     return this.authStatusListener.asObservable();
+  }
+
+  isValid(controlName,form): boolean {
+    return form.get(controlName).invalid && form.get(controlName).touched;
   }
 
   isLoggedIn(): boolean {
@@ -69,7 +71,9 @@ export class ToolsService {
       roof_area: data["roof_area"] ? data["roof_area"] : undefined,
       final_save : data["final_save"]? data["final_save"] : undefined,
       rentability: data["rentability"] ? data["rentability"] : undefined,
+      total_cost: data["total_cost"] ? data["total_cost"] : undefined,
       created_at: data["created_at"] ? data["created_at"] : new Date(),
+      tiles_cost: data["tiles_cost"] ? data["tiles_cost"] : undefined
     }
   }
 
@@ -95,6 +99,17 @@ export class ToolsService {
         email: profile["email"],
       }
     }
+  }
+
+  openSnackBar(message: string, action: string,time = 2000) {
+    this._snackBar.open(message, action, {
+      duration: time,
+    });
+  }
+
+  convertDateToString(date : Date){
+    let d = new Date(date);
+    return d.toLocaleDateString();
   }
 
 }

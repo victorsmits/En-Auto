@@ -1,0 +1,48 @@
+<mat-grid-list cols="2" rowHeight="100%">
+  <mat-grid-tile>
+    <mat-card *ngIf="isLoading" style="margin: auto">
+      <mat-spinner style="margin: auto"></mat-spinner>
+    </mat-card>
+
+    <div>
+      <mat-table *ngIf="!isLoading" [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="Devis">
+          <mat-header-cell *matHeaderCellDef> Devis</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span>
+              {{element.address}}, {{element.code_postal}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Date">
+          <mat-header-cell *matHeaderCellDef> Date(s)</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span>
+              {{this.tool.convertDateToString(element.created_at)}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span>
+              <mat-icon color="primary" (click)="openDevis(element)">search</mat-icon>
+            </span>
+            <span>
+              <mat-icon color="primary">mail</mat-icon>
+            </span>
+            <span>
+              <mat-icon color="warn" (click)="deleteDevis(element)">delete</mat-icon>
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+</mat-grid-list>

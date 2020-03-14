@@ -1,0 +1,57 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-list>
+      <mat-list-item>
+        Coût de structure
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+        Tuiles x
+      </mat-list-item>
+
+      <mat-list-item>
+        Cuve
+      </mat-list-item>
+
+      <mat-list-item>
+        Acheminement
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+        Coût Totale
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-list>
+      <mat-list-item>
+        {{data.structural_cost}}
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+        {{data.tiles_cost}}
+      </mat-list-item>
+
+      <mat-list-item>
+        {{data.tank_cost}}
+      </mat-list-item>
+
+      <mat-list-item>
+        {{data.routing_cost}}
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+        Coût Totale
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -49,6 +49,14 @@ export class ApiService {
       catchError(this.handelError));
   }
 
+  getDevis(id){
+    return this.http.get(this.ip + '/devis', {
+      observe: 'body',
+      params: new HttpParams().append('id_user', id)
+    }).pipe(
+      catchError(this.handelError));
+  }
+
   getWaterCost(codepostal: any) {
     return this.http.get(this.ip + '/watercost', {
       observe: 'body',

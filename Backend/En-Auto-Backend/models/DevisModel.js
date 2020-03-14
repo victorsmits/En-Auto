@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const devisSchema = new Schema({
-    'addresse' : {
+    'address' : {
       type: String,
       required: true
     },
@@ -15,21 +15,21 @@ const devisSchema = new Schema({
         required : true
     },
     //coût
-    'cout_structure': {
+    'structural_cost': {
         type: Number
     }, //installation de goutiere? tuiles manquante?
-    'cout_acheminement': {
+    'routing_cost': {
         type: Number,
         required: true
     },  //achemeniment eau pluie (goutiere)
-    'prix_cuve': {
+    'tank_cost': {
         type: Number,
         required: true
     }, //plusieurs a proposer ?
-    'conso': {
+    'consum': {
         type: Number,
     }, //estimation ou pas conso
-    'prix_eau': {
+    'water_cost': {
         type: Number
     }, //m3 ou L a convertir potentiellement
     'Total_cost': {
@@ -37,25 +37,29 @@ const devisSchema = new Schema({
     },
 
     //economie
-    'recup_eau': {
+    'water_volume': {
         type: Number
     }, //recuperation d'eau annuelle
-    'superficie': {
+    'roof_area': {
         type: Number
     }, //toit m2
-
-    'economie': {
+    'final_save': {
         type: Number
     }, //estimation finale en €
-
-    'rentabilite': {
+    'rentability': {
         type: Number,
         // default: false
     }, //ou bien une jauge
-    'createdAt': {
+    'created_at': {
         type: Date,
         default: Date.now
     },
+    'total_cost': {
+        type: Number,
+    },
+    'tiles_cost': {
+        type: Number,
+    }
 });
 const DevisModel = mongoose.model('Devis', devisSchema);
 

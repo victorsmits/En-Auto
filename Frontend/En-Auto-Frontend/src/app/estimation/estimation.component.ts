@@ -118,6 +118,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
         address: this.estiForm.value["address"] ? this.estiForm.value["address"] : undefined,
         code_postal: this.estiForm.value["postalCode"] ? this.estiForm.value["postalCode"] : undefined,
         id_user: this.tool.isLoggedIn() ? this.tool.getUser()._id : undefined,
+        tiles_cost : this.tiles_cost,
         structural_cost: this.roof_cost,
         routing_cost: 10,
         tank_cost: 10,
@@ -154,7 +155,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     }
     this.api.createDevis(this.finalDevis).subscribe(data => {
       if (data["message"]) {
-        console.log(data["message"])
+        this.tool.openSnackBar("Sauvegarde du Devis Effectuée","")
       }
     })
   }
