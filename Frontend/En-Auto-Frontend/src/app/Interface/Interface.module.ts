@@ -14,7 +14,6 @@ export interface Devis {
   final_save? : Number,
   rentability?: Number,
   created_at?: Date,
-  total_cost?: Number,
   tiles_cost?:Number
 }
 

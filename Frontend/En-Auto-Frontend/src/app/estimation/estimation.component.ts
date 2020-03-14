@@ -170,5 +170,5 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   }
 
   send() {
-
+  }
 }
