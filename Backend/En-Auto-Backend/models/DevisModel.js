@@ -43,6 +43,9 @@ const devisSchema = new Schema({
     'roof_area': {
         type: Number
     }, //toit m2
+    'vol_storage': {
+        type: Number
+    }, //volume de stockage
     'final_save': {
         type: Number
     }, //estimation finale en €

@@ -69,6 +69,7 @@ export class ToolsService {
       water_cost: data["water_cost"] ? data["water_cost"] : undefined,
       water_volume: data["water_volume"] ? data["water_volume"] : undefined,
       roof_area: data["roof_area"] ? data["roof_area"] : undefined,
+      vol_storage: data["vol_storage"] ? data["vol_storage"] : undefined,
       final_save : data["final_save"]? data["final_save"] : undefined,
       rentability: data["rentability"] ? data["rentability"] : undefined,
       total_cost: data["total_cost"] ? data["total_cost"] : undefined,

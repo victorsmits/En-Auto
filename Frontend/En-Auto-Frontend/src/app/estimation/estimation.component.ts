@@ -123,15 +123,16 @@ export class EstimationComponent implements OnInit, AfterViewInit {
         routing_cost: 10,
         tank_cost: 10,
         consum: this.estiForm.value["consommation"] ? this.estiForm.value["consommation"] : undefined,
-        water_cost:water,
-        water_volume: this.water_volume,
-        roof_area: this.estiForm.value["houseArea"] ? this.estiForm.value["houseArea"] : undefined,
+        water_cost:water, //cout de l'eau recuperer sur BDD
+        water_volume: this.water_volume, //volume d'eau recupéré
+        roof_area: this.estiForm.value["houseArea"] ? this.estiForm.value["houseArea"] : this.math.calc_vol_storage(this.finalDevis),
+        //vol_storage: this.estiForm.value["vol_storage"]? this.math.calc_vol_storage(this.finalDevis) : undefined,
         final_save: this.estiForm.value["final_save"] ? this.estiForm.value["final_save"] : undefined,
         rentability: undefined,
         created_at: this.estiForm.value["created_at"] ? this.estiForm.value["created_at"] : new Date(),
       }
     });
-
+    console.log(this.finalDevis);
   }
 
   selectionChange($event: StepperSelectionEvent) {

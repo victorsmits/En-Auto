@@ -11,6 +11,7 @@ export interface Devis {
   water_cost?: Number,
   water_volume?: Number,
   roof_area?: Number,
+  vol_storage?: Number,
   final_save? : Number,
   rentability?: Number,
   created_at?: Date,

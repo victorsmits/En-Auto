@@ -49,6 +49,12 @@ export class MathService {
     return conso;
   }
 
+  calc_vol_storage(devis: Devis) : number {
+    let moy: number;
+    moy = (devis.consum.valueOf() + devis.water_volume.valueOf() ) / 2;
+    return (moy * 21)/365;
+  }
+
   totalCost(devis: Devis) : number {
      return (devis.routing_cost.valueOf() + devis.structural_cost.valueOf() + devis.tank_cost.valueOf() + devis.water_cost.valueOf()*devis.consum.valueOf());
   }

@@ -19,6 +19,7 @@ router.post('', function(req, res, next) {
         consum : req.body.consum ? req.body.consum : undefined,
         roof_area : req.body.roof_area ? req.body.roof_area : undefined,
         water_volume : req.body.water_volume ? req.body.water_volume : undefined,
+        vol_storage: req.body.vol_storage ? req.body.vol_storage : undefined,
         rentability : req.body.rentability ? req.body.rentability : undefined,
         created_at : req.body.created_at ? req.body.created_at : undefined,
         final_save : req.body.final_save ? req.body.final_save : undefined,
