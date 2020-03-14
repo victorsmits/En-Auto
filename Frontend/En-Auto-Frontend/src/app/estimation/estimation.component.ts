@@ -168,15 +168,6 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     }
   }
 
-  save() {
-    if(!this.tool.isLoggedIn()){
-      sessionStorage.setItem('devis',this.estiForm.value);
-      this.router.navigate(['login'])
-    }else{
-      this.saveDevis();
-    }
-  }
-
   send() {
 
 }
