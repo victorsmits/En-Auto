@@ -3,19 +3,20 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Devis = mongoose.model('Devis');
 
-//Création d'un devis 
+//Création d'un devis
 router.post('', function(req, res, next) {
     let devis = new Devis ({
         // required
         addresse: req.body.address? req.body.address : undefined,
         code_postal : req.body.code_postal ? req.body.code_postal : undefined,
         id_user: req.body.id_user ? req.body.id_user : undefined,
-        cout_structure: req.body.structural_cost ? req.body.structural_cost : undefined,
         cout_acheminement: req.body.routing_cost ? req.body.routing_cost : undefined,
         prix_cuve : req.body.tank_cost ? req.body.tank_cost : undefined,
         prix_eau : req.body.water_cost ? req.body.water_cost : undefined,
+        total_cost: req.body.total_cost ? req.body.total_cost : undefined,
 
         // non required
+        cout_structure: req.body.structural_cost ? req.body.structural_cost : undefined,
         conso : req.body.consum ? req.body.consum : undefined,
         superficie : req.body.roof_area ? req.body.roof_area : undefined,
         recup_eau : req.body.water_volume ? req.body.water_volume : undefined,
@@ -41,7 +42,7 @@ router.get('', function(req, res, next) {
             });
         }else{
             return res.status(201).json(devis);
-        } 
+        }
     })
 });
 
@@ -70,4 +71,5 @@ router.put('', function(req, res, next) {
         return res.status(201).send({message : "Devis updated successfully!"});
     })
 })
+
 module.exports = router;

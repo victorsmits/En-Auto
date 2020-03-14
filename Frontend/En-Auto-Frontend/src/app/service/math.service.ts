@@ -1,5 +1,6 @@
 
 import { Injectable } from '@angular/core';
+import {Devis} from "../Interface/Interface.module";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,24 @@ export class MathService {
     return gutter * 15;
   }
 
+  calc_conso(people:number, nb_machin:number, garden_area: number) : number {
+    //wc+Nettoyage+machines
+    let conso: number;
+    conso = 8500 * people + 1100 * people;
+    console.log("machine: "+nb_machin);
+    if (nb_machin > 0) {
+      conso = conso + (nb_machin * 3500);
+      console.log("conso: " + conso);
+    }
+    if(garden_area>0) {
+      conso = conso + (garden_area*70);
+      console.log("conso: " + conso);
+    }
+    return conso;
+  }
+
+  totalCost(devis: Devis) : number {
+     return (devis.routing_cost.valueOf() + devis.structural_cost.valueOf() + devis.tank_cost.valueOf() + devis.water_cost.valueOf()*devis.consum.valueOf());
+  }
 
 }

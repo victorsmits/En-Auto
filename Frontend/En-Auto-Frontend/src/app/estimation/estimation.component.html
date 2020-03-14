@@ -9,7 +9,7 @@
       <button mat-flat-button color="primary" matStepperPrevious>Back</button>
       <button mat-flat-button color="primary" matStepperNext>Next</button>
     </mat-step>
-    <mat-step label="Toiture">
+    <mat-step label="Gouttière">
       <div *ngTemplateOutlet="step3"></div>
       <button mat-flat-button color="primary" matStepperPrevious>Back</button>
       <button mat-flat-button color="primary" matStepperNext>Next</button>
@@ -28,7 +28,7 @@
         <button mat-flat-button color="primary" matStepperNext>Next</button>
       </mat-step>
 
-      <mat-step label="Consomation" *ngIf="choice === 'both'|| choice === 'house'" >
+      <mat-step label="Consommation" *ngIf="choice === 'both'|| choice === 'house'" >
 <!--        comsonmation totale-->
         <div *ngTemplateOutlet="step4"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
@@ -124,9 +124,9 @@
 
 <ng-template #step6>
   <form action="" [formGroup]="estiForm">
-    <p>Connaissez vous votre consommation d'eau annuelle ?</p>
+    <p>Quelle type d'installation de cuve souhaitez-vous?</p>
 
-    <mat-radio-group aria-label="Connaissez vous votre consommation d'eau annuelle ?" formControlName="tank_type">
+    <mat-radio-group aria-label="Quelle type d'installation de cuve souhaitez-vous?" formControlName="tank_type">
       <mat-radio-button value="dig"> Entérer</mat-radio-button>
       <mat-radio-button value="not-dig"> Non Entérer</mat-radio-button>
     </mat-radio-group>

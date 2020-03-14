@@ -16,8 +16,7 @@ const devisSchema = new Schema({
     },
     //coût
     'cout_structure': {
-        type: Number,
-        required: true
+        type: Number
     }, //installation de goutiere? tuiles manquante?
     'cout_acheminement': {
         type: Number,
@@ -33,6 +32,10 @@ const devisSchema = new Schema({
     'prix_eau': {
         type: Number
     }, //m3 ou L a convertir potentiellement
+    'Total_cost': {
+        type: Number,
+    },
+
     //economie
     'recup_eau': {
         type: Number
@@ -40,9 +43,11 @@ const devisSchema = new Schema({
     'superficie': {
         type: Number
     }, //toit m2
+
     'economie': {
         type: Number
     }, //estimation finale en €
+
     'rentabilite': {
         type: Number,
         // default: false
