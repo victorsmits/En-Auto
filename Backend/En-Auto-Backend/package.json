@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
+    "test": "mocha --exit --recursive --timeout   10000",
     "populate": "tsc --build ./node_modules/.bin/ts-node En-Auto_backEnd/test/populate.ts"
   },
   "keywords": [
