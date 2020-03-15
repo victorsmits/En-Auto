@@ -39,7 +39,7 @@
         <!--        distance cuve maison-->
         <div *ngTemplateOutlet="step6"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" matStepperNext>Next</button>
+        <button mat-flat-button color="primary" matStepperNext [disabled]="checkIfTank()"> Terminer </button>
       </mat-step>
 
       <mat-step label="Devis Finale">
@@ -69,19 +69,19 @@
              placeholder="Quelle est la superficie (sol) de votre maison ?">
     </mat-form-field>
     <p>Quelle est votre type de toit</p>
-    <mat-radio-group aria-label="Quelle est le type de tuiles de votre toit" (change)="setType($event.value)">
+    <mat-radio-group aria-label="Quelle est le type de tuiles de votre toit" formControlName="roof_type">
       <mat-radio-button value="3"> Toit plat</mat-radio-button>
       <mat-radio-button value="2"> Toit en tôle ondulés</mat-radio-button>
       <mat-radio-button value="1"> Toit en tuiles</mat-radio-button>
     </mat-radio-group>
 
     <p>Avez vous des tuiles a remplacer?</p>
-    <mat-radio-group aria-label="Avez vous des tuiles a remplacer?" (change)="setTiles($event.value)">
+    <mat-radio-group aria-label="Avez vous des tuiles a remplacer?" formControlName="has_tiles">
       <mat-radio-button value="yes"> oui</mat-radio-button>
       <mat-radio-button value="no"> non</mat-radio-button>
     </mat-radio-group>
 
-    <mat-form-field *ngIf="hasTiles === 'yes' ">
+    <mat-form-field *ngIf="estiForm.value['has_tiles'] === 'yes' ">
       <input matInput type="number" formControlName="tiles_nb" placeholder="combien de tuile(s) a remplacer?">
     </mat-form-field>
   </form>
@@ -90,12 +90,12 @@
 <ng-template #step3>
   <form action="" [formGroup]="estiForm">
     <p>Avez vous besoin de faire installer une goutière?</p>
-    <mat-radio-group aria-label="Avez vous besoin de faire installer une goutière?" (change)="setGutter($event.value)">
+    <mat-radio-group aria-label="Avez vous besoin de faire installer une goutière?" formControlName="has_gutter">
       <mat-radio-button value="yes"> oui</mat-radio-button>
       <mat-radio-button value="no"> non</mat-radio-button>
     </mat-radio-group>
 
-    <mat-form-field *ngIf="hasGutter === 'yes' ">
+    <mat-form-field *ngIf="estiForm.value['has_gutter'] === 'yes' ">
       <input matInput type="number" formControlName="m_gutter"
              placeholder="Combien de mètres de goutière avez vous besoin d'installer?">
     </mat-form-field>
@@ -106,16 +106,16 @@
   <form action="" [formGroup]="estiForm">
     <p>Connaissez vous votre consommation d'eau annuelle ?</p>
     <mat-radio-group aria-label="Connaissez vous votre consommation d'eau annuelle ?"
-                     (change)="setConsommation($event.value)">
+                     formControlName="know_consum">
       <mat-radio-button value="yes"> oui</mat-radio-button>
       <mat-radio-button value="no"> non</mat-radio-button>
     </mat-radio-group>
 
-    <mat-form-field *ngIf="knowConsommation === 'yes' ">
+    <mat-form-field *ngIf="estiForm.value['know_consum'] === 'yes' ">
       <input matInput type="number" formControlName="consommation"
              placeholder="Combien de m3 d'eau consommez vous annuellement ?">
     </mat-form-field>
-    <mat-form-field *ngIf="knowConsommation === 'no' ">
+    <mat-form-field *ngIf="estiForm.value['know_consum'] === 'no' ">
       <input matInput type="number" formControlName="people"
              placeholder="Combien de personnes habitent à l'année votre domicile ?">
     </mat-form-field>
@@ -141,27 +141,27 @@
 <ng-template #step5>
   <form action="" [formGroup]="estiForm">
     <p>Quelle est l'usage que vous voudriez faire ?</p>
-    <mat-radio-group aria-label="Quelle est l'usage que vous voudriez faire ?" (change)="setUse($event.value)">
+    <mat-radio-group aria-label="Quelle est l'usage que vous voudriez faire ?" formControlName="use">
       <mat-radio-button value="garden"> Jardin seulement</mat-radio-button>
       <mat-radio-button value="house"> Usage domestique</mat-radio-button>
       <mat-radio-button value="both"> Les deux</mat-radio-button>
     </mat-radio-group>
 
-    <mat-form-field *ngIf="choice === 'garden' ">
+    <mat-form-field *ngIf="estiForm.value['use'] === 'garden' ">
       <input matInput type="number" formControlName="garden_area"
              placeholder="Quelle est la superfecie de votre jardin ?">
     </mat-form-field>
 
-    <mat-form-field *ngIf="choice === 'house' ">
+    <mat-form-field *ngIf="estiForm.value['use'] === 'house' ">
       <input matInput type="number" formControlName="nb_machin" placeholder="Combien de machines possedez vous ?">
     </mat-form-field>
 
-    <mat-form-field *ngIf="choice === 'both' ">
+    <mat-form-field *ngIf="estiForm.value['use'] === 'both' ">
       <input matInput type="number" formControlName="garden_area"
              placeholder="Quelle est la superfecie de votre jardin ?">
     </mat-form-field>
 
-    <mat-form-field *ngIf="choice === 'both' ">
+    <mat-form-field *ngIf="estiForm.value['use'] === 'both' ">
       <input matInput type="number" formControlName="nb_machin" placeholder="Combien de machines possedez vous ?">
     </mat-form-field>
 

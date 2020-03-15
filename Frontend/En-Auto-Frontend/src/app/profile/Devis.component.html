@@ -1,22 +1,36 @@
-<mat-grid-list cols="2" rowHeight="2:1">
+<mat-grid-list cols="2" rowHeight="1:2">
   <mat-grid-tile>
     <mat-list>
+      <mat-list-item>{{this.tool.convertDateToString(data.created_at)}}</mat-list-item>
+
+      <mat-list-item>
+        {{data.address}}, {{data.code_postal}}
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+      
       <mat-list-item>
         Coût de structure
       </mat-list-item>
 
       <mat-divider></mat-divider>
 
-      <mat-list-item>
+      <mat-list-item *ngIf="data.tiles_cost">
         Tuiles x
       </mat-list-item>
 
       <mat-list-item>
-        Cuve
+        Cuve de {{data.vol_storage}}
       </mat-list-item>
 
       <mat-list-item>
         Acheminement
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+        Eau
       </mat-list-item>
 
       <mat-divider></mat-divider>
@@ -29,28 +43,40 @@
 
   <mat-grid-tile>
     <mat-list>
+      <mat-list-item></mat-list-item>
+
+      <mat-list-item></mat-list-item>
+      
+      <mat-divider></mat-divider>
+
       <mat-list-item>
-        {{data.structural_cost}}
+        {{data.structural_cost}} €
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item *ngIf="data.tiles_cost">
+        {{data.tiles_cost}} €
+      </mat-list-item>
+
+      <mat-list-item>
+        {{data.tank_cost}} €
+      </mat-list-item>
+
+      <mat-list-item>
+        {{data.routing_cost}} €
       </mat-list-item>
 
       <mat-divider></mat-divider>
 
       <mat-list-item>
-        {{data.tiles_cost}}
-      </mat-list-item>
-
-      <mat-list-item>
-        {{data.tank_cost}}
-      </mat-list-item>
-
-      <mat-list-item>
-        {{data.routing_cost}}
+        {{data.water_cost}} €
       </mat-list-item>
 
       <mat-divider></mat-divider>
 
       <mat-list-item>
-        Coût Totale
+        {{data.total_cost}} €
       </mat-list-item>
     </mat-list>
   </mat-grid-tile>

@@ -51,13 +51,18 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       address: ["", [Validators.required]],
       postalCode: ["", [Validators.required]],
       houseArea: ["", [Validators.required]],
+      has_tiles: ['no'],
       tiles_nb: [null],
+      roof_type: ["3"],
+      has_gutter: ["no"],
       m_gutter: [null],
+      use: ['garden'],
+      know_consum:["no"],
       consommation: [null],
       people: [null],
       nb_machin: [null],
       garden_area: [null],
-      tank_type: [null],
+      tank_type: ["dig"],
       tank_dist: [null]
     });
   }
@@ -70,38 +75,14 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     })
   }
 
-  // Form Question control
-
-  setTiles(value: any) {
-    return this.hasTiles = value;
-  }
-
-  setGutter(value: any) {
-    return this.hasGutter = value;
-  }
-
-  setType(value: any) {
-    return this.roof = value;
-  }
-
-  setConsommation(value: any) {
-    return this.knowConsommation = value;
-  }
-
-  setUse(value: any) {
-    return this.choice = value;
-  }
-
   computeFirstDevis() {
-    console.log(this.estiForm.value);
     let gutter = this.estiForm.value["m_gutter"];
     let tiles = this.estiForm.value["tiles_nb"];
 
     this.tiles_cost = tiles != null ? this.math.tilesReparationCost(tiles) : 0;
     this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;
 
-    this.water_volume = this.math.roofWaterVolume(this.estiForm.value["houseArea"], 10, this.roof);
-    console.log(this.water_volume);
+    this.water_volume = this.math.roofWaterVolume(this.estiForm.value["houseArea"], 10, this.estiForm.value["roof_type"]);
     this.roof_cost = this.tiles_cost + this.gutter_cost;
   }
 
@@ -151,7 +132,6 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       console.log(JSON.parse(sessionStorage.getItem("devis")));
       this.finalDevis = this.tool.setDevis(JSON.parse(sessionStorage.getItem("devis")));
       this.finalDevis.id_user = this.tool.getUser()._id;
-      console.log(this.finalDevis);
       sessionStorage.removeItem("devis");
     }
     this.api.createDevis(this.finalDevis).subscribe(data => {
@@ -171,5 +151,9 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   }
 
   send() {
+  }
+
+  checkIfTank() {
+    return (this.estiForm.value['tank_dist'] === null)
   }
 }

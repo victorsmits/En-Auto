@@ -29,7 +29,7 @@ router.post('', function(req, res, next) {
 
     devis.save()
         .then(r =>{
-            return res.status(201).json(r);
+            return res.status(201).json({"message":true});
         }).catch(error => {
             return res.status(501).json({message : error})
         })

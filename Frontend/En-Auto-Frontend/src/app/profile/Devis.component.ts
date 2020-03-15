@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from "@angular/core";
 import {MatTableDataSource} from "@angular/material/table";
 import {Devis} from "../Interface/Interface.module";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {ToolsService} from "../service/tools.service";
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,8 @@ export class DevisComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DevisComponent>,
-               @Inject(MAT_DIALOG_DATA) public data: Devis) {
+               @Inject(MAT_DIALOG_DATA) public data: Devis,
+    public tool : ToolsService) {
   }
 
   ngOnInit(): void {
