@@ -1,6 +1,5 @@
 div{
-  width: 100%;
-  padding: 1em;
+
 }
 
 mat-cell{
@@ -34,4 +33,19 @@ mat-icon{
   font-size: 30px;
   margin-left: 1em;
   cursor: pointer;
+}
+
+h4{
+  margin-top: 1em;
+}
+
+.Profile {
+
+  width: 15em;
+}
+
+.devis-tile {
+  width: 100%;
+  padding: 1em;
+  margin-left: 5em;
 }

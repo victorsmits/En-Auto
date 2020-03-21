@@ -3,11 +3,10 @@
     <mat-card *ngIf="isLoading" style="margin: auto">
       <mat-spinner style="margin: auto"></mat-spinner>
     </mat-card>
-
-    <div>
+    <div class="devis-tile">
       <mat-table *ngIf="!isLoading" [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="Devis">
-          <mat-header-cell *matHeaderCellDef> Devis</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Devi(s)</mat-header-cell>
           <mat-cell *matCellDef="let element">
             <span>
               {{element.address}}, {{element.code_postal}}
@@ -44,5 +43,21 @@
       </mat-table>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="Profile">
+        <mat-card-content>
+          <mat-list-item>
+            <h1>{{User.lastName}} {{User.firstName}}</h1>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+
+          <mat-list-item>
+            <h4>Email</h4>
+            <p>{{User.email}}</p>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-card-content>
+
+    </mat-card>
+  </mat-grid-tile>
 </mat-grid-list>

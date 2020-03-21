@@ -1,0 +1,25 @@
+
+mat-card{
+  margin:1em;
+}
+
+.devis {
+  display: grid;
+}
+h1{
+  font-size: 26px;
+}
+
+h3{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+h4{
+  font-weight: bold;
+  font-size: 18px;
+}
+
+p{
+  font-size: 16px;
+}

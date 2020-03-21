@@ -19,11 +19,7 @@ import {$e} from "codelyzer/angular/styles/chars";
 export class EstimationComponent implements OnInit, AfterViewInit {
 
   public estiForm: FormGroup;
-  hasTiles: string;
-  hasGutter: string;
-  knowConsommation: string;
   choice: string;
-  formStep = 0;
   goFurther: boolean = false;
   public finalDevis: Devis;
 
@@ -95,16 +91,19 @@ export class EstimationComponent implements OnInit, AfterViewInit {
         water = 0
       }
       this.finalDevis = {
+        //required
         _id: this.estiForm.value["_id"] ? this.estiForm.value["_id"] : undefined,
         address: this.estiForm.value["address"] ? this.estiForm.value["address"] : undefined,
         code_postal: this.estiForm.value["postalCode"] ? this.estiForm.value["postalCode"] : undefined,
         id_user: this.tool.isLoggedIn() ? this.tool.getUser()._id : undefined,
-        tiles_cost : this.tiles_cost,
-        structural_cost: this.roof_cost,
         routing_cost: 10,
         tank_cost: 10,
+        water_cost: water, //cout de l'eau recuperer sur BDD
+
+        // non required
+        tiles_cost : this.tiles_cost,
+        structural_cost: this.roof_cost,
         consum: this.estiForm.value["consommation"] ? this.estiForm.value["consommation"] : undefined,
-        water_cost:water, //cout de l'eau recuperer sur BDD
         water_volume: this.water_volume, //volume d'eau recupéré
         roof_area: this.estiForm.value["houseArea"] ? this.estiForm.value["houseArea"] : this.math.calc_vol_storage(this.finalDevis),
         //vol_storage: this.estiForm.value["vol_storage"]? this.math.calc_vol_storage(this.finalDevis) : undefined,

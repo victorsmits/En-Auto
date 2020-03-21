@@ -7,7 +7,7 @@ import {LoginComponent} from './login/login.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {RegisterComponent} from './register/register.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
@@ -30,6 +30,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DevisComponent} from "./profile/Devis.component";
+import {ProgressBarColor} from "./profile/progress-bar-color";
+import {MatSliderModule} from "@angular/material/slider";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import {DevisComponent} from "./profile/Devis.component";
     RegisterComponent,
     EstimationComponent,
     ProfileComponent,
-    DevisComponent
+    DevisComponent,
+    ProgressBarColor
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,9 @@ import {DevisComponent} from "./profile/Devis.component";
     MatDialogModule,
     MatGridListModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule,
+    FormsModule
   ],
   providers: [
     MatDialogModule,

@@ -12,6 +12,7 @@ import {ToolsService} from "../service/tools.service";
 export class DevisComponent implements OnInit {
   displayedColumns = ["Devis","Cost"];
   isLoading: boolean;
+  value: number = 50;
 
   constructor(
     public dialogRef: MatDialogRef<DevisComponent>,
