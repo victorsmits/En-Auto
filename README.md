@@ -55,3 +55,23 @@
 * Test vde la version Alpha1 :
   * Test du formulaire par étape 
   * Affichage du premier devis 
+
+## Rapport du 13 mars :
+
+* Calcule de la quantité d'eau récupérable par le toit
+* Sauvegarde du devis dans l'espace client
+* Ajout des fonctions pour obtenir le prix de l'eau selon le code postal
+* Modèle du devis en pop-up
+* Mise à jour des routes
+
+##  Rapport du 14 mars :
+
+* Page Profil
+* Mise à jour du devis (plus complet)
+* Ajout de test pour les nouvelles DB
+* Ajout du calcul du volume du réservoir nécessaire pour stocker l'eau de pluie
+* Correction de bugs et optimisation
+
+## Rapport du 21 mars :
+
+* Nouvelle base de donnée : volume d'eau récupérable par année et par ville (2)
