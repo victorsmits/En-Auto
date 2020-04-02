@@ -24,4 +24,4 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: node En-Auto-Frontend/server.js
+    - run: node En-Auto-Backend/bin/www.js
