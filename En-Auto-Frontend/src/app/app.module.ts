@@ -42,7 +42,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     EstimationComponent,
     ProfileComponent,
     DevisComponent,
-    ProgressBarColor
+    ProgressBarColor,
+    DevisComponent
   ],
   imports: [
     BrowserModule,
