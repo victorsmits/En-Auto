@@ -102,6 +102,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
 
         // non required
         tiles_cost : this.tiles_cost,
+        tiles_number: this.estiForm.value["tiles_nb"] ? this.estiForm.value["tiles_nb"] : undefined,
         structural_cost: this.roof_cost,
         consum: this.estiForm.value["consommation"] ? this.estiForm.value["consommation"] : undefined,
         water_volume: this.water_volume, //volume d'eau recupéré
@@ -136,6 +137,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     this.api.createDevis(this.finalDevis).subscribe(data => {
       if (data["message"]) {
         this.tool.openSnackBar("Sauvegarde du Devis Effectuée","")
+        this.router.navigate(['profile'])
       }
     })
   }
