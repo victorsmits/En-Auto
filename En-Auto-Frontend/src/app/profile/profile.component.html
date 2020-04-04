@@ -1,0 +1,65 @@
+<!--suppress AngularUndefinedBinding -->
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-card *ngIf="isLoading" style="margin: auto">
+      <mat-spinner style="margin: auto"></mat-spinner>
+    </mat-card>
+    <div class="devis-tile">
+      <mat-table *ngIf="!isLoading" [dataSource]="dataSource"
+                 class="mat-elevation-z8">
+        <ng-container matColumnDef="Devis">
+          <mat-header-cell *matHeaderCellDef> Devi(s)</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span>
+              {{element.address}}, {{element.code_postal}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Date">
+          <mat-header-cell *matHeaderCellDef> Date(s)</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span>
+              {{this.tool.convertDateToString(element.created_at)}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <span>
+              <mat-icon color="primary"
+                        (click)="openDevis(element)">visibility</mat-icon>
+            </span>
+
+            <span>
+              <mat-icon color="warn"
+                        (click)="deleteDevis(element)">delete</mat-icon>
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="Profile">
+      <mat-card-content>
+        <mat-list-item>
+          <h1>{{User.lastName}} {{User.firstName}}</h1>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+
+        <mat-list-item>
+          <h4>Email</h4>
+          <p>{{User.email}}</p>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-card-content>
+
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,46 @@
+{
+  "name": "en-auto-backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "test": "mocha --exit --recursive --timeout   10000",
+    "populate": "tsc --build ./node_modules/.bin/ts-node En-Auto_backEnd/test/populate.ts"
+  },
+  "keywords": [
+    "Backend"
+  ],
+  "author": "En-Auto PPE ECE",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "express-jwt": "^5.3.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^6.2.3",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.7",
+    "mongoose-model-cli": "^1.4.0",
+    "morgan": "~1.9.1",
+    "mysql2": "^2.1.0",
+    "nodemailer": "^6.4.6",
+    "nodemon": "^2.0.2",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/ejs": "^2.6.3",
+    "@types/mocha": "^5.2.7",
+    "@types/mongodb": "^3.5.4",
+    "@types/node": "^12.12.34",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.7.3"
+  }
+}

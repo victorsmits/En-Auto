@@ -1,0 +1,129 @@
+<div id="devis">
+  <mat-card>
+    <mat-grid-list cols="2" rowHeight="1:1">
+      <mat-grid-tile>
+        <mat-list>
+          <mat-list-item>
+            <h3>{{this.tool.convertDateToString(data.created_at)}}</h3>
+          </mat-list-item>
+
+          <mat-list-item>
+            <h4>{{data.address}}, {{data.code_postal}}</h4>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+
+          <mat-list-item>
+            <p> Coût de structure</p>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+
+          <mat-list-item *ngIf="data.tiles_cost">
+            <p> Tuiles x {{data.tiles_number}}</p>
+          </mat-list-item>
+
+          <mat-list-item *ngIf="data.gutter_price">
+            <p> Gouttière {{data.gutter_length}} m</p>
+          </mat-list-item>
+
+          <mat-list-item>
+            <p> Cuve de {{data.vol_storage}}</p>
+          </mat-list-item>
+
+          <mat-list-item>
+            <p>Acheminement</p>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+
+          <mat-list-item>
+            <p>Eau</p>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+
+          <mat-list-item>
+            <p>Coût Totale</p>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-list>
+          <mat-list-item></mat-list-item>
+
+          <mat-list-item></mat-list-item>
+
+          <mat-divider></mat-divider>
+
+          <mat-list-item>
+            {{data.structural_cost}} €
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+
+          <mat-list-item *ngIf="data.tiles_cost">
+            {{data.tiles_cost}} €
+          </mat-list-item>
+
+          <mat-list-item *ngIf="data.gutter_price">
+            <p>{{data.gutter_price}}</p>
+          </mat-list-item>
+
+          <mat-list-item>
+            {{data.tank_cost}} €
+          </mat-list-item>
+
+          <mat-list-item>
+            {{data.routing_cost}} €
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+
+          <mat-list-item>
+            {{data.water_cost}} €
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+
+          <mat-list-item>
+            {{data.total_cost}} €
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <div class="rentability">
+      <h2>Rentabilité  {{data.rentability}}%</h2>
+
+      <mat-progress-bar
+        [value]="data.rentability"
+        [appProgressBarColor]="data.rentability"
+        mode="determinate">
+      </mat-progress-bar>
+    </div>
+
+  </mat-card>
+</div>
+
+<mat-card>
+  <div>
+    <button mat-button>
+      <mat-icon color="primary" matTooltip="Télécharger PDF" class="download">
+        cloud_download
+      </mat-icon>
+    </button>
+
+    <button mat-button>
+      <mat-icon color="warn" matTooltip="Effacer devis" class="download" (click)="delete()">
+        delete
+      </mat-icon>
+    </button>
+
+  </div>
+</mat-card>
