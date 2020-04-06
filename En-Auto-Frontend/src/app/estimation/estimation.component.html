@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-horizontal-stepper [linear]="true"
+  <mat-horizontal-stepper [linear]=false>
                           (selectionChange)="selectionChange($event)" #stepper>
     <mat-step label="Adresse">
       <div *ngTemplateOutlet="step1"></div>
