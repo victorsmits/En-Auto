@@ -33,6 +33,7 @@ import {DevisComponent} from "./profile/Devis.component";
 import {ProgressBarColor} from "./profile/progress-bar-color";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     EstimationComponent,
     ProfileComponent,
     DevisComponent,
-    ProgressBarColor
+    ProgressBarColor,
+    DevisComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

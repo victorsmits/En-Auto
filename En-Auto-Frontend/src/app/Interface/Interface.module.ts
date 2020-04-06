@@ -15,10 +15,10 @@ export interface Devis {
   final_save? : Number,
   rentability?: Number,
   created_at?: Date,
-  tiles_cost?:Number
-  tiles_number?:Number
-  gutter_length?:Number
-  gutter_cost?:Number
+  tiles_cost?:Number,
+  tiles_number?:Number,
+  gutter_length?:Number,
+  gutter_cost?:Number,
 }
 
 export interface User {

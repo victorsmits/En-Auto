@@ -6,6 +6,7 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map, shareReplay} from "rxjs/operators";
 import {MathService} from "./math.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class ToolsService {
 
   constructor(public api : ApiService,
               public math : MathService,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private router:Router) { }
 
   get AuthStatusListener() : Observable<any> {
     return this.authStatusListener.asObservable();
@@ -36,8 +38,12 @@ export class ToolsService {
   onLogout(){
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    location.reload();
-    this.authStatusListener.next(false)
+    this.router.navigate([""]).then(r => {
+      location.reload();
+      this.authStatusListener.next(false)
+    })
+
+
   }
 
   setProfile(){

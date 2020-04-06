@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
 
 </head>
+
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav">
     <div *ngTemplateOutlet="desktopNav"></div>
@@ -27,6 +28,7 @@
 
   </mat-sidenav-content>
 </mat-sidenav-container>
+
 </html>
 
 <ng-template #desktopNav>
@@ -50,7 +52,7 @@
 
     <div *ngIf="tool.isLoggedIn()">
       <a mat-list-item [matMenuTriggerFor]="menu">
-        <mat-icon> person </mat-icon>
+        <mat-icon> person</mat-icon>
         <span> {{user.lastName}} {{user.firstName}} </span>
       </a>
 
@@ -59,6 +61,11 @@
         <a mat-menu-item (click)="tool.onLogout()">Déconnexion</a>
       </mat-menu>
     </div>
+
+    <a mat-list-item routerLink="about-us">
+      <mat-icon> live_help</mat-icon>
+      <span> A propos </span>
+    </a>
 
   </mat-nav-list>
 </ng-template>
