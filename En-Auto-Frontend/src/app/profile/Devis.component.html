@@ -23,7 +23,7 @@
             <p> Tuiles x {{data.tiles_number}}</p>
           </mat-list-item>
 
-          <mat-list-item *ngIf="data.gutter_price">
+          <mat-list-item *ngIf="data.gutter_cost">
             <p> Gouttière {{data.gutter_length}} m</p>
           </mat-list-item>
 
@@ -69,8 +69,8 @@
             {{data.tiles_cost}} €
           </mat-list-item>
 
-          <mat-list-item *ngIf="data.gutter_price">
-            <p>{{data.gutter_price}}</p>
+          <mat-list-item *ngIf="data.gutter_cost">
+            <p>{{data.gutter_cost}}</p>
           </mat-list-item>
 
           <mat-list-item>
