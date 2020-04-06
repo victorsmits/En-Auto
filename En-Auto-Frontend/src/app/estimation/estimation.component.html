@@ -1,42 +1,51 @@
 <mat-card>
   <mat-horizontal-stepper [linear]="true"
-                          (selectionChange)="selectionChange($event)">
+                          (selectionChange)="selectionChange($event)" #stepper>
     <mat-step label="Adresse">
       <div *ngTemplateOutlet="step1"></div>
       <button mat-flat-button color="primary" matStepperNext
-              [disabled]="! (estiForm.value['address'] &&
-              estiForm.value['postalCode'])">Next</button>
+              [disabled]="! (estiForm.get('address').valid &&
+              estiForm.get('postalCode').valid)">Next
+      </button>
     </mat-step>
 
     <mat-step label="Toiture">
       <div *ngTemplateOutlet="step2"></div>
       <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-      <button mat-flat-button color="primary" matStepperNext>Next</button>
+      <button type="submit" mat-flat-button color="primary" matStepperNext
+              [disabled]="estiForm.value['houseArea']">
+        Next
+      </button>
     </mat-step>
 
     <mat-step label="Gouttière">
       <div *ngTemplateOutlet="step3"></div>
       <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-      <button mat-flat-button color="primary" matStepperNext>Next</button>
+      <button type="submit" mat-flat-button color="primary" matStepperNext>
+        Next
+      </button>
     </mat-step>
 
     <mat-step label="Premier résultat">
-      <div *ngTemplateOutlet="firstDevisTemplate"></div>
+      <p>Grace à votre toit vous pouvez récolté {{water_volume}} L/an</p>
 
       <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-      <button mat-flat-button color="primary" (click)="goFurther = true"
-              *ngIf="!goFurther">Aller plus loin
+      <button type="submit" mat-flat-button color="primary"
+              (click)="goFurther()"
+              *ngIf="!go_further" matStepperNext>Aller plus loin
       </button>
-      <button mat-flat-button color="primary" matStepperNext *ngIf="goFurther">
-        Continuer
-      </button>
+      <!--      <button mat-flat-button color="primary" matStepperNext *ngIf="go_further">-->
+      <!--        Continuer-->
+      <!--      </button>-->
     </mat-step>
 
-    <div *ngIf="goFurther">
+    <div *ngIf="go_further">
       <mat-step label="Utilisation">
         <div *ngTemplateOutlet="step5"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" matStepperNext>Next</button>
+        <button type="submit" mat-flat-button color="primary" matStepperNext>
+          Next
+        </button>
       </mat-step>
 
       <mat-step label="Consommation"
@@ -44,14 +53,16 @@
         <!--        comsonmation totale-->
         <div *ngTemplateOutlet="step4"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" matStepperNext>Next</button>
+        <button type="submit" mat-flat-button color="primary" matStepperNext>
+          Next
+        </button>
       </mat-step>
 
       <mat-step label="Cuve">
         <!--        distance cuve maison-->
         <div *ngTemplateOutlet="step6"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" matStepperNext
+        <button type="submit" mat-flat-button color="primary" matStepperNext
                 [disabled]="checkIfTank()"> Terminer
         </button>
       </mat-step>
@@ -65,6 +76,10 @@
   </mat-horizontal-stepper>
 </mat-card>
 
+<mat-card *ngIf="first_devis">
+  <div *ngTemplateOutlet="firstDevisTemplate"></div>
+</mat-card>
+
 <ng-template #step1>
   <form action="" [formGroup]="estiForm">
     <mat-form-field>
@@ -73,8 +88,9 @@
       <mat-error>Veuilliez entrer une addresse du type : numero rue</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input type="number" matInput formControlName="postalCode"
+      <input type="text" matInput formControlName="postalCode"
              placeholder="Quelle est votre code postal ?">
+      <mat-error>Veuillez entrer un code postal valide</mat-error>
     </mat-form-field>
   </form>
 </ng-template>
@@ -197,10 +213,9 @@
 </ng-template>
 
 <ng-template #Save>
-  <p> Voulez vous sauvegarder ou envoyer le devis ?</p>
+  <p> Sauvegardé votre devis en créant un compte sur notre site!</p>
   <div>
     <button mat-flat-button (click)="save()"> Sauvegarder</button>
-    <button mat-flat-button (click)="send()"> Envoyez</button>
   </div>
 </ng-template>
 
