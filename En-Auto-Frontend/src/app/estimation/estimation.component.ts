@@ -44,8 +44,8 @@ export class EstimationComponent implements OnInit, AfterViewInit {
 
 
     this.estiForm = this.fb.group({
-      address: ["", [Validators.required]],
-      postalCode: ["", [Validators.required]],
+      address: ["", [Validators.required,Validators.pattern('(\\d{1,}) [a-zA-Z0-9\\s]+(\\.)?')]],
+      postalCode: ["", [Validators.required,Validators.min(5)]],
       houseArea: ["", [Validators.required]],
       has_tiles: ['no'],
       tiles_nb: [null],
