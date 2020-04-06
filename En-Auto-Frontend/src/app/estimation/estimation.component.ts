@@ -8,7 +8,6 @@ import {StepperSelectionEvent} from '@angular/cdk/stepper';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {MatStepper} from '@angular/material/stepper';
-import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-estimation',
@@ -157,9 +156,6 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   }
 
   goFurther() {
-    console.log('step before: ' + this.stepper.steps);
     this.go_further = true;
-    delay(3000)
-    console.log('step after: ' + this.stepper.steps);
   }
 }

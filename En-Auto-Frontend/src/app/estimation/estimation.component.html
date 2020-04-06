@@ -13,7 +13,7 @@
       <div *ngTemplateOutlet="step2"></div>
       <button mat-flat-button color="primary" matStepperPrevious>Back</button>
       <button type="submit" mat-flat-button color="primary" matStepperNext
-              [disabled]="estiForm.value['houseArea']">
+              [disabled]="!estiForm.get('houseArea').valid">
         Next
       </button>
     </mat-step>
@@ -27,16 +27,17 @@
     </mat-step>
 
     <mat-step label="Premier résultat">
-      <p>Grace à votre toit vous pouvez récolté {{water_volume}} L/an</p>
-
+      <div *ngTemplateOutlet="firstDevisTemplate"></div>
+      <p>Cela correspond à {{(water_volume * 1000) / 60}} douches/an 🚿 (une
+        douche correspond a 60L/an en moyenne) </p>
       <button mat-flat-button color="primary" matStepperPrevious>Back</button>
       <button type="submit" mat-flat-button color="primary"
               (click)="goFurther()"
               *ngIf="!go_further" matStepperNext>Aller plus loin
       </button>
-      <!--      <button mat-flat-button color="primary" matStepperNext *ngIf="go_further">-->
-      <!--        Continuer-->
-      <!--      </button>-->
+      <button mat-flat-button color="primary" matStepperNext *ngIf="go_further">
+        Continuer
+      </button>
     </mat-step>
 
     <div *ngIf="go_further">
@@ -221,9 +222,6 @@
 
 <ng-template #firstDevisTemplate>
   <div>
-    <p> Coût total de réparation du toit      {{roof_cost}}</p>
-    <p> Coût des tuiles   {{tiles_cost}}</p>
-    <p> Coût des gouttière {{gutter_cost}} </p>
-    <p>Volume totale d'eau récupérable    {{water_volume}}</p>
+    <p>Grâce à votre toit vous pouvez récolté {{water_volume * 1000}} L/an.</p>
   </div>
 </ng-template>
