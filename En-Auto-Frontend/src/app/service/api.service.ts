@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {throwError} from "rxjs";
-import {Devis, WaterCost} from "../Interface/Interface.module";
+import {Devis, WaterCost, Precipitation} from "../Interface/Interface.module";
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +59,14 @@ export class ApiService {
 
   getWaterCost(codepostal: any) {
     return this.http.get(this.ip + '/watercost', {
+      observe: 'body',
+      params: new HttpParams().append('postCode', codepostal)
+    }).pipe(
+      catchError(this.handelError));
+  }
+
+  getPrecipitation(codepostal: any) {
+    return this.http.get(this.ip + '/precipitation', {
       observe: 'body',
       params: new HttpParams().append('postCode', codepostal)
     }).pipe(

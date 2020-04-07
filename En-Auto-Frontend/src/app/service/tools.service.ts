@@ -63,6 +63,7 @@ export class ToolsService {
   }
 
   setDevis(data : JSON) : Devis {
+    console.log(data)
     return {
       _id: data["_id"] ? data["_id"] : undefined,
       address: data["address"] ? data["address"] : undefined,
@@ -80,7 +81,12 @@ export class ToolsService {
       rentability: data["rentability"] ? data["rentability"] : undefined,
       total_cost: data["total_cost"] ? data["total_cost"] : undefined,
       created_at: data["created_at"] ? data["created_at"] : new Date(),
-      tiles_cost: data["tiles_cost"] ? data["tiles_cost"] : undefined
+
+      tiles_cost: data["tiles_cost"] ? data["tiles_cost"] : undefined,
+      tiles_number: data["tiles_number"] ? data["tiles_number"] : undefined,
+
+      gutter_length: data["gutter_length"] ? data["gutter_length"] : undefined,
+      gutter_cost: data["gutter_cost"] ? data["gutter_cost"] : undefined
     }
   }
 

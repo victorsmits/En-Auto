@@ -53,7 +53,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       tiles_nb: [null],
       roof_type: ['3'],
       has_gutter: ['no'],
-      m_gutter: [null],
+      gutter_length: [null],
       use: ['garden'],
       know_consum: ['no'],
       consommation: [null],
@@ -74,13 +74,20 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   }
 
   computeFirstDevis() {
-    let gutter = this.estiForm.value['m_gutter'];
+    let gutter = this.estiForm.value['gutter_length'];
     let tiles = this.estiForm.value['tiles_nb'];
-
-    this.water_volume = this.math.roofWaterVolume(this.estiForm.value['houseArea'], 10, this.estiForm.value['roof_type']);
 
     this.tiles_cost = tiles != null ? this.math.tilesReparationCost(tiles) : 0;
     this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;
+
+    this.api.getPrecipitation(this.estiForm.value['postalCode']).subscribe(data => {
+      let precipitation = JSON.parse(JSON.stringify(data))[0];
+
+      console.log(precipitation);
+
+      this.water_volume = this.math.roofWaterVolume(this.estiForm.value['houseArea'],
+        Number.parseInt(precipitation['avg']), this.estiForm.value['roof_type']);
+    });
 
     this.api.getWaterCost(this.estiForm.value['postalCode']).subscribe(data => {
       if (data[0]) {
@@ -88,13 +95,14 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       } else {
         this.water_cost = 0;
       }
+      this.final_save = this.math.calc_final_save(this.water_cost, this.water_volume)
     });
+    
   }
 
   computeFinalDevis() {
     let consommation = this.estiForm.value['consommation'] ? this.estiForm.value['consommation'] : this.math.calc_conso(this.estiForm);
     let vol_storage = this.math.calc_vol_storage(this.water_volume, consommation);
-    this.final_save = this.math.calc_final_save(this.water_cost, this.water_volume)
 
     this.finalDevis = {
       //required
@@ -106,11 +114,16 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       water_cost: this.water_cost, //cout de l'eau recuperer sur BDD
 
       // non required
-      tank_type: this.estiForm.value['tank_type'] ? this.estiForm.value['tank_type'] : undefined ,
+      tank_type: this.estiForm.value['tank_type'] ? this.estiForm.value['tank_type'] : undefined,
       tank_dist: this.estiForm.value['tank_dist'] ? this.estiForm.value['tank_dist'] : undefined,
       roof_area: this.estiForm.value['houseArea'] ? this.estiForm.value['houseArea'] : undefined,
+
       tiles_number: this.estiForm.value['tiles_nb'] ? this.estiForm.value['tiles_nb'] : undefined,
       tiles_cost: this.tiles_cost,
+
+      gutter_length: this.estiForm.value['gutter_length'] ? this.estiForm.value['gutter_length'] : undefined,
+      gutter_cost: this.gutter_cost,
+
       structural_cost: this.tiles_cost + this.gutter_cost,
       consum: consommation,
       water_volume: this.water_volume, //volume d'eau recupéré
@@ -119,11 +132,8 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       final_save: this.final_save,
       created_at: new Date(),
     };
-    console.log("fin de boucle" + this.finalDevis)
     this.finalDevis.total_cost = this.math.totalCost(this.finalDevis);
-    console.log(this.finalDevis)
     this.finalDevis.rentability = this.math.calc_rentability(this.finalDevis);
-    console.log(this.finalDevis)
   }
 
   selectionChange($event: StepperSelectionEvent) {

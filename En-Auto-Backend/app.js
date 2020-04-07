@@ -2,7 +2,9 @@ require('dotenv/config');
 require('./models/UserModel');
 require('./models/DevisModel');
 require('./models/WaterCostModel');
+require('./models/PrecipitationModel');
 require('./config/passport');
+require('./models/PrecipitationModel');
 
 const cors = require('cors');
 const createError = require('http-errors');
@@ -18,6 +20,7 @@ const usersRouter = require('./routes/users');
 const waterCostRouter  = require('./routes/watercost');
 const devRouter = require('./routes/devis');
 const mailRouter = require('./routes/mail');
+const precipitationRouter = require('./routes/precipitation');
 
 const app = express();
 
@@ -72,6 +75,7 @@ app.use('/users', usersRouter);
 app.use('/devis', devRouter);
 app.use('/watercost', waterCostRouter);
 app.use('/mail', mailRouter);
+app.use('/precipitation', precipitationRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
