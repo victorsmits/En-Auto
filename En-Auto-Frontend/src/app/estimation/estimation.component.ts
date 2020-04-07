@@ -123,8 +123,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       this.first_devis = true;
       this.computeFirstDevis();
     }
-    if ((this.estiForm.value['use'] == 'garden' && $event.selectedIndex == 6) ||
-      ((this.estiForm.value['use'] == 'both' || this.estiForm.value['use'] == 'house') && $event.selectedIndex == 7)) {
+    if ((this.estiForm.value['use'] == 'both' || this.estiForm.value['use'] == 'house') && $event.selectedIndex == 6) {
       this.computeFinalDevis();
     }
     console.log("test")
