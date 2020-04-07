@@ -28,6 +28,8 @@ router.post('', function(req, res, next) {
         tiles_number : req.body.tiles_number ? req.body.tiles_number : undefined,
         gutter_length : req.body.gutter_length ? req.body.gutter_length : undefined,
         gutter_cost : req.body.gutter_cost ? req.body.gutter_cost : undefined,
+        tank_dist : req.body.tank_dist ? req.body.tank_dist : undefined,
+        tank_type : req.body.tank_type ? req.body.tank_type : undefined,
     });
 
     devis.save()

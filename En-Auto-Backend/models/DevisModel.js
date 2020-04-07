@@ -68,6 +68,12 @@ const devisSchema = new Schema({
     },
     'gutter_length': {
         type: Number,
+    },
+    'tank_dist': {
+        type: Number,
+    },
+    'tank_type': {
+        type: String,
     }
 });
 const DevisModel = mongoose.model('Devis', devisSchema);
