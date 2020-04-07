@@ -13,3 +13,6 @@ mat-card{
 mat-radio-button{
   margin: 2%
 }
+.step_display{
+  display: flex;
+}

@@ -2,7 +2,8 @@
   <form action="" [formGroup]="estiForm">
     <mat-horizontal-stepper [linear]=false
                             (selectionChange)="selectionChange($event)" #stepper>
-      <mat-step label="Adresse">
+
+      <mat-step label="Adresse" class="step_display">
         <mat-form-field>
           <input matInput type="text" formControlName="address"
                  placeholder="Quelle est votre adresse ?">
@@ -13,17 +14,22 @@
                  placeholder="Quelle est votre code postal ?">
           <mat-error>Veuillez entrer un code postal valide</mat-error>
         </mat-form-field>
-        <button mat-flat-button type="submit" color="primary" matStepperNext
-                [disabled]="! (estiForm.get('address').valid &&
+
+        <div>
+          <button mat-flat-button type="submit" color="primary" matStepperNext
+                  [disabled]="! (estiForm.get('address').valid &&
               estiForm.get('postalCode').valid)">Next
-        </button>
+          </button>
+        </div>
+
       </mat-step>
 
-      <mat-step label="Toiture" [stepControl]="estiForm">
+      <mat-step label="Toiture" [stepControl]="estiForm" class="step_display">
         <mat-form-field>
           <input matInput type="number" formControlName="houseArea"
                  placeholder="Quelle est la superficie (sol) de votre maison ?">
         </mat-form-field>
+
         <p>Quelle est votre type de toit</p>
         <mat-radio-group aria-label="Quelle est le type de tuiles de votre toit"
                          formControlName="roof_type">
@@ -43,219 +49,172 @@
           <input matInput type="number" formControlName="tiles_nb"
                  placeholder="combien de tuile(s) a remplacer?">
         </mat-form-field>
-        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button type="submit" mat-flat-button color="primary" matStepperNext
-                [disabled]="!estiForm.get('houseArea').valid">
-          Next
-        </button>
+
+        <div>
+          <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+          <button type="submit" mat-flat-button color="primary" matStepperNext
+                  [disabled]="!estiForm.get('houseArea').valid">
+            Next
+          </button>
+        </div>
+
+
       </mat-step>
 
-      <mat-step label="Consommation"
-                *ngIf="estiForm.value['use'] === 'both'|| estiForm.value['use'] === 'house'">
-        <!--        comsonmation totale-->
-        <div *ngTemplateOutlet="step4"></div>
-        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button type="submit" mat-flat-button color="primary" matStepperNext>
-          Next
-        </button>
+      <mat-step label="Gouttière" [stepControl]="estiForm" class="step_display">
+
+        <p>Avez vous besoin de faire installer une goutière?</p>
+
+        <mat-radio-group
+          aria-label="Avez vous besoin de faire installer une goutière?"
+          formControlName="has_gutter">
+
+          <mat-radio-button value="yes"> oui</mat-radio-button>
+          <mat-radio-button value="no"> non</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field *ngIf="estiForm.value['has_gutter'] === 'yes' ">
+          <input matInput type="number" formControlName="m_gutter"
+                 placeholder="Combien de mètres de goutière avez vous besoin d'installer?">
+        </mat-form-field>
+
+        <div>
+          <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+          <button type="submit" mat-flat-button color="primary" matStepperNext>
+            Next
+          </button>
+        </div>
+
       </mat-step>
 
-      <mat-step label="Cuve">
-        <!--        distance cuve maison-->
-        <div *ngTemplateOutlet="step6"></div>
-        <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button type="submit" mat-flat-button color="primary" matStepperNext> Terminer
-        </button>
+      <mat-step label="Première estimation" class="step_display">
+        <p>Grâce à votre toit vous pouvez récolté {{water_volume * 1000}} L/an.</p>
+        <p>Cela correspond à {{(water_volume * 1000) / 60}} douches/an 🚿 (une
+          douche correspond a 60L/an en moyenne) </p>
+        <p>Vous pourriez économiser jusqu'à {{(water_volume / 4) * water_cost |number:'1.2-2'}} €/mois</p>
+
+        <div>
+          <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+          <button type="submit" mat-flat-button color="primary"
+                  (click)="goFurther()"
+                  *ngIf="!go_further" matStepperNext>Aller plus loin
+          </button>
+          <button mat-flat-button type="submit" color="primary" matStepperNext *ngIf="go_further">
+            Continuer
+          </button>
+        </div>
+
       </mat-step>
 
-<!--        <p>Vous pourriez économiser jusqu'à {{(water_volume / 4) * water_cost |number:'1.2-2'}} €/mois</p>-->
-<!--        <button mat-flat-button color="primary" matStepperPrevious>Back</button>-->
-<!--        <button type="submit" mat-flat-button color="primary"-->
-<!--                (click)="goFurther()"-->
-<!--                *ngIf="!go_further" matStepperNext>Aller plus loin-->
-<!--        </button>-->
-<!--        <button mat-flat-button color="primary" matStepperNext *ngIf="go_further">-->
-<!--          Continuer-->
-<!--        </button>-->
-<!--      </mat-step>-->
+      <div *ngIf="go_further">
+        <mat-step label="Utilisation" class="step_display">
+          <p>Quelle est l'usage que vous voudriez faire ?</p>
 
-<!--      <div *ngIf="go_further">-->
-<!--        <mat-step label="Utilisation">-->
-<!--          <div *ngTemplateOutlet="Use"></div>-->
-<!--          <button mat-flat-button color="primary" matStepperPrevious>Back</button>-->
-<!--          <button type="submit" mat-flat-button color="primary" matStepperNext>-->
-<!--            Next-->
-<!--          </button>-->
-<!--        </mat-step>-->
+          <mat-radio-group aria-label="Quelle est l'usage que vous voudriez faire ?"
+                           formControlName="use">
+            <mat-radio-button value="garden"> Jardin seulement</mat-radio-button>
+            <mat-radio-button value="house"> Usage domestique</mat-radio-button>
+            <mat-radio-button value="both"> Les deux</mat-radio-button>
+          </mat-radio-group>
 
-<!--        <mat-step label="Consommation"-->
-<!--                  *ngIf="estiForm.value['use'] === 'both'|| estiForm.value['use'] === 'house'">-->
-<!--          &lt;!&ndash;        comsonmation totale&ndash;&gt;-->
-<!--          <div *ngTemplateOutlet="Conso"></div>-->
-<!--          <button mat-flat-button color="primary" matStepperPrevious>Back</button>-->
-<!--          <button type="submit" mat-flat-button color="primary" matStepperNext>-->
-<!--            Next-->
-<!--          </button>-->
-<!--        </mat-step>-->
+          <mat-form-field *ngIf="estiForm.value['use'] === 'garden' ">
+            <input matInput type="number" formControlName="garden_area"
+                   placeholder="Quelle est la superfecie de votre jardin ?">
+          </mat-form-field>
 
-<!--        <mat-step label="Cuve">-->
-<!--          &lt;!&ndash;        distance cuve maison&ndash;&gt;-->
-<!--          <div *ngTemplateOutlet="step6"></div>-->
-<!--          <button mat-flat-button color="primary" matStepperPrevious>Back</button>-->
-<!--          <button type="submit" mat-flat-button color="primary" matStepperNext-->
-<!--                  [disabled]="checkIfTank()"> Terminer-->
-<!--          </button>-->
-<!--        </mat-step>-->
+          <mat-form-field *ngIf="estiForm.value['use'] === 'house' ">
+            <input matInput type="number" formControlName="nb_machin"
+                   placeholder="Combien de machines possedez vous ?">
+          </mat-form-field>
 
-<!--        <mat-step label="Devis Finale">-->
-<!--          <div *ngTemplateOutlet="Save"></div>-->
+          <div *ngIf="estiForm.value['use'] === 'both'">
+            <mat-form-field>
+              <input matInput type="number" formControlName="garden_area"
+                     placeholder="Quelle est la superfecie de votre jardin ?">
+            </mat-form-field>
 
-<!--        </mat-step>-->
+            <mat-form-field>
+              <input matInput type="number" formControlName="nb_machin"
+                     placeholder="Combien de machines possedez vous ?">
+            </mat-form-field>
+          </div>
 
-<!--      </div>-->
+          <div *ngIf="estiForm.value['use'] === 'both' || estiForm.value['use'] === 'house'">
+
+            <p>Connaissez vous votre consommation d'eau annuelle ?</p>
+
+            <mat-radio-group
+              aria-label="Connaissez vous votre consommation d'eau annuelle ?"
+              formControlName="know_consum">
+              <mat-radio-button value="yes"> oui</mat-radio-button>
+              <mat-radio-button value="no"> non</mat-radio-button>
+            </mat-radio-group>
+
+            <mat-form-field *ngIf="estiForm.value['know_consum'] === 'yes' ">
+              <input matInput type="number" formControlName="consommation"
+                     placeholder="Combien de m3 d'eau consommez vous annuellement ?">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="estiForm.value['know_consum'] === 'no' ">
+              <input matInput type="number" formControlName="people"
+                     placeholder="Combien de personnes habitent à l'année votre domicile ?">
+            </mat-form-field>
+
+          </div>
+
+          <div>
+            <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+            <button type="submit" mat-flat-button color="primary" matStepperNext>
+              Next
+            </button>
+          </div>
+
+        </mat-step>
+
+        <mat-step label="Cuve" class="step_display">
+
+          <!--distance cuve maison-->
+          <p *ngIf="water_volume >= 1000">Quelle type d'installation de cuve souhaitez-vous?</p>
+          <p *ngIf="water_volume < 1000">Cuve : non enterré</p>
+
+          <mat-radio-group
+            aria-label="Quelle type d'installation de cuve souhaitez-vous?"
+            formControlName="tank_type" *ngIf="water_volume >= 1000">
+            <mat-radio-button value="dig"> Entérer</mat-radio-button>
+            <mat-radio-button value="not-dig"> Non Entérer</mat-radio-button>
+          </mat-radio-group>
+
+          <p *ngIf="water_volume <1000"> Pour un volume de récupération inférieur à 1000L nous déconseillons les cuves
+            enterrés. </p>
+
+          <mat-form-field *ngIf="water_volume >= 1000">
+            <input matInput type="number" formControlName="tank_dist"
+                   placeholder="Distance cuve maison?">
+          </mat-form-field>
+
+          <div>
+            <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+            <button type="submit" mat-flat-button color="primary" matStepperNext
+                    [disabled]="checkIfTank()"> Terminer
+            </button>
+          </div>
+
+        </mat-step>
+
+        <mat-step label="Devis Finale" class="step_display">
+          <p> Sauvegardé votre devis en créant un compte sur notre site!</p>
+          <div>
+            <button mat-flat-button (click)="save()"> Sauvegarder</button>
+          </div>
+        </mat-step>
+
+      </div>
     </mat-horizontal-stepper>
   </form>
 </mat-card>
 
 <mat-card *ngIf="first_devis">
-  <div *ngTemplateOutlet="firstDevisTemplate"></div>
-</mat-card>
-
-<ng-template #step1>">
-  <mat-form-field>
-    <input matInput type="text" formControlName="address"
-           placeholder="Quelle est votre adresse ?">
-    <mat-error>Veuilliez entrer une addresse du type : numero rue</mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <input type="text" matInput formControlName="postalCode"
-           placeholder="Quelle est votre code postal ?">
-    <mat-error>Veuillez entrer un code postal valide</mat-error>
-  </mat-form-field>
-</ng-template>
-
-<ng-template #step2>
-  <mat-form-field>
-    <input matInput type="number" formControlName="houseArea"
-           placeholder="Quelle est la superficie (sol) de votre maison ?">
-  </mat-form-field>
-  <p>Quelle est votre type de toit</p>
-  <mat-radio-group aria-label="Quelle est le type de tuiles de votre toit"
-                   formControlName="roof_type">
-    <mat-radio-button value="3"> Toit plat</mat-radio-button>
-    <mat-radio-button value="2"> Toit en tôle ondulés</mat-radio-button>
-    <mat-radio-button value="1"> Toit en tuiles</mat-radio-button>
-  </mat-radio-group>
-
-  <p>Avez vous des tuiles a remplacer?</p>
-  <mat-radio-group aria-label="Avez vous des tuiles a remplacer?"
-                   formControlName="has_tiles">
-    <mat-radio-button value="yes"> oui</mat-radio-button>
-    <mat-radio-button value="no"> non</mat-radio-button>
-  </mat-radio-group>
-
-  <mat-form-field *ngIf="estiForm.value['has_tiles'] === 'yes' ">
-    <input matInput type="number" formControlName="tiles_nb"
-           placeholder="combien de tuile(s) a remplacer?">
-  </mat-form-field>
-</ng-template>
-
-<ng-template #step3>
-  <p>Avez vous besoin de faire installer une goutière?</p>
-  <mat-radio-group
-    aria-label="Avez vous besoin de faire installer une goutière?"
-    formControlName="has_gutter">
-    <mat-radio-button value="yes"> oui</mat-radio-button>
-    <mat-radio-button value="no"> non</mat-radio-button>
-  </mat-radio-group>
-
-  <mat-form-field *ngIf="estiForm.value['has_gutter'] === 'yes' ">
-    <input matInput type="number" formControlName="m_gutter"
-           placeholder="Combien de mètres de goutière avez vous besoin d'installer?">
-  </mat-form-field>
-</ng-template>
-
-<ng-template #Conso>
-  <p>Connaissez vous votre consommation d'eau annuelle ?</p>
-  <mat-radio-group
-    aria-label="Connaissez vous votre consommation d'eau annuelle ?"
-    formControlName="know_consum">
-    <mat-radio-button value="yes"> oui</mat-radio-button>
-    <mat-radio-button value="no"> non</mat-radio-button>
-  </mat-radio-group>
-
-  <mat-form-field *ngIf="estiForm.value['know_consum'] === 'yes' ">
-    <input matInput type="number" formControlName="consommation"
-           placeholder="Combien de m3 d'eau consommez vous annuellement ?">
-  </mat-form-field>
-  <mat-form-field *ngIf="estiForm.value['know_consum'] === 'no' ">
-    <input matInput type="number" formControlName="people"
-           placeholder="Combien de personnes habitent à l'année votre domicile ?">
-  </mat-form-field>
-</ng-template>
-
-<ng-template #step6>
-  <form action="" [formGroup]="estiForm">
-    <p *ngIf="water_volume >= 1000">Quelle type d'installation de cuve souhaitez-vous?</p>
-    <p *ngIf="water_volume < 1000">Cuve : non enterré</p>
-    <mat-radio-group
-      aria-label="Quelle type d'installation de cuve souhaitez-vous?"
-      formControlName="tank_type" *ngIf="water_volume >= 1000">
-      <mat-radio-button value="dig"> Entérer</mat-radio-button>
-      <mat-radio-button value="not-dig"> Non Entérer</mat-radio-button>
-    </mat-radio-group>
-    <p *ngIf="water_volume <1000"> Pour un volume de récupération inférieur à 1000L nous déconseillons les cuves enterrés. </p>
-
-    <mat-form-field *ngIf="water_volume >= 1000">
-      <input matInput type="number" formControlName="tank_dist"
-             placeholder="Distance cuve maison?">
-    </mat-form-field>
-  </form>
-</ng-template>
-
-<ng-template #Use>
-  <p>Quelle est l'usage que vous voudriez faire ?</p>
-  <mat-radio-group aria-label="Quelle est l'usage que vous voudriez faire ?"
-                   formControlName="use">
-    <mat-radio-button value="garden"> Jardin seulement</mat-radio-button>
-    <mat-radio-button value="house"> Usage domestique</mat-radio-button>
-    <mat-radio-button value="both"> Les deux</mat-radio-button>
-  </mat-radio-group>
-
-  <mat-form-field *ngIf="estiForm.value['use'] === 'garden' ">
-    <input matInput type="number" formControlName="garden_area"
-           placeholder="Quelle est la superfecie de votre jardin ?">
-  </mat-form-field>
-
-  <mat-form-field *ngIf="estiForm.value['use'] === 'house' ">
-    <input matInput type="number" formControlName="nb_machin"
-           placeholder="Combien de machines possedez vous ?">
-  </mat-form-field>
-
-  <mat-form-field *ngIf="estiForm.value['use'] === 'both' ">
-    <input matInput type="number" formControlName="garden_area"
-           placeholder="Quelle est la superfecie de votre jardin ?">
-  </mat-form-field>
-
-  <mat-form-field *ngIf="estiForm.value['use'] === 'both' ">
-    <input matInput type="number" formControlName="nb_machin"
-           placeholder="Combien de machines possedez vous ?">
-  </mat-form-field>
-
-  <div *ngIf="estiForm.value['use'] === 'both' || estiForm.value['use'] === 'house'">
-    <div *ngTemplateOutlet="Conso"></div>
-  </div>
-</ng-template>
-
-<ng-template #Save>
-  <p> Sauvegardé votre devis en créant un compte sur notre site!</p>
-  <div>
-    <button mat-flat-button (click)="save()"> Sauvegarder</button>
-  </div>
-</ng-template>
-
-<ng-template #firstDevisTemplate>
   <div>
     <p>Grâce à votre toit vous pouvez récolté {{water_volume * 1000}} L/an.</p>
   </div>
-</ng-template>
+</mat-card>
