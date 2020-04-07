@@ -29,6 +29,9 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   gutter_cost: number;
   first_devis: boolean;
 
+  water_cost: any;
+  public final_save: number;
+
   constructor(public api: ApiService,
               public fb: FormBuilder,
               public tool: ToolsService,
@@ -41,7 +44,6 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     if ('devis' in sessionStorage && this.tool.isLoggedIn()) {
       this.saveDevis();
     }
-
 
     this.estiForm = this.fb.group({
       address: ['', [Validators.required, Validators.pattern('(\\d{1,}) [a-zA-Z0-9\\s]+(\\.)?')]],
@@ -58,7 +60,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       people: [null],
       nb_machin: [null],
       garden_area: [null],
-      tank_type: ['dig'],
+      tank_type: ['not-dig'],
       tank_dist: [null]
     });
   }
@@ -75,56 +77,60 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     let gutter = this.estiForm.value['m_gutter'];
     let tiles = this.estiForm.value['tiles_nb'];
 
+    this.water_volume = this.math.roofWaterVolume(this.estiForm.value['houseArea'], 10, this.estiForm.value['roof_type']);
+
     this.tiles_cost = tiles != null ? this.math.tilesReparationCost(tiles) : 0;
     this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;
 
-    this.water_volume = this.math.roofWaterVolume(this.estiForm.value['houseArea'], 10, this.estiForm.value['roof_type']);
-    this.roof_cost = this.tiles_cost + this.gutter_cost;
-  }
-
-  computeFinalDevis() {
-    let water;
     this.api.getWaterCost(this.estiForm.value['postalCode']).subscribe(data => {
       if (data[0]) {
-        water = this.tool.setWaterCost(data[0]).cost;
+        this.water_cost = this.tool.setWaterCost(data[0]).cost;
       } else {
-        water = 0;
+        this.water_cost = 0;
       }
-      this.finalDevis = {
-        //required
-        _id: this.estiForm.value['_id'] ? this.estiForm.value['_id'] : undefined,
-        address: this.estiForm.value['address'] ? this.estiForm.value['address'] : undefined,
-        code_postal: this.estiForm.value['postalCode'] ? this.estiForm.value['postalCode'] : undefined,
-        id_user: this.tool.isLoggedIn() ? this.tool.getUser()._id : undefined,
-        routing_cost: 10,
-        tank_cost: 10,
-        water_cost: water, //cout de l'eau recuperer sur BDD
-
-        // non required
-        tiles_cost: this.tiles_cost,
-        tiles_number: this.estiForm.value['tiles_nb'] ? this.estiForm.value['tiles_nb'] : undefined,
-        structural_cost: this.roof_cost,
-        consum: this.estiForm.value['consommation'] ? this.estiForm.value['consommation'] : undefined,
-        water_volume: this.water_volume, //volume d'eau recupéré
-        roof_area: this.estiForm.value['houseArea'] ? this.estiForm.value['houseArea'] : this.math.calc_vol_storage(this.finalDevis),
-        vol_storage: this.estiForm.value["vol_storage"]? this.math.calc_vol_storage(this.finalDevis) : undefined,
-        final_save: this.estiForm.value['final_save'] ? this.estiForm.value['final_save'] : undefined,
-        rentability: undefined,
-        created_at: this.estiForm.value['created_at'] ? this.estiForm.value['created_at'] : new Date(),
-      };
     });
   }
 
+  computeFinalDevis() {
+    let consommation = this.estiForm.value['consommation'] ? this.estiForm.value['consommation'] : this.math.calc_conso(this.estiForm);
+    let vol_storage = this.math.calc_vol_storage(this.water_volume, consommation);
+    this.final_save = this.math.calc_final_save(this.water_cost, this.water_volume)
+
+    this.finalDevis = {
+      //required
+      _id: this.estiForm.value['_id'] ? this.estiForm.value['_id'] : undefined,
+      address: this.estiForm.value['address'] ? this.estiForm.value['address'] : undefined,
+      code_postal: this.estiForm.value['postalCode'] ? this.estiForm.value['postalCode'] : undefined,
+      id_user: this.tool.isLoggedIn() ? this.tool.getUser()._id : undefined,
+      routing_cost: 100,
+      water_cost: this.water_cost, //cout de l'eau recuperer sur BDD
+
+      // non required
+      tank_type: this.estiForm.value['tank_type'] ? this.estiForm.value['tank_type'] : undefined ,
+      tank_dist: this.estiForm.value['tank_dist'] ? this.estiForm.value['tank_dist'] : undefined,
+      roof_area: this.estiForm.value['houseArea'] ? this.estiForm.value['houseArea'] : undefined,
+      tiles_number: this.estiForm.value['tiles_nb'] ? this.estiForm.value['tiles_nb'] : undefined,
+      tiles_cost: this.tiles_cost,
+      structural_cost: this.tiles_cost + this.gutter_cost,
+      consum: consommation,
+      water_volume: this.water_volume, //volume d'eau recupéré
+      vol_storage: vol_storage,
+      tank_cost: this.math.calc_cost_tank(this.estiForm, vol_storage),
+      final_save: this.final_save,
+      created_at: new Date(),
+    };
+    console.log("fin de boucle" + this.finalDevis)
+    this.finalDevis.total_cost = this.math.totalCost(this.finalDevis);
+    console.log(this.finalDevis)
+    this.finalDevis.rentability = this.math.calc_rentability(this.finalDevis);
+    console.log(this.finalDevis)
+  }
+
   selectionChange($event: StepperSelectionEvent) {
-    console.log(this.estiForm.value);
     if ($event.selectedIndex == 3) {
       this.first_devis = true;
       this.computeFirstDevis();
     }
-    if (this.estiForm.value['tank_type'] != null) {
-      this.computeFinalDevis();
-    }
-    console.log($event.selectedIndex);
   }
 
   saveDevis() {
@@ -134,6 +140,8 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       this.finalDevis.id_user = this.tool.getUser()._id;
       sessionStorage.removeItem('devis');
     }
+
+
     this.api.createDevis(this.finalDevis).subscribe(data => {
       if (data['message']) {
         this.tool.openSnackBar('Sauvegarde du Devis Effectuée', '');
@@ -152,10 +160,11 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   }
 
   checkIfTank() {
-    return (this.estiForm.value['tank_dist'] === null);
+    return this.estiForm.value['tank_dist'] === null || this.water_volume < 1000;
   }
 
   goFurther() {
     this.go_further = true;
+    this.stepper.next()
   }
 }

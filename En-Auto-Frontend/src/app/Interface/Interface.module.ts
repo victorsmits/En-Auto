@@ -6,7 +6,7 @@ export interface Devis {
   structural_cost?: Number,
   routing_cost?: Number,
   tank_cost?: Number,
-  total_cost?: Number,
+  total_cost?:Number ,
   consum?: Number,
   water_cost?: Number,
   water_volume?: Number,
@@ -19,6 +19,8 @@ export interface Devis {
   tiles_number?:Number,
   gutter_length?:Number,
   gutter_cost?:Number,
+  tank_dist?:Number,
+  tank_type?:String,
 }
 
 export interface User {
