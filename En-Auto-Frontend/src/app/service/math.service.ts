@@ -35,7 +35,7 @@ export class MathService {
     return gutter * 15;
   }
 
-//calcule la consommation du foyer
+//calcule la consommation du foyer en L / an
   calc_conso(estiForm: FormGroup): number {
     //wc+Nettoyage+machines
     let conso: number;
@@ -43,15 +43,15 @@ export class MathService {
     let nb_machin = estiForm.value["nb_machin"];
     let garden_area = estiForm.value["garden_area"];
 
-    conso = 8500 * people + 1100 * people;
+    conso = 42000 * people;
     console.log("machine: " + nb_machin);
     if (nb_machin > 0) {
       conso = conso + (nb_machin * 3500);
-      console.log("conso: " + conso);
+      console.log("conso2: " + conso);
     }
     if (garden_area > 0) {
       conso = conso + (garden_area * 70);
-      console.log("conso: " + conso);
+      console.log("conso3: " + conso);
     }
     return conso;
   }
