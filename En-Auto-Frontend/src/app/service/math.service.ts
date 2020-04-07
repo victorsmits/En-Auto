@@ -21,16 +21,16 @@ export class MathService {
     //flat roof
     if (roof == 3) {
       return (area * rain * 0.6) //en L par an
-    } else { //tiles roof
+    } if (roof == 1) { //tiles roof
       return (area * rain * 0.9) //en L par an
     }
   }
 
-//cout tuile
+//cout éventuel de remplacement de tuiles
   tilesReparationCost(tiles: number): number {
     return tiles * 2;
   }
-
+//cout de réparation evetuel de la goutiere
   gutterReparationCost(gutter: number): number {
     return gutter * 15;
   }
@@ -55,7 +55,7 @@ export class MathService {
     }
     return conso;
   }
-
+//calcule du volument d'eau à stocker dans la citerne
   calc_vol_storage(water_volume: number, conso: number): number {
     let moy: number;
     moy = (conso + water_volume) / 2;
@@ -63,7 +63,7 @@ export class MathService {
     var around = Math.round(resultat);
     return around;
   }
-
+//calcule le cout de la citerne en fonction du volume nécessaire à stocker et de son type
   calc_cost_tank(estiForm: FormGroup, vol: number): number {
     let cost: number;
 
@@ -89,17 +89,17 @@ export class MathService {
     cost = cost + estiForm.value["tank_dist"] * 50;
     return (cost);
   }
-
+//calcule le cout total de l'installation pour en déduire sa rentabilité et la durée de l'amortissement
   totalCost(devis: Devis): Number {
     console.log(devis)
     return (devis.routing_cost.valueOf() + devis.structural_cost.valueOf() + devis.tank_cost.valueOf()
       + devis.water_cost.valueOf() * devis.consum.valueOf());
   }
-
+//calcule l'économie d'eau en fonction du prix de l'eau
   calc_final_save(water_cost: number, water_volume: number) {
-    return Math.round((water_volume / 4) * water_cost);
+    return Math.round((water_volume) * water_cost);
   }
-
+//calcul la rentabilité
   calc_rentability(finalDevis: Devis) {
     return 0;
   }

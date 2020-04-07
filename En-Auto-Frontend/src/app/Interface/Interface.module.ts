@@ -35,3 +35,9 @@ export interface WaterCost {
   postCode: Number,
   cost: Number,
 }
+
+export interface Precipitation {
+  _id?: String,
+  postCode?: Number,
+  rain?: Number,
+}
