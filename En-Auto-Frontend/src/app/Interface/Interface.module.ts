@@ -6,7 +6,7 @@ export interface Devis {
   structural_cost?: Number,
   routing_cost?: Number,
   tank_cost?: Number,
-  total_cost?: Number,
+  total_cost?:Number ,
   consum?: Number,
   water_cost?: Number,
   water_volume?: Number,

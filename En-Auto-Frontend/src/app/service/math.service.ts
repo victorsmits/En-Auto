@@ -90,8 +90,10 @@ export class MathService {
     return (cost);
   }
 
-  totalCost(devis: Devis): number {
-    return (devis.routing_cost.valueOf() + devis.structural_cost.valueOf() + devis.tank_cost.valueOf() + devis.water_cost.valueOf() * devis.consum.valueOf());
+  totalCost(devis: Devis): Number {
+    console.log(devis)
+    return (devis.routing_cost.valueOf() + devis.structural_cost.valueOf() + devis.tank_cost.valueOf()
+      + devis.water_cost.valueOf() * devis.consum.valueOf());
   }
 
   calc_final_save(water_cost: number, water_volume: number) {

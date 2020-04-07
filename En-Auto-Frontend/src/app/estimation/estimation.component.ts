@@ -74,7 +74,13 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   }
 
   computeFirstDevis() {
+    let gutter = this.estiForm.value['m_gutter'];
+    let tiles = this.estiForm.value['tiles_nb'];
+
     this.water_volume = this.math.roofWaterVolume(this.estiForm.value['houseArea'], 10, this.estiForm.value['roof_type']);
+
+    this.tiles_cost = tiles != null ? this.math.tilesReparationCost(tiles) : 0;
+    this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;
 
     this.api.getWaterCost(this.estiForm.value['postalCode']).subscribe(data => {
       if (data[0]) {
@@ -114,6 +120,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       created_at: new Date(),
     };
     console.log(this.finalDevis)
+    console.log(this.math.totalCost(this.finalDevis))
     this.finalDevis.total_cost = this.math.totalCost(this.finalDevis);
     console.log(this.finalDevis)
     this.finalDevis.rentability = this.math.calc_rentability(this.finalDevis);
@@ -121,7 +128,6 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   }
 
   selectionChange($event: StepperSelectionEvent) {
-    console.log(this.estiForm.value);
     if ($event.selectedIndex == 3) {
       this.first_devis = true;
       this.computeFirstDevis();
