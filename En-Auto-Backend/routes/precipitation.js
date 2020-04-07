@@ -5,11 +5,11 @@ const RN = mongoose.model('rain');
 
 //post
 router.post('', function(req, res, next) {
-    let precipitation = new RN( {
-        codePost: req.body.codePost ? req.body.codePost : undefined,
+    let jeanmi = new RN( {
+        postCode: req.body.postCode ? req.body.postCode : undefined,
         rain: req.body.rain ? req.body.rain : undefined,
     })
-    precipitation.save()
+    jeanmi.save()
         .then(r =>{
             return res.status(201).json({"message":true});
         }).catch(error => {
@@ -20,13 +20,13 @@ router.post('', function(req, res, next) {
 
 //Récupération de la précipitation en fonction du code postal
 router.get('', function(req, res, next) {
-    precipitation.find({codePost : req.query.codePost.toString()},(err,precipitation) =>{
-        if(!precipitation) {
+    RN.find({postCode : req.query.postCode.toString()},(err,precep)=>{
+        if(err) {
             return res.status(401).send({
-                message : "Precipitation not found with code postal "+ req.query.codePost
+                message : "Precipitation not found with post code "+ req.query.postCode
             });
         }else{
-            return res.status(201).json(precipitation);
+            return res.status(201).json(precep);
         }
     })
 });

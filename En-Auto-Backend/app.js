@@ -3,6 +3,7 @@ require('./models/UserModel');
 require('./models/DevisModel');
 require('./models/WaterCostModel');
 require('./config/passport');
+require('./models/PrecipitationModel');
 
 const cors = require('cors');
 const createError = require('http-errors');
