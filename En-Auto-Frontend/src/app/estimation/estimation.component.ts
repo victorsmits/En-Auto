@@ -113,7 +113,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       final_save: this.final_save,
       created_at: new Date(),
     };
-    console.log(this.finalDevis)
+    console.log("fin de boucle" + this.finalDevis)
     this.finalDevis.total_cost = this.math.totalCost(this.finalDevis);
     console.log(this.finalDevis)
     this.finalDevis.rentability = this.math.calc_rentability(this.finalDevis);

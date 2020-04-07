@@ -91,7 +91,17 @@ export class MathService {
   }
 
   totalCost(devis: Devis): number {
-    return (devis.routing_cost.valueOf() + devis.structural_cost.valueOf() + devis.tank_cost.valueOf() + devis.water_cost.valueOf() * devis.consum.valueOf());
+    console.log("cost total : ");
+    let total: number;
+    total = devis.routing_cost.valueOf();
+    console.log(total)
+    let total1 = devis.structural_cost.valueOf();
+    console.log(total1)
+    let total2 =  devis.tank_cost.valueOf();
+    console.log(total2)
+    let total3 = devis.water_cost.valueOf() * devis.consum.valueOf();
+    console.log(total3)
+    return (total);
   }
 
   calc_final_save(water_cost: number, water_volume: number) {
