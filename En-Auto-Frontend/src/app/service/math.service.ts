@@ -94,4 +94,11 @@ export class MathService {
     return (devis.routing_cost.valueOf() + devis.structural_cost.valueOf() + devis.tank_cost.valueOf() + devis.water_cost.valueOf() * devis.consum.valueOf());
   }
 
+  calc_final_save(water_cost: number, water_volume: number) {
+    return Math.round((water_volume / 4) * water_cost);
+  }
+
+  calc_rentability(finalDevis: Devis) {
+    return 0;
+  }
 }

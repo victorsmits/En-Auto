@@ -91,7 +91,7 @@
         <p>Grâce à votre toit vous pouvez récolté {{water_volume * 1000}} L/an.</p>
         <p>Cela correspond à {{(water_volume * 1000) / 60}} douches/an 🚿 (une
           douche correspond a 60L/an en moyenne) </p>
-        <p>Vous pourriez économiser jusqu'à {{(water_volume / 4) * water_cost |number:'1.2-2'}} €/mois</p>
+        <p>Vous pourriez économiser jusqu'à {{final_save}} €/mois</p>
 
         <div>
           <button mat-flat-button color="primary" matStepperPrevious>Back</button>
@@ -184,18 +184,17 @@
             <mat-radio-button value="not-dig"> Non Entérer</mat-radio-button>
           </mat-radio-group>
 
-          <p *ngIf="water_volume <1000"> Pour un volume de récupération inférieur à 1000L nous déconseillons les cuves
+          <p *ngIf="water_volume < 1000"> Pour un volume de récupération inférieur à 1000L nous déconseillons les cuves
             enterrés. </p>
 
-          <mat-form-field *ngIf="water_volume >= 1000">
+          <mat-form-field *ngIf="(water_volume >= 1000 && estiForm.value['tank_type'] === 'dig')">
             <input matInput type="number" formControlName="tank_dist"
                    placeholder="Distance cuve maison?">
           </mat-form-field>
 
           <div>
             <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-            <button type="submit" mat-flat-button color="primary" matStepperNext
-                    [disabled]="checkIfTank()"> Terminer
+            <button type="submit" mat-flat-button color="primary" matStepperNext (click)="computeFinalDevis()"> Terminer
             </button>
           </div>
 
