@@ -50,7 +50,7 @@
       </mat-step>
 
       <mat-step label="Consommation"
-                *ngIf="choice === 'both'|| choice === 'house'">
+                *ngIf="estiForm.value['use'] === 'both'|| estiForm.value['use'] === 'house'">
         <!--        comsonmation totale-->
         <div *ngTemplateOutlet="step4"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
@@ -63,8 +63,7 @@
         <!--        distance cuve maison-->
         <div *ngTemplateOutlet="step6"></div>
         <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-        <button type="submit" mat-flat-button color="primary" matStepperNext
-                [disabled]="checkIfTank()"> Terminer
+        <button type="submit" mat-flat-button color="primary" matStepperNext> Terminer
         </button>
       </mat-step>
 
@@ -164,16 +163,17 @@
 
 <ng-template #step6>
   <form action="" [formGroup]="estiForm">
-    <p>Quelle type d'installation de cuve souhaitez-vous?</p>
-
+    <p *ngIf="water_volume >= 1000">Quelle type d'installation de cuve souhaitez-vous?</p>
+    <p *ngIf="water_volume < 1000">Cuve : non enterré</p>
     <mat-radio-group
       aria-label="Quelle type d'installation de cuve souhaitez-vous?"
-      formControlName="tank_type">
+      formControlName="tank_type" *ngIf="water_volume >= 1000">
       <mat-radio-button value="dig"> Entérer</mat-radio-button>
       <mat-radio-button value="not-dig"> Non Entérer</mat-radio-button>
     </mat-radio-group>
+    <p *ngIf="water_volume <1000"> Pour un volume de récupération inférieur à 1000L nous déconseillons les cuves enterrés. </p>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="water_volume >= 1000">
       <input matInput type="number" formControlName="tank_dist"
              placeholder="Distance cuve maison?">
     </mat-form-field>
