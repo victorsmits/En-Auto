@@ -63,6 +63,9 @@ const devisSchema = new Schema({
     'tiles_number': {
         type: Number,
     },
+    'tiles_cost': {
+        type: Number,
+    },
     'gutter_cost': {
         type: Number,
     },

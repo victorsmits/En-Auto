@@ -59,9 +59,7 @@ export class MathService {
   calc_vol_storage(water_volume: number, conso: number): number {
     let moy: number;
     moy = (conso + water_volume) / 2;
-    var resultat = (moy * 21) / 365
-    var around = Math.round(resultat);
-    return around;
+    return Math.round((moy * 21) / 365);
   }
 //calcule le cout de la citerne en fonction du volume nécessaire à stocker et de son type
   calc_cost_tank(estiForm: FormGroup, vol: number): number {
@@ -92,15 +90,14 @@ export class MathService {
 //calcule le cout total de l'installation pour en déduire sa rentabilité et la durée de l'amortissement
   totalCost(devis: Devis): Number {
     console.log(devis)
-    return (devis.routing_cost.valueOf() + devis.structural_cost.valueOf() + devis.tank_cost.valueOf()
-      + devis.water_cost.valueOf() * devis.consum.valueOf());
+    return (devis.routing_cost.valueOf() + devis.structural_cost.valueOf() + devis.tank_cost.valueOf());
   }
 //calcule l'économie d'eau en fonction du prix de l'eau
   calc_final_save(water_cost: number, water_volume: number) {
     return Math.round((water_volume) * water_cost);
   }
-//calcul la rentabilité
-  calc_rentability(finalDevis: Devis) {
-    return 0;
+
+  calc_rentability(devis: Devis) {
+    return (devis.total_cost.valueOf()/(5 * devis.final_save.valueOf()) * 100);
   }
 }

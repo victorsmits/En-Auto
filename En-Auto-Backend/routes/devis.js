@@ -24,10 +24,13 @@ router.post('', function(req, res, next) {
         created_at : req.body.created_at ? req.body.created_at : undefined,
         final_save : req.body.final_save ? req.body.final_save : undefined,
         total_cost : req.body.total_cost ? req.body.total_cost : undefined,
+
         tiles_cost : req.body.tiles_cost ? req.body.tiles_cost : undefined,
         tiles_number : req.body.tiles_number ? req.body.tiles_number : undefined,
+
         gutter_length : req.body.gutter_length ? req.body.gutter_length : undefined,
         gutter_cost : req.body.gutter_cost ? req.body.gutter_cost : undefined,
+
         tank_dist : req.body.tank_dist ? req.body.tank_dist : undefined,
         tank_type : req.body.tank_type ? req.body.tank_type : undefined,
     });
