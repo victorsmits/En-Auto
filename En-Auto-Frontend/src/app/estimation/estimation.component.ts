@@ -29,6 +29,8 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   gutter_cost: number;
   first_devis: boolean;
 
+  water_cost: any;
+
   constructor(public api: ApiService,
               public fb: FormBuilder,
               public tool: ToolsService,
@@ -72,15 +74,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   }
 
   computeFirstDevis() {
-    let gutter = this.estiForm.value['m_gutter'];
-    let tiles = this.estiForm.value['tiles_nb'];
-
-    this.tiles_cost = tiles != null ? this.math.tilesReparationCost(tiles) : 0;
-    this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;
-
     this.water_volume = this.math.roofWaterVolume(this.estiForm.value['houseArea'], 10, this.estiForm.value['roof_type']);
-    this.roof_cost = this.tiles_cost + this.gutter_cost;
-  }
 
   computeFinalDevis() {
     let water;
@@ -88,9 +82,9 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     let vol_storage = this.math.calc_vol_storage(this.water_volume, consommation);
     this.api.getWaterCost(this.estiForm.value['postalCode']).subscribe(data => {
       if (data[0]) {
-        water = this.tool.setWaterCost(data[0]).cost;
+        this.water_cost = this.tool.setWaterCost(data[0]).cost;
       } else {
-        water = 0;
+        this.water_cost = 0;
       }
       this.finalDevis = {
         //required
@@ -120,6 +114,37 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     });
   }
 
+  computeFinalDevis() {
+    let gutter = this.estiForm.value['m_gutter'];
+    let tiles = this.estiForm.value['tiles_nb'];
+
+    this.tiles_cost = tiles != null ? this.math.tilesReparationCost(tiles) : 0;
+    this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;
+
+    this.finalDevis = {
+      //required
+      _id: this.estiForm.value['_id'] ? this.estiForm.value['_id'] : undefined,
+      address: this.estiForm.value['address'] ? this.estiForm.value['address'] : undefined,
+      code_postal: this.estiForm.value['postalCode'] ? this.estiForm.value['postalCode'] : undefined,
+      id_user: this.tool.isLoggedIn() ? this.tool.getUser()._id : undefined,
+      routing_cost: 10,
+      tank_cost: 10,
+      water_cost: this.water_cost, //cout de l'eau recuperer sur BDD
+
+      // non required
+      tiles_cost: this.tiles_cost,
+      tiles_number: this.estiForm.value['tiles_nb'] ? this.estiForm.value['tiles_nb'] : undefined,
+      structural_cost: this.tiles_cost + this.gutter_cost,
+      consum: this.estiForm.value['consommation'] ? this.estiForm.value['consommation'] : undefined,
+      water_volume: this.water_volume, //volume d'eau recupéré
+      roof_area: this.estiForm.value['houseArea'] ? this.estiForm.value['houseArea'] : this.math.calc_vol_storage(this.finalDevis),
+      vol_storage: this.estiForm.value["vol_storage"] ? this.math.calc_vol_storage(this.finalDevis) : undefined,
+      final_save: this.estiForm.value['final_save'] ? this.estiForm.value['final_save'] : undefined,
+      rentability: undefined,
+      created_at: this.estiForm.value['created_at'] ? this.estiForm.value['created_at'] : new Date(),
+    };
+  }
+
   selectionChange($event: StepperSelectionEvent) {
     console.log(this.estiForm.value);
     if ($event.selectedIndex == 3) {
@@ -130,6 +155,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     ((this.estiForm.value['use'] == 'both' || this.estiForm.value['use'] == 'house') && $event.selectedIndex == 7)) {
       this.computeFinalDevis();
     }
+    console.log("test")
     console.log($event.selectedIndex);
   }
 
@@ -163,5 +189,6 @@ export class EstimationComponent implements OnInit, AfterViewInit {
 
   goFurther() {
     this.go_further = true;
+    this.stepper.next()
   }
 }
