@@ -7,6 +7,10 @@ mat-card {
   display: grid;
 }
 
+.button{
+  margin-top: 1em;
+}
+
 h1 {
   font-size: 26px;
 }

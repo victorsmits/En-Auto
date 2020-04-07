@@ -74,7 +74,7 @@
         </mat-radio-group>
 
         <mat-form-field *ngIf="estiForm.value['has_gutter'] === 'yes' ">
-          <input matInput type="number" formControlName="m_gutter"
+          <input matInput type="number" formControlName="gutter_length"
                  placeholder="Combien de mètres de goutière avez vous besoin d'installer?">
         </mat-form-field>
 
@@ -88,10 +88,10 @@
       </mat-step>
 
       <mat-step label="Première estimation" class="step_display">
-        <p>Grâce à votre toit vous pouvez récolté {{water_volume * 1000}} L/an.</p>
-        <p>Cela correspond à {{(water_volume * 1000) / 60}} douches/an 🚿 (une
+        <h3>Grâce à votre toit vous pouvez récolté {{water_volume}} L/an.</h3>
+        <p>Cela correspond à {{water_volume / 60}} douches/an 🚿 (une
           douche correspond a 60L/an en moyenne) </p>
-        <p>Vous pourriez économiser jusqu'à {{final_save}} €/mois</p>
+        <p>Vous pourriez économiser jusqu'à {{final_save}} €/an</p>
 
         <div>
           <button mat-flat-button color="primary" matStepperPrevious>Back</button>
@@ -214,6 +214,6 @@
 
 <mat-card *ngIf="first_devis">
   <div>
-    <p>Grâce à votre toit vous pouvez récolté {{water_volume * 1000}} L/an.</p>
+    <p>Grâce à votre toit vous pouvez récolté {{water_volume}} L/an.</p>
   </div>
 </mat-card>

@@ -23,6 +23,7 @@ export class DevisComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.data)
   }
 
   close(): void {
@@ -33,15 +34,15 @@ export class DevisComponent implements OnInit {
     let data = document.getElementById('devis');
     html2canvas(data).then(canvas => {
 
-      let imgWidth = 208;
+      let imgWidth = 190;
       let pageHeight = 295;
       let imgHeight = canvas.height * imgWidth / canvas.width;
       let heightLeft = imgHeight;
 
       const contentDataURL = canvas.toDataURL('image/png')
       let pdf = new JSPDF('p', 'mm', 'a4'); // A4 size page of PDF
-      const position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      const position = 10;
+      pdf.addImage(contentDataURL, 'PNG', position, position, imgWidth, imgHeight)
       pdf.save(this.data.address + '-' +
         this.tool.convertDateToString(this.data.created_at) + '.pdf'); // Generated PDF
     });
