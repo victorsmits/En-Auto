@@ -19,15 +19,14 @@ router.post('', function(req, res, next) {
 }
 
 //Récupération de la précipitation en fonction du code postal
-router.get('', function(req, res, next) {
-    RN.find({postCode : req.query.postCode.toString()},(err)=>{
-        console.log(err);
-        if(err, res) {
+router.get('', function (req, res, next) {
+    RN.find({postCode: req.query.postCode.toString()}, (err, precep) => {
+        if (err) {
             return res.status(401).send({
-                message : "Precipitation not found with post code "+ req.query.postCode
+                message: "Precipitation not found with post code " + req.query.postCode
             });
-        }else{
-            return res.status(201).json(RN);
+        } else {
+            return res.status(201).json(precep);
         }
     })
 });

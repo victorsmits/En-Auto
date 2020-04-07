@@ -11,6 +11,6 @@ const precipitation = new Schema({
         required: true
     }
 });
-const PrecipitationModel = mongoose.model('rain', rain);
+const PrecipitationModel = mongoose.model('rain', precipitation);
 
 module.exports = PrecipitationModel;

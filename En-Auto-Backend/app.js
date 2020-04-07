@@ -2,6 +2,7 @@ require('dotenv/config');
 require('./models/UserModel');
 require('./models/DevisModel');
 require('./models/WaterCostModel');
+require('./models/PrecipitationModel');
 require('./config/passport');
 
 const cors = require('cors');

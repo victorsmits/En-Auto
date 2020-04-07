@@ -77,7 +77,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     let gutter = this.estiForm.value['gutter_length'];
     let tiles = this.estiForm.value['tiles_nb'];
 
-    this.water_volume = this.math.roofWaterVolume(this.estiForm.value['houseArea'], 10, this.estiForm.value['roof_type']);
+    this.water_volume = this.math.roofWaterVolume(this.estiForm.value['houseArea'], 657, this.estiForm.value['roof_type']);
 
     this.tiles_cost = tiles != null ? this.math.tilesReparationCost(tiles) : 0;
     this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;

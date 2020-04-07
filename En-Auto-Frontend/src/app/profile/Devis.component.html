@@ -138,8 +138,9 @@
   <div class="rentability">
     <h2>Rentabilité  {{data.rentability}}%</h2>
 
+
     <mat-progress-bar
-      [value]="data.rentability"
+      value="{{value}}"
       [appProgressBarColor]="data.rentability"
       mode="determinate">
     </mat-progress-bar>

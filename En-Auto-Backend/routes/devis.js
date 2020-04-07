@@ -81,4 +81,5 @@ router.put('', function(req, res, next) {
         return res.status(201).send({message : "Devis updated successfully!"});
     })
 });
+
 module.exports = router;

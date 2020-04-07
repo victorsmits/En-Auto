@@ -14,6 +14,7 @@ import {ApiService} from "../service/api.service";
 export class DevisComponent implements OnInit {
 
   @ViewChild('devis') htmlData: ElementRef;
+  value: number;
 
   constructor(
     public dialogRef: MatDialogRef<DevisComponent>,
@@ -24,6 +25,7 @@ export class DevisComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data)
+    this.value = Math.round(this.data.rentability.valueOf() + 100);
   }
 
   close(): void {
