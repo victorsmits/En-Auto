@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const precipitation = new Schema({
+const rainschema = new Schema({
     'postCode': {
         type: Number,
         required: true
@@ -11,6 +11,6 @@ const precipitation = new Schema({
         required: true
     }
 });
-const PrecipitationModel = mongoose.model('rain', precipitation);
+const PrecipitationModel = mongoose.model('rain', rainschema);
 
 module.exports = PrecipitationModel;

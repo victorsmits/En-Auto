@@ -4,6 +4,7 @@ require('./models/DevisModel');
 require('./models/WaterCostModel');
 require('./models/PrecipitationModel');
 require('./config/passport');
+require('./models/PrecipitationModel');
 
 const cors = require('cors');
 const createError = require('http-errors');
