@@ -25,8 +25,7 @@ export class AppComponent implements AfterViewInit,OnInit {
     email : null,
   };
 
-  Mailer: FormGroup;
-  sended: String;
+
 
   constructor(public tool: ToolsService,
               public fb : FormBuilder,
@@ -37,12 +36,7 @@ export class AppComponent implements AfterViewInit,OnInit {
       this.user = this.tool.getUser();
     }
 
-    this.Mailer = this.fb.group({
-      mail : [null,[Validators.required,Validators.email]],
-      name : [null,[Validators.required]],
-      obj : [null,[Validators.required]],
-      content : [null,[Validators.required]],
-    })
+
 
     this.tool.AuthStatusListener.subscribe(status => {
       if(status){
@@ -64,15 +58,4 @@ export class AppComponent implements AfterViewInit,OnInit {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
-  sendMail() {
-    let mail :Mail = {
-      name : this.Mailer.value["name"],
-      obj : this.Mailer.value["obj"],
-      content : this.Mailer.value["content"],
-      mail : this.Mailer.value["mail"],
-    }
-    this.api.sendMail(mail).subscribe((data:String)=>{
-      this.sended = data
-    })
-  }
 }

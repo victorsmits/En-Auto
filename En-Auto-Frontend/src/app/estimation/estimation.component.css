@@ -29,9 +29,8 @@ mat-radio-button {
 }
 
 .background{
-  height: 30em;
-  width: auto;
-  background-image: url(~/../assets/images/fond-puie1.jpg);
+  height: 20em;
+  background-image: url(~/../assets/images/fond-puie1.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
