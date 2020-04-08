@@ -6,6 +6,7 @@ import {EstimationComponent} from "./estimation/estimation.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {AboutUsComponent} from './about-us/about-us.component';
 import {ContactUsComponent} from "./contact-us/contact-us.component";
+import {ValorisationComponent} from "./valorisation/valorisation.component";
 
 
 const routes: Routes = [
@@ -38,6 +39,11 @@ const routes: Routes = [
     path: 'contact',
     component: ContactUsComponent,
     data : {animation: 'ContactPage'}
+  },
+  {
+    path: 'valorisation',
+    component: ValorisationComponent,
+    data : {animation: 'ValoPage'}
   },
 ];
 

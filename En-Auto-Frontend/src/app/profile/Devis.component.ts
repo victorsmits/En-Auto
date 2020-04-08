@@ -30,7 +30,6 @@ export class DevisComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
     this.value = Math.round(this.data.rentability.valueOf() + 50);
     this.updateColor();
   }

@@ -34,6 +34,7 @@ import {MatSliderModule} from "@angular/material/slider";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ValorisationComponent } from './valorisation/valorisation.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     DevisComponent,
     DevisComponent,
     AboutUsComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    ValorisationComponent
   ],
   imports: [
     BrowserModule,

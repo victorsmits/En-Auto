@@ -33,6 +33,7 @@ mongoose.connect(process.env.MONGO,
 // Passport init
 app.use(passport.initialize());
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
