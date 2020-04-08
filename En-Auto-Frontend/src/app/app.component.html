@@ -2,29 +2,29 @@
 <html>
 <head>
   <meta charset="UTF-8">
-
 </head>
 
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav">
+  <mat-sidenav #drawer class="sidenav"
+               fixedInViewport="false" [opened]="true" mode="side">
     <div *ngTemplateOutlet="desktopNav"></div>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
+      <div class="navbar custom-navbar navbar-fixed-top">
+        <div class="navbar-header">
+          <a href="index.html" class="navbar-brand">EN <span>'</span> AUTO</a>
+          <img src="./assets/images/logo.jpg" width="50" height="50">
+        </div>
+      </div>
     </mat-toolbar>
 
-    <ng-container>
-      <body>
-      <router-outlet></router-outlet>
-      </body>
-    </ng-container>
+    <body>
+    <div [@routeAnimations]="prepareRoute(outlet)" >
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+    </body>
 
   </mat-sidenav-content>
 </mat-sidenav-container>
@@ -64,7 +64,12 @@
 
     <a mat-list-item routerLink="about-us">
       <mat-icon> live_help</mat-icon>
-      <span> A propos </span>
+      <span> Qui somme nous? </span>
+    </a>
+
+    <a mat-list-item routerLink="about-us">
+      <mat-icon> mail</mat-icon>
+      <span> Nous contacté</span>
     </a>
 
   </mat-nav-list>

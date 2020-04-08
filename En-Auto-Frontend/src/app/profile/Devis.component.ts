@@ -5,6 +5,7 @@ import {ToolsService} from "../service/tools.service";
 import * as JSPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {ApiService} from "../service/api.service";
+import {ThemePalette} from "@angular/material/core";
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,7 @@ export class DevisComponent implements OnInit {
 
   @ViewChild('devis') htmlData: ElementRef;
   value: number;
+  private color: string;
 
   constructor(
     public dialogRef: MatDialogRef<DevisComponent>,
@@ -25,7 +27,8 @@ export class DevisComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data)
-    this.value = Math.round(this.data.rentability.valueOf() + 100);
+    this.value = Math.round(this.data.rentability.valueOf() + 50);
+    this.updateColor();
   }
 
   close(): void {
@@ -56,5 +59,40 @@ export class DevisComponent implements OnInit {
         this.dialogRef.close();
       }
     })
+  }
+  updateColor(): void {
+    if (this.value > 100) {
+      this.color = '#2d9026'
+    }
+    if (this.value <= 100 && this.value > 90) {
+      this.color = '#4b9026'
+    }
+    if (this.value <= 90 && this.value > 80) {
+      this.color = '#86a531'
+    }
+    if (this.value <= 80 && this.value > 70) {
+      this.color = '#cebd3b'
+    }
+    if (this.value <= 70 && this.value > 60) {
+      this.color = '#b1aa29'
+    }
+    if (this.value >= 60 && this.value > 50) {
+      this.color = '#a0912c'
+    }
+    if (this.value <= 50 && this.value > 40) {
+      this.color = '#ba6012'
+    }
+    if (this.value <= 40 && this.value > 30) {
+      this.color = '#a33e0b'
+    }
+    if (this.value <= 30 && this.value > 20) {
+      this.color = '#ac4330'
+    }
+    if (this.value <= 20 && this.value > 10) {
+      this.color = '#923b2c'
+    }
+    if (this.value <= 10) {
+      this.color = '#9e2828'
+    }
   }
 }
