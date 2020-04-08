@@ -4,10 +4,12 @@
 $primary: mat-palette($mat-indigo);
 $accent: mat-palette($mat-pink);
 $warn: mat-palette($mat-red);
-$l0:('#9e2828');
+
+$l0:mat-palette($mat-red);
+$l1:mat-palette($mat-orange);
+$l2:mat-palette($mat-green);
 
 $theme: mat-light-theme($primary,$accent,$warn);
+$pregress: mat-light-theme($l0,$l1,$l2);
 
-
-
-@include angular-material-theme($theme)
+@include angular-material-theme($theme);
