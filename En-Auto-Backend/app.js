@@ -30,30 +30,6 @@ mongoose.connect(process.env.MONGO,
         console.log("mongo connected")
 );
 
-
-// //connection to DB
-// const db = mongoose.connection;
-// db.on('error', console.log.bind(console, "connection error"));
-//
-// db.EnAuto.remove( {_id: 1});
-// db.EnAuto.remove( {_id:2});
-// db.once('open', function (callback) {
-//     console.log("Connection succeeded");
-//     //populate the database with 2 users test when starting the app
-//     var newUsers = [{_id:1, firstName: 'Victor', lastname: 'Smits', username: 'Totor', password: '123',adresse: "3 rue de la madeleine, tournai 7500"},
-//                     {_id:2, firstName: 'Alexandre', lastname: 'Loba', username: 'Alex', password: '456',adresse: "16 rue brederode, bruxelles 1000"},
-//                      ];
-//
-//     User.collection.insert(newUsers, function (err, savedUser) {
-//         if (err) {
-//             console.log(err)
-//         }
-//         else {
-//             console.log('Database test populated')
-//         }
-//     })
-// });
-
 // Passport init
 app.use(passport.initialize());
 
