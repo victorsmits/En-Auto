@@ -52,6 +52,10 @@ const devisSchema = new Schema({
     'rentability': {
         type: Number,
         // default: false
+    },//estimation finale en €
+    'rentability_year': {
+        type: Number,
+        // default: false
     }, //ou bien une jauge
     'created_at': {
         type: Date,

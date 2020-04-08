@@ -60,31 +60,36 @@ export class MathService {
 
 //calcule du volument d'eau à stocker dans la citerne
   calc_vol_storage(water_volume: number): number {
-    return Math.round((water_volume) / 12000);
+   //return Math.round((water_volume*21) / 365000);
+    return Math.round((water_volume)/12000);
   }
 
 //calcule le cout de la citerne en fonction du volume nécessaire à stocker et de son type
   calc_cost_tank(estiForm: FormGroup, vol: number): number {
+    console.log(estiForm.value["tank_type"]);
     let cost: number;
     vol = vol * 1000; //conversion en L
-    if (estiForm.value["tank_type"].match("dig")) {
-      if (vol <= 1500) {
-        cost = 1900;
-      }
-      if ((vol > 1500) && (vol <= 3000)) {
-        cost = 2600;
-      }
-      if ((vol > 3000) && (vol <= 5000)) {
-        cost = 3000;
-      }
-      if (vol > 5000) {
-        cost = 3800;
-      }
-    } else if (estiForm.value["tank_type"].match("not-dig")) {
-      if (vol <= 400) {
-        cost = 200;
-      } else
-        cost = 500;
+    switch (estiForm.value["tank_type"]) {
+      case "dig":
+        if (vol <= 1500) {
+          cost = 1900;
+        }
+        if ((vol > 1500) && (vol <= 3000)) {
+          cost = 2600;
+        }
+        if ((vol > 3000) && (vol <= 5000)) {
+          cost = 3000;
+        }
+        if (vol > 5000) {
+          cost = 3800;
+        }
+        break;
+      case "not-dig":
+        if (vol <= 400) {
+          cost = 200;
+        } else
+          cost = 500;
+        break;
     }
     cost = cost + estiForm.value["tank_dist"] * 50;
     return (cost);
@@ -100,9 +105,13 @@ export class MathService {
   calc_final_save(water_cost: number, water_volume: number) {
     return Math.round((water_volume / 1000) * water_cost);
   }
+
 //la rentabilite est calculé sur 8 : 0% veut dire qu'on a remboursé son investssement. Au dessus on a gagné de l'argent.
   calc_rentability(devis: Devis) {
-    let year = devis.total_cost.valueOf() / devis.final_save.valueOf();
     return ((((devis.final_save.valueOf() * 8) / (devis.total_cost.valueOf())) * 100) - 100);
+  }
+
+  calc_rentability_year(devis: Devis) {
+    return Math.round(devis.total_cost.valueOf() / devis.final_save.valueOf());
   }
 }
