@@ -27,10 +27,10 @@ router.post('', function(req, res, next) {
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
             console.log("error: " + error);
-            res.status(200).send('not-send');
+            res.status(201).send({"message":'send'});
         } else {
             console.log('Email sent: ' + info.response);
-            res.status(200).send("send");
+            res.status(201).send({"message":'send'});
         }
     });
 });
