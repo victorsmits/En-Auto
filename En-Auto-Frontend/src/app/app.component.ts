@@ -1,8 +1,10 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ToolsService} from "./service/tools.service";
-import {User} from "./Interface/Interface.module";
+import {Mail, User} from "./Interface/Interface.module";
 import {RouterOutlet} from "@angular/router";
 import {slideInAnimation} from "./animation";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ApiService} from "./service/api.service";
 
 @Component({
   selector: 'app-root',
@@ -23,15 +25,20 @@ export class AppComponent implements AfterViewInit,OnInit {
     email : null,
   };
 
-  constructor(public tool: ToolsService) {}
+
+
+  constructor(public tool: ToolsService,
+              public fb : FormBuilder,
+              public api:ApiService) {}
 
   ngOnInit(): void {
     if(this.tool.isLoggedIn()){
       this.user = this.tool.getUser();
     }
 
+
+
     this.tool.AuthStatusListener.subscribe(status => {
-      console.log(status);
       if(status){
         this.user = this.tool.getUser();
       }
@@ -39,8 +46,6 @@ export class AppComponent implements AfterViewInit,OnInit {
   }
 
   ngAfterViewInit(){
-
-    console.log(this.tool.isLoggedIn());
 
     this.tool.AuthStatusListener.subscribe(status => {
       if(status){

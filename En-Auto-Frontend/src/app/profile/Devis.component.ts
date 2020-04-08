@@ -17,12 +17,16 @@ export class DevisComponent implements OnInit {
   @ViewChild('devis') htmlData: ElementRef;
   value: number;
   private color: string;
+  styleEl: HTMLStyleElement = document.createElement('style');
 
   constructor(
     public dialogRef: MatDialogRef<DevisComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Devis,
     public tool: ToolsService,
-    public api: ApiService) {
+    public api: ApiService,
+    private el: ElementRef) {
+    const nativeEl: HTMLElement = this.el.nativeElement;
+    nativeEl.appendChild(this.styleEl);
   }
 
   ngOnInit(): void {
@@ -55,11 +59,12 @@ export class DevisComponent implements OnInit {
 
   delete() {
     this.api.deleteDevis(this.data).subscribe(data => {
-      if (data["message"]){
+      if (data["message"]) {
         this.dialogRef.close();
       }
     })
   }
+
   updateColor(): void {
     if (this.value > 100) {
       this.color = '#2d9026'
@@ -94,5 +99,12 @@ export class DevisComponent implements OnInit {
     if (this.value <= 10) {
       this.color = '#9e2828'
     }
+
+    this.styleEl.innerText = `
+  .mat-progress-bar-fill::after {
+    background-color: ${this.color};
+  }
+`;
+
   }
 }

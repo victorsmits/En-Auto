@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="app.component.css"/>
   <meta charset="UTF-8">
 </head>
 
@@ -14,15 +15,17 @@
     <mat-toolbar color="primary">
       <div class="navbar custom-navbar navbar-fixed-top">
         <div class="navbar-header">
-          <a href="index.html" class="navbar-brand">EN <span>'</span> AUTO</a>
-          <img src="./assets/images/logo.jpg" width="50" height="50">
+          <img src="./assets/images/logo.png" width="50" height="60">
+          <a routerLink="" class="navbar-brand">EN<span>'</span> AUTO</a>
         </div>
       </div>
     </mat-toolbar>
 
     <body>
-    <div [@routeAnimations]="prepareRoute(outlet)" >
+    <div [@routeAnimations]="prepareRoute(outlet)">
       <router-outlet #outlet="outlet"></router-outlet>
+
+
     </div>
     </body>
 
@@ -67,7 +70,7 @@
       <span> Qui somme nous? </span>
     </a>
 
-    <a mat-list-item routerLink="about-us">
+    <a mat-list-item routerLink="contact">
       <mat-icon> mail</mat-icon>
       <span> Nous contacté</span>
     </a>

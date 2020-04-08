@@ -33,6 +33,7 @@ import {DevisComponent} from "./profile/Devis.component";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     ProfileComponent,
     DevisComponent,
     DevisComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,

@@ -32,6 +32,9 @@ mat-toolbar a{
 a span{
   margin-left: 0.3em;
 }
+body{
+  background-color:white ;
+}
 
 .custom-navbar .navbar-brand {
   color: #ffffff;
@@ -41,3 +44,11 @@ a span{
 .navbar-brand span{
   color:orange;
 }
+
+.contact {
+  width: 100%;
+}
+
+
+
+

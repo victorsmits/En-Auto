@@ -41,3 +41,10 @@ export interface Precipitation {
   postCode?: Number,
   rain?: Number,
 }
+
+export interface Mail {
+  name?: String,
+  obj?: String,
+  mail?: String,
+  content?: String
+}

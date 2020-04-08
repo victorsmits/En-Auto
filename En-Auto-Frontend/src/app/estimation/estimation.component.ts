@@ -61,7 +61,8 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       nb_machin: [null],
       garden_area: [null],
       tank_type: ['not-dig'],
-      tank_dist: [null]
+      tank_dist: [null],
+      defaultpostcode:['false']
     });
   }
 
@@ -81,23 +82,26 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;
 
     this.api.getPrecipitation(this.estiForm.value['postalCode']).subscribe(data => {
-      let precipitation = JSON.parse(JSON.stringify(data))[0];
-
-      console.log(precipitation);
+      let precipitation = JSON.parse(JSON.stringify(data));
 
       this.water_volume = this.math.roofWaterVolume(this.estiForm.value['houseArea'],
         Number.parseInt(precipitation['avg']), this.estiForm.value['roof_type']);
     });
 
     this.api.getWaterCost(this.estiForm.value['postalCode']).subscribe(data => {
-      if (data[0]) {
-        this.water_cost = this.tool.setWaterCost(data[0]).cost;
-      } else {
-        this.water_cost = 0;
+
+      let water_c = JSON.parse(JSON.stringify(data));
+      this.water_cost = this.tool.setWaterCost(water_c).cost;
+      if (this.water_cost === 4) {
+        console.log("hi");
+        this.estiForm.value['defaultpostcode'] = 'true';
       }
+      else
+        this.estiForm.value['defaultpostcode'] = 'false';
+
       this.final_save = this.math.calc_final_save(this.water_cost, this.water_volume)
     });
-    
+
   }
 
   computeFinalDevis() {

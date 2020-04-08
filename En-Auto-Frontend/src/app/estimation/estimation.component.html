@@ -104,6 +104,12 @@
         <p>Cela correspond environ à {{water_volume / 60}} douches/an 🚿 (une
           douche consomme en moyenne 60L) </p>
         <p>Vous pourriez économiser jusqu'à {{final_save}} €/an</p>
+        <p *ngIf="estiForm.value['defaultpostcode'] === 'true' ">
+          <br />
+          <i>
+            <font color="#990000"> <b> Votre ville n'est pas couverte par notre service, les valeurs sont données sur la base de : <br /> 4€ le m3 et 660 mm de pluie par an</b> </font>
+          </i>
+        </p>
 
           <div>
             <button mat-flat-button color="primary" matStepperPrevious>Back</button>
@@ -226,6 +232,7 @@
     </form>
   </mat-card>
 </div>
+
 <div class="container">
   <div style="margin-top: 2em">
     <p style="text-align: justify; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">« EN
@@ -268,4 +275,5 @@
     </mat-grid-list>
   </div>
 </div>
+
 

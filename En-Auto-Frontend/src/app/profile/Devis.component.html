@@ -22,9 +22,10 @@
           Surface au sol
         </mat-list-item>
 
-        <mat-divider></mat-divider>
 
-        <mat-list-item>
+
+        <mat-list-item *ngIf="data.structural_cost">
+          <mat-divider></mat-divider>
           <p> Coût de réparation</p>
         </mat-list-item>
 
@@ -87,9 +88,10 @@
           {{data.roof_area}} m3
         </mat-list-item>
 
-        <mat-divider></mat-divider>
 
-        <mat-list-item>
+
+        <mat-list-item *ngIf="data.structural_cost">
+          <mat-divider></mat-divider>
           {{data.structural_cost}} €
         </mat-list-item>
 
@@ -136,12 +138,11 @@
   </mat-grid-list>
 
   <div class="rentability">
-    <h2>Rentabilité  {{data.rentability}}%</h2>
+    <h2>Rentabilité  {{data.rentability }}%</h2>
 
 
     <mat-progress-bar
       value="{{value}}"
-      color="warn(A100)"
       mode="determinate">
     </mat-progress-bar>
   </div>

@@ -1,0 +1,19 @@
+#google-map{
+  margin-bottom: 50px;
+}
+#google-map iframe {
+  border: 0;
+  width: 30em;
+  height: 30em;
+}
+mat-form-field{
+  width: 30em;
+  margin-right: 10em;
+}
+.contact{
+  margin-top: 5em;
+}
+button{
+  width: fit-content;
+  font-size: large;
+}
