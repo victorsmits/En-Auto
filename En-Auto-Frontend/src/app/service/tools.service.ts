@@ -79,6 +79,7 @@ export class ToolsService {
       vol_storage: data["vol_storage"] ? data["vol_storage"] : undefined,
       final_save : data["final_save"]? data["final_save"] : undefined,
       rentability: data["rentability"] ? data["rentability"] : undefined,
+      rentability_year: data["rentability_year"] ? data["rentability_year"] : undefined,
       total_cost: data["total_cost"] ? data["total_cost"] : undefined,
       created_at: data["created_at"] ? data["created_at"] : new Date(),
 

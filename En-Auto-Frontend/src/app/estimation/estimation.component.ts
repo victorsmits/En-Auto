@@ -140,6 +140,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       created_at: new Date(),
     };
     this.finalDevis.total_cost = this.math.totalCost(this.finalDevis);
+    this.finalDevis.rentability_year = this.math.calc_rentability_year(this.finalDevis);
     this.finalDevis.rentability = this.math.calc_rentability(this.finalDevis);
   }
 

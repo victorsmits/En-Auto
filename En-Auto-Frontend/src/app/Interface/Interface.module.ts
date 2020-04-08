@@ -14,6 +14,7 @@ export interface Devis {
   vol_storage?: Number,
   final_save? : Number,
   rentability?: Number,
+  rentability_year?: Number,
   created_at?: Date,
   tiles_cost?:Number,
   tiles_number?:Number,
