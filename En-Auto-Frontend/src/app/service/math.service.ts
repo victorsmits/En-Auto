@@ -67,24 +67,27 @@ export class MathService {
   calc_cost_tank(estiForm: FormGroup, vol: number): number {
     let cost: number;
     vol = vol * 1000; //conversion en L
-    if (estiForm.value["tank_type"].match("dig")) {
-      if (vol <= 1500) {
-        cost = 1900;
-      }
-      if ((vol > 1500) && (vol <= 3000)) {
-        cost = 2600;
-      }
-      if ((vol > 3000) && (vol <= 5000)) {
-        cost = 3000;
-      }
-      if (vol > 5000) {
-        cost = 3800;
-      }
-    } else if (estiForm.value["tank_type"].match("not-dig")) {
-      if (vol <= 400) {
-        cost = 200;
-      } else
-        cost = 500;
+    switch (estiForm.value["tank_type"]) {
+      case "dig":
+        if (vol <= 1500) {
+          cost = 1900;
+        }
+        if ((vol > 1500) && (vol <= 3000)) {
+          cost = 2600;
+        }
+        if ((vol > 3000) && (vol <= 5000)) {
+          cost = 3000;
+        }
+        if (vol > 5000) {
+          cost = 3800;
+        }
+        break;
+      case "not-dig":
+        if (vol <= 400) {
+          cost = 200;
+        } else
+          cost = 500;
+        break;
     }
     cost = cost + estiForm.value["tank_dist"] * 50;
     return (cost);
@@ -100,6 +103,7 @@ export class MathService {
   calc_final_save(water_cost: number, water_volume: number) {
     return Math.round((water_volume / 1000) * water_cost);
   }
+
 //la rentabilite est calculé sur 8 : 0% veut dire qu'on a remboursé son investssement. Au dessus on a gagné de l'argent.
   calc_rentability(devis: Devis) {
     return ((((devis.final_save.valueOf() * 8) / (devis.total_cost.valueOf())) * 100) - 100);
