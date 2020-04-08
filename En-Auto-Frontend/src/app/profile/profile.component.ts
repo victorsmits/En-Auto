@@ -24,13 +24,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.User = this.tool.getUser();
-
+    this.isLoading = true;
     this.api.getDevis(this.User._id).subscribe((data:[JSON]) =>{
       this.devisList = [];
       for(let devi of data){
         this.devisList.push(this.tool.setDevis(devi));
       }
       this.dataSource = new MatTableDataSource(this.devisList);
+      this.isLoading = false;
     })
   }
 
