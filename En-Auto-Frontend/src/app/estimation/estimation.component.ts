@@ -106,7 +106,10 @@ export class EstimationComponent implements OnInit, AfterViewInit {
 
   computeFinalDevis() {
     let consommation = this.estiForm.value['consommation'] ? this.estiForm.value['consommation'] : this.math.calc_conso(this.estiForm);
-    let vol_storage = this.math.calc_vol_storage(this.water_volume, consommation);
+    console.log("conso : "+consommation);
+    console.log("watervolume" + this.water_volume);
+    let vol_stor = this.math.calc_vol_storage(this.water_volume);
+    console.log("volume " + vol_stor);
 
     this.finalDevis = {
       //required
@@ -131,8 +134,8 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       structural_cost: this.tiles_cost + this.gutter_cost,
       consum: consommation,
       water_volume: this.water_volume, //volume d'eau recupéré
-      vol_storage: vol_storage,
-      tank_cost: this.math.calc_cost_tank(this.estiForm, vol_storage),
+      vol_storage: vol_stor,
+      tank_cost: this.math.calc_cost_tank(this.estiForm, vol_stor),
       final_save: this.final_save,
       created_at: new Date(),
     };
