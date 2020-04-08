@@ -12,7 +12,8 @@ import {ToolsService} from "../service/tools.service";
 export class ContactUsComponent implements OnInit {
 
   Mailer: FormGroup;
-  sended: string;
+  sended: string = "";
+  isLoading: boolean;
 
   constructor(public api:ApiService,
               public fb : FormBuilder,
@@ -28,6 +29,7 @@ export class ContactUsComponent implements OnInit {
     })
   }
   sendMail() {
+    this.isLoading = true;
     let mail :Mail = {
       name : this.Mailer.value["name"],
       obj : this.Mailer.value["obj"],
@@ -43,6 +45,7 @@ export class ContactUsComponent implements OnInit {
         this.tool.openSnackBar("Echec de l'envoie du message",'',5000)
       }
       this.sended = isSend["message"];
+      this.isLoading = false;
     })
   }
 }

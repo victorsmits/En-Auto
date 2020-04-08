@@ -16,7 +16,7 @@
       </div>
 
       <!-- CONTACT FORM -->
-      <form (submit)="sendMail()" [formGroup]="Mailer" class="contact" #contactForm>
+      <form *ngIf="!isLoading && sended === ''" (submit)="sendMail()" [formGroup]="Mailer" class="contact" #contactForm>
 
         <mat-form-field>
           <input matInput formControlName="name" placeholder="Nom complet">
@@ -37,12 +37,11 @@
 
         <button mat-flat-button type="submit" color="primary">Envoyer
         </button>
-
-        <h6 *ngIf="sended === 'send'">Votre message a été envoyé avec succès.</h6>
-
-        <h6 *ngIf="sended=== 'not-send'">L'e-mail doit être valide et faire plus d'un caractère.</h6>
-
       </form>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <h2 *ngIf="sended === 'send'">Votre message a été envoyé avec succès.</h2>
+
+      <h2 *ngIf="sended=== 'not-send'">L'e-mail doit être valide et faire plus d'un caractère.</h2>
     </div>
   </mat-grid-tile>
 </mat-grid-list>
