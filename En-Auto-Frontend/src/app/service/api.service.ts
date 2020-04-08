@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {throwError} from "rxjs";
-import {Devis, WaterCost, Precipitation} from "../Interface/Interface.module";
+import {Devis, WaterCost, Precipitation, Mail} from "../Interface/Interface.module";
 
 @Injectable({
   providedIn: 'root'
@@ -88,6 +88,11 @@ export class ApiService {
 
   updateWaterCost(WaterCost : WaterCost) {
     return this.http.put(this.ip + '/watercost', WaterCost ).pipe(
+      catchError(this.handelError));
+  }
+
+  sendMail(mail:Mail){
+    return this.http.post(this.ip + '/mail', mail ).pipe(
       catchError(this.handelError));
   }
 

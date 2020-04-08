@@ -5,9 +5,9 @@ const Devis = mongoose.model('Devis');
 const Users = mongoose.model('User');
 const nodemailer = require('nodemailer');
 
-router.get('', function(req, res, next) {
+router.post('', function(req, res, next) {
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
+        host: 'smtp-mail.outlook.com',
         port: 587,
         secure: false,
         requireTLS: true,
@@ -19,18 +19,18 @@ router.get('', function(req, res, next) {
 
     const mailOptions = {
         from: process.env.MAIL,
-        to: 'victor-smi@hotmail.fr',
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!'
+        to: process.env.MAIL,
+        subject: req.body.name + ': ' + req.body.obj,
+        text: 'from: ' + req.body.mail + '\n' + 'name: ' + req.body.name + '\n' + 'content: \n' + req.body.content
     };
 
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
-            console.log(error);
-            res.status(401).send(error);
+            console.log("error: " + error);
+            res.status(200).send('not-send');
         } else {
             console.log('Email sent: ' + info.response);
-            res.status(200).send({message:'Email sent: ' + info.response});
+            res.status(200).send("send");
         }
     });
 });
