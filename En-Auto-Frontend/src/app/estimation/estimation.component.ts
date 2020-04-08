@@ -81,9 +81,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
     this.gutter_cost = gutter != null ? this.math.gutterReparationCost(gutter) : 0;
 
     this.api.getPrecipitation(this.estiForm.value['postalCode']).subscribe(data => {
-      let precipitation = JSON.parse(JSON.stringify(data))[0];
-
-      console.log(precipitation);
+      let precipitation = JSON.parse(JSON.stringify(data));
 
       this.water_volume = this.math.roofWaterVolume(this.estiForm.value['houseArea'],
         Number.parseInt(precipitation['avg']), this.estiForm.value['roof_type']);
@@ -97,7 +95,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
       }
       this.final_save = this.math.calc_final_save(this.water_cost, this.water_volume)
     });
-    
+
   }
 
   computeFinalDevis() {
