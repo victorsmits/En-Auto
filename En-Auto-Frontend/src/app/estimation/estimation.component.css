@@ -29,12 +29,11 @@ mat-radio-button {
 }
 
 .background{
-  height: 40em;
-  display: flex;
-  justify-content: center;
+  height: 30em;
+  width: auto;
   background-image: url(~/../assets/images/fond-pluie1.jpg);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
 }
 
 .title{
@@ -50,9 +49,15 @@ mat-radio-button {
   height: 70%;
 }
 .solution-title{
+  font-size: xx-large;
   margin-top: 2em;
   margin-left: 2em;
 }
 .quote{
   width: min-content;
+}
+
+.devis{
+  margin-top: 3em;
+  margin-bottom: 5em;
 }
