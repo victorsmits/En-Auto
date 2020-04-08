@@ -65,37 +65,39 @@ export class DevisComponent implements OnInit {
   }
 
   updateColor(): void {
-    if (this.value > 100) {
+    console.log(this.value)
+    if (this.value >= 100) {
       this.color = '#07db09'
     }
-    else if (this.value <= 100 && this.value > 90) {
+    else if (this.value < 100 && this.value >= 90) {
       this.color = '#03c805'
     }
-    else if (this.value <= 90 && this.value > 80) {
+    else if (this.value < 90 && this.value >= 80) {
       this.color = '#12a500'
     }
-    else if (this.value <= 80 && this.value > 70) {
+    else if (this.value < 80 && this.value >=70) {
       this.color = '#74a23c'
     }
-    else if (this.value <= 70 && this.value > 60) {
+    else if (this.value < 70 && this.value >= 60) {
       this.color = '#c3b604'
     }
-    else if (this.value >= 60 && this.value > 50) {
+    else if (this.value < 60 && this.value >= 50) {
+      console.log("rpout")
       this.color = '#c9a629'
     }
-    else if (this.value <= 50 && this.value > 40) {
+    else if (this.value < 50 && this.value >= 40) {
       this.color = '#ba6012'
     }
-    else if (this.value <= 40 && this.value > 30) {
+    else if (this.value < 40 && this.value >= 30) {
       this.color = '#a33e0b'
     }
-    else if (this.value <= 30 && this.value > 20) {
+    else if (this.value < 30 && this.value >= 20) {
       this.color = '#9b1900'
     }
-    else if (this.value <= 20 && this.value > 10) {
+    else if (this.value < 20 && this.value >= 10) {
       this.color = '#a2000b'
     }
-    else if (this.value <= 10) {
+    else if (this.value < 10) {
       this.color = '#cf0011'
     }
 
