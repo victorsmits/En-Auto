@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const WC = mongoose.model('watercost');
 
-//Création d'un devis
+//Post watercost
 router.post('', function(req, res, next) {
     let wc = new WC ({
         postCode: req.body.postCode,
@@ -18,21 +18,24 @@ router.post('', function(req, res, next) {
     })
 });
 
-//Récupération d'un devis en fonction de l'id_user
+//Récupération du coup de l'eau en fonction du codepostal
 router.get('', function(req, res, next) {
-    WC.find({postCode : req.query.postCode.toString()},(err,wc)=>{
-        console.log(wc,err);
-        if(err) {
-            return res.status(401).send({
-                message : "Water cost not found with post code "+ req.query.postCode
+    WC.findOne({"postCode" : req.query.postCode.toString()}, function(err,wc) {
+        if (err) throw err;    //There was an error with the database.
+        if (wc === null) {
+            WC.findOne({"postCode": 99999}, function (err, wc) {
+                if (err) throw err;
+                if (wc) return res.status(201).send(wc);
             });
-        }else{
-            return res.status(201).json(wc);
+        }//The default query
+        else {
+            return res.status(201).send(wc); //resultat si dans la DB
         }
+
     })
 });
 
-//Suppression d'un devis utilisateur (dépendant de l'id du devis)
+//Suppression du prix de l'eau
 router.delete('', function(req, res, next) {
     WC.findByIdAndRemove({_id: req.query._id.toString()}, (err,wc) =>{
         if(!wc) {
@@ -44,7 +47,7 @@ router.delete('', function(req, res, next) {
     });
 });
 
-//M.A.J d'un devis utilisateur (dépendant de l'id du devis)
+//M.A.J du prix de l'eau
 router.put('', function(req, res, next) {
     WC.findByIdAndUpdate(req.query._id, req.body, (err, wc) => {
         if(!wc) {

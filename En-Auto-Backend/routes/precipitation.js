@@ -29,7 +29,7 @@ router.get('', function (req, res, next) {
             });
         }//The default query
         else {
-            return res.status(201).send(result);
+            return res.status(201).send(result); //resultat si dans la DB
         }
     });
 })
