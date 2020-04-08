@@ -204,12 +204,13 @@
               aria-label="Quelle type d'installation de cuve souhaitez-vous?"
               formControlName="tank_type" *ngIf="water_volume >= 1000">
               <mat-radio-button value="dig"> Entérer</mat-radio-button>
-              <mat-radio-button value="not-dig"> Non Entérer</mat-radio-button>
+              <mat-radio-button value="not-dig"> Non Entérer (déconseiller)</mat-radio-button>
             </mat-radio-group>
 
+            <mat-error *ngIf="estiForm.value['tank_type'] === 'not-dig' && (water_volume >= 1000)" style="margin:1em">La cuve non enterré pour un tel volume n'est pas pris en compte dans le devis.  </mat-error>
+
             <p *ngIf="water_volume < 1000"> Pour un volume de récupération inférieur à 1000L nous déconseillons les
-              cuves
-              enterrés. </p>
+              cuves enterrés. </p>
 
             <mat-form-field *ngIf="(water_volume >= 1000 && estiForm.value['tank_type'] === 'dig')">
               <input matInput type="number" formControlName="tank_dist"
