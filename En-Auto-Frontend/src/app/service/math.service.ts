@@ -105,6 +105,7 @@ export class MathService {
   calc_final_save(water_cost: number, water_volume: number) {
     return Math.round((water_volume / 1000) * water_cost);
   }
+
 //la rentabilite est calculé sur 8 : 0% veut dire qu'on a remboursé son investssement. Au dessus on a gagné de l'argent.
   calc_rentability(devis: Devis) {
     return ((((devis.final_save.valueOf() * 8) / (devis.total_cost.valueOf())) * 100) - 100);
