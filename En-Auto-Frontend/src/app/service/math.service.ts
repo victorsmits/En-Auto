@@ -59,16 +59,14 @@ export class MathService {
   }
 
 //calcule du volument d'eau à stocker dans la citerne
-  calc_vol_storage(water_volume: number, conso: number): number {
-    let moy: number;
-    moy = (conso + water_volume) / 2;
-    return Math.round((moy * 21) / 365);
+  calc_vol_storage(water_volume: number): number {
+    return Math.round((water_volume) / 12000);
   }
 
 //calcule le cout de la citerne en fonction du volume nécessaire à stocker et de son type
   calc_cost_tank(estiForm: FormGroup, vol: number): number {
     let cost: number;
-
+    vol = vol * 1000; //conversion en L
     if (estiForm.value["tank_type"].match("dig")) {
       if (vol <= 1500) {
         cost = 1900;
