@@ -2,17 +2,57 @@ mat-form-field {
   width: 30em;
   display: grid;
 }
-button{
+
+button {
   font-size: 16px;
   margin-left: 2%;
 }
-mat-card{
+
+mat-card {
   width: fit-content;
-  margin: 5em auto;
+  margin: 3em auto;
 }
-mat-radio-button{
+
+mat-radio-button {
   margin: 2%
 }
-.step_display{
+
+.step_display {
   display: flex;
+}
+
+.nav {
+  background-color: teal;
+  border: 0;
+  width: 200px;
+  height: 40px;
+}
+
+.background{
+  height: 40em;
+  display: flex;
+  justify-content: center;
+  background-image: url(~/../assets/images/fond-pluie1.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.title{
+  font-size: 45px;
+  margin-left: 10em;
+  margin-top: 1em;
+  margin-right: 10em;
+  justify-content: center;
+}
+
+.solution{
+  display: flex;
+  height: 70%;
+}
+.solution-title{
+  margin-top: 2em;
+  margin-left: 2em;
+}
+.quote{
+  width: min-content;
 }

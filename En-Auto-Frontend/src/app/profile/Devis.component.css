@@ -36,3 +36,6 @@ p {
 .rentability {
   margin-top: 1em;
 }
+.mat-progress-bar {
+  height: 50px !important;
+}

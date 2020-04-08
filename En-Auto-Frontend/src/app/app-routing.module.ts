@@ -11,22 +11,27 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    data : {animation: 'isRight'}
   },
   {
     path: 'register',
     component: RegisterComponent,
+    data : {animation: 'isRight'}
   },
   {
     path: '',
     component: EstimationComponent,
+    data : {animation: 'HomePage'}
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    data : {animation: 'isRight'}
   },
   {
     path: 'about-us',
     component: AboutUsComponent,
+    data : {animation: 'AboutPage'}
   },
 ];
 
