@@ -1,6 +1,6 @@
 <div class="background">
   <div class="quote">
-<!--    <h1 class="title">In Rain we trust</h1>-->
+    <!--    <h1 class="title">In Rain we trust</h1>-->
   </div>
 </div>
 <div class="container devis">
@@ -99,29 +99,34 @@
 
         </mat-step>
 
-      <mat-step label="Première estimation" class="step_display">
-        <h3>Grâce à votre toit vous pouvez récolté {{water_volume}} L/an.</h3>
-        <p>Cela correspond environ à {{water_volume / 60}} douches/an 🚿 (une
-          douche consomme en moyenne 60L) </p>
-        <p>Vous pourriez économiser jusqu'à {{final_save}} €/an</p>
-        <p *ngIf="estiForm.value['defaultpostcode'] === 'true' ">
-          <br />
-          <i>
-            <font color="#990000"> <b> Votre ville n'est pas couverte par notre service, les valeurs sont données sur la base de : <br /> 4€ le m3 et 660 mm de pluie par an</b> </font>
-          </i>
-        </p>
-
-          <div>
-            <button mat-flat-button color="primary" matStepperPrevious>Back</button>
-            <button type="submit" mat-flat-button color="primary"
-                    (click)="goFurther()"
-                    *ngIf="!go_further" matStepperNext>Aller plus loin
-            </button>
-            <button mat-flat-button type="submit" color="primary" matStepperNext *ngIf="go_further">
-              Continuer
-            </button>
+        <mat-step label="Première estimation" class="step_display">
+          <div style="justify-content: center">
+            <mat-spinner *ngIf="final_save === 0"></mat-spinner>
           </div>
+          <div *ngIf="final_save != 0">
+            <h3>Grâce à votre toit vous pouvez récolté {{water_volume}} L/an.</h3>
+            <p>Cela correspond environ à {{water_volume / 60}} douches/an 🚿 (une
+              douche consomme en moyenne 60L) </p>
+            <p>Vous pourriez économiser jusqu'à {{final_save}} €/an</p>
+            <p *ngIf="estiForm.value['defaultpostcode'] === 'true' ">
+              <br/>
+              <i>
+                <font color="#990000"> <b> Votre ville n'est pas couverte par notre service, les valeurs sont données sur
+                  la base de : <br/> 4€ le m3 et 660 mm de pluie par an</b> </font>
+              </i>
+            </p>
 
+            <div>
+              <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+              <button type="submit" mat-flat-button color="primary"
+                      (click)="goFurther()"
+                      *ngIf="!go_further" matStepperNext>Aller plus loin
+              </button>
+              <button mat-flat-button type="submit" color="primary" matStepperNext *ngIf="go_further">
+                Continuer
+              </button>
+            </div>
+          </div>
         </mat-step>
 
         <div *ngIf="go_further">

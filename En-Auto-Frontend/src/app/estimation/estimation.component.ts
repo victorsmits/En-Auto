@@ -30,7 +30,7 @@ export class EstimationComponent implements OnInit, AfterViewInit {
   first_devis: boolean;
 
   water_cost: any;
-  public final_save: number;
+  public final_save: number = 0;
 
   constructor(public api: ApiService,
               public fb: FormBuilder,
