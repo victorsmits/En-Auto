@@ -163,13 +163,13 @@
 </div>
 
 <div class="button">
-  <button mat-button>
-    <mat-icon color="primary" matTooltip="Télécharger PDF" class="download" (click)="downloadPDF()">
+  <button mat-button matTooltip="Télécharger">
+    <mat-icon color="primary" matTooltip="Télécharger PDF" class="download" (click)="downloadPDF() ">
       cloud_download
     </mat-icon>
   </button>
 
-  <button mat-button>
+  <button mat-button matTooltip="Effacer">
     <mat-icon color="warn" matTooltip="Effacer devis" class="download" (click)="delete()">
       delete
     </mat-icon>
