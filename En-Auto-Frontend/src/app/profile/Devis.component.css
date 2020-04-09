@@ -39,3 +39,9 @@ p {
 .mat-progress-bar {
   height: 30px !important;
 }
+
+.note {
+  font-size: small;
+  font-style: italic;
+  color: cadetblue;
+}
