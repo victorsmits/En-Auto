@@ -30,12 +30,12 @@
           <mat-cell *matCellDef="let element">
             <span>
               <mat-icon color="primary"
-                        (click)="openDevis(element)">visibility</mat-icon>
+                        (click)="openDevis(element)" matTooltip="Visualiser">visibility</mat-icon>
             </span>
 
             <span>
               <mat-icon color="warn"
-                        (click)="deleteDevis(element)">delete</mat-icon>
+                        (click)="deleteDevis(element)" matTooltip="Effacer">delete</mat-icon>
             </span>
           </mat-cell>
         </ng-container>

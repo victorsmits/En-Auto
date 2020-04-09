@@ -41,7 +41,8 @@ p {
 }
 
 .note {
+  margin-top: 1em;
   font-size: small;
   font-style: italic;
-  color: cadetblue;
+  color: #3c6465;
 }

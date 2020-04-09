@@ -69,7 +69,7 @@
 
         <mat-divider></mat-divider>
 
-        <mat-list-item>
+        <mat-list-item *ngIf="data.rentability_year">
           <p>Années avant rentabilité</p>
         </mat-list-item>
 
@@ -141,7 +141,7 @@
 
         <mat-divider></mat-divider>
 
-        <mat-list-item>
+        <mat-list-item *ngIf="data.rentability_year">
           {{data.rentability_year}} ans
         </mat-list-item>
 
@@ -158,13 +158,13 @@
       mode="determinate">
     </mat-progress-bar>
 
-    <p class="note">*: Le taux rentabilité est calculer sur 8 ans et permet d'estimer la perte (si taux négatif) ou le gain (taux positifi).</p>
+    <p class="note">* : Le taux rentabilité est calculer sur 8 ans et permet d'estimer la perte (si taux négatif) ou le gain (taux positifi).</p>
   </div>
 </div>
 
 <div class="button">
   <button mat-button>
-    <mat-icon color="primary" matTooltip="Télécharger PDF" class="download" (click)="downloadPDF()">
+    <mat-icon color="primary" matTooltip="Télécharger PDF" class="download" (click)="downloadPDF() ">
       cloud_download
     </mat-icon>
   </button>
