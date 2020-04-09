@@ -67,6 +67,12 @@
           <p>Economie</p>
         </mat-list-item>
 
+        <mat-divider></mat-divider>
+
+        <mat-list-item>
+          <p>Années avant rentabilité</p>
+        </mat-list-item>
+
       </mat-list>
     </mat-grid-tile>
 
@@ -133,18 +139,26 @@
           {{data.final_save}} €
         </mat-list-item>
 
+        <mat-divider></mat-divider>
+
+        <mat-list-item>
+          {{data.rentability_year}} ans
+        </mat-list-item>
+
       </mat-list>
     </mat-grid-tile>
   </mat-grid-list>
 
   <div class="rentability">
-    <h2>Rentabilité  {{data.rentability }}% {{data.rentability_year}}</h2>
+    <h2>*Taux de rentabilité  {{data.rentability }}% </h2>
 
 
     <mat-progress-bar
       value="{{value}}"
       mode="determinate">
     </mat-progress-bar>
+
+    <p class="note">*: Le taux rentabilité est calculer sur 8 ans et permet d'estimer la perte (si taux négatif) ou le gain (taux positifi).</p>
   </div>
 </div>
 
